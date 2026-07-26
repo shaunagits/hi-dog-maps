@@ -196,7 +196,10 @@
       attributionControl: false,
       dragRotate: true
     });
-    map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+    map.addControl(new maplibregl.AttributionControl({
+      compact: true,
+      customAttribution: 'Park &amp; beach data: <a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">Honolulu DPR</a> &amp; <a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>'
+    }), "bottom-right");
     // Zoom control top-right (below the basemap toggle) so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     // Run setup once — 'load' can be missed if the first render is gated (e.g. the
@@ -558,8 +561,10 @@
 
   /* ---------- Modal ---------- */
   const backdrop = document.getElementById("modal-backdrop");
+  const aboutBackdrop = document.getElementById("about-backdrop");
 
   function openModal(park) {
+    aboutBackdrop.hidden = true; // only one panel open at a time
     const hero = document.getElementById("modal-hero");
     hero.className = "modal-hero hero-" + park.category;
     if (park.photo) {
@@ -612,9 +617,23 @@
   // so the map stays clickable while the panel is open. Close via the button
   // or Escape only — clicking another pin just swaps the panel's content.
   document.getElementById("modal-close").addEventListener("click", closeModal);
+
+  /* ---------- About panel ---------- */
+  // Same non-modal side-panel component as the park detail panel; triggered
+  // by clicking the header logo. Only one of the two panels is open at once.
+  function openAbout() {
+    closeModal();
+    aboutBackdrop.hidden = false;
+  }
+  function closeAbout() { aboutBackdrop.hidden = true; }
+
+  document.getElementById("about-trigger").addEventListener("click", openAbout);
+  document.getElementById("about-close").addEventListener("click", closeAbout);
+
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (!backdrop.hidden) closeModal();
+    else if (!aboutBackdrop.hidden) closeAbout();
     else if (viewMode === "list") setViewMode("map");
   });
 

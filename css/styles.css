@@ -192,11 +192,18 @@ html, body {
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  border: none;
+  margin: 0;
+  font: inherit;
   border-radius: 11px;
   padding: 4px 7px;
   line-height: 1;
+  cursor: pointer;
   box-shadow: 0 2px 6px rgba(14, 116, 144, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.brand-icon:hover { transform: scale(1.06); box-shadow: 0 3px 9px rgba(14, 116, 144, 0.4); }
+.brand-icon:active { transform: scale(0.97); }
 .brand-icon svg {
   width: 23px;
   height: 27px;
@@ -217,6 +224,13 @@ html, body {
   font-weight: 700;
   color: var(--ocean-deep);
 }
+.credit-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(21, 94, 117, 0.4);
+  text-underline-offset: 2px;
+}
+.credit-link:hover { text-decoration-color: currentColor; }
 
 /* Filter panel — always a centered bottom bar; wraps (never scrolls) and condenses */
 .filter-panel {
@@ -554,6 +568,15 @@ html, body {
 .btn-secondary { background: #e2e8f0; color: var(--ink); }
 
 .modal-disclaimer { margin: 14px 0 0; font-size: 12px; color: #94a3b8; text-align: center; font-weight: 600; }
+
+/* ---------- About panel ---------- */
+.about-body { padding-top: 26px; }
+.about-body p { margin: 0 0 14px; font-size: 14.5px; line-height: 1.6; }
+.about-sources { margin: 0; padding: 0 0 0 18px; }
+.about-sources li { font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; }
+.about-sources a { color: var(--ocean-deep); font-weight: 700; }
+.about-body .about-credit { text-align: center; margin: 22px 0 0; font-size: 13px; }
+.about-credit a { color: var(--ocean-deep); font-weight: 800; text-decoration: underline; }
 
 /* ---------- List view ---------- */
 /* An alternative to the map for browsing every place; sits between the map

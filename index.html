@@ -61,8 +61,8 @@
   <!-- Floating header: brand + inline search -->
   <div class="top-left">
     <div class="header-bar">
-      <span class="brand-icon" aria-hidden="true">
-        <svg viewBox="0 0 64 74" xmlns="http://www.w3.org/2000/svg">
+      <button class="brand-icon" id="about-trigger" type="button" aria-label="About HI Dog Maps">
+        <svg viewBox="0 0 64 74" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <ellipse cx="32" cy="66" rx="14" ry="3.6" fill="#a7d8c8"/>
           <path d="M32 6C44.5 6 54 15.2 54 27.5C54 41 40 52.5 32 65C24 52.5 10 41 10 27.5C10 15.2 19.5 6 32 6Z" fill="#0e7490"/>
           <ellipse cx="21.5" cy="28" rx="3.3" ry="4.5" fill="#ffffff"/>
@@ -71,10 +71,10 @@
           <ellipse cx="42.5" cy="28" rx="3.3" ry="4.5" fill="#ffffff"/>
           <path d="M32 29.5C37.5 29.5 42 33 42 37.2C42 41 38.5 42.7 35.2 41.6C33.4 41 30.6 41 28.8 41.6C25.5 42.7 22 41 22 37.2C22 33 26.5 29.5 32 29.5Z" fill="#ffffff"/>
         </svg>
-      </span>
+      </button>
       <div class="brand-text">
         <h1>HI Dog Maps</h1>
-        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu</p>
+        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu · <a href="https://shauna.digital" target="_blank" rel="noopener" class="credit-link">Built by</a></p>
       </div>
       <div class="header-divider" aria-hidden="true"></div>
       <div class="search-panel">
@@ -154,6 +154,36 @@
           <a id="modal-streetview" class="btn btn-secondary" target="_blank" rel="noopener">👀 View on Google Maps</a>
         </div>
         <p class="modal-disclaimer">Rules and hours can change — check posted signs on arrival. Always pick up after your pup! 🦴</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About panel: same non-modal side-panel component as the park detail
+       panel, different content. Triggered by clicking the header logo. -->
+  <div class="modal-backdrop" id="about-backdrop" hidden>
+    <div class="modal about-modal" role="dialog" aria-modal="false" aria-labelledby="about-title">
+      <button class="modal-close" id="about-close" aria-label="Close">&times;</button>
+      <div class="modal-body about-body">
+        <h2 id="about-title">About HI Dog Maps</h2>
+        <p>HI Dog Maps is a hand-curated guide to every place on O&#699;ahu where you can
+          actually bring your dog — off-leash dog parks, leash-friendly parks and beaches,
+          hiking trails, and dog-welcoming restaurant patios.</p>
+        <p>Every spot here comes from official designations and verified lists, not a scrape
+          or a guess — sites with unclear or nuanced rules are flagged
+          <span class="tag tag-uncertain">⚠️ Verify before visiting</span> rather than
+          presented as certain.</p>
+
+        <div class="info-card">
+          <h3>🗂️ Data &amp; map sources</h3>
+          <ul class="about-sources">
+            <li><a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">City &amp; County of Honolulu, Dept. of Parks &amp; Recreation</a> — on-leash park designations &amp; GIS park data</li>
+            <li><a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a> — dog-friendly beach &amp; park lists</li>
+            <li><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> &amp; <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre GL JS</a> — map tiles &amp; rendering</li>
+            <li><a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — satellite imagery &amp; hillshade</li>
+          </ul>
+        </div>
+
+        <p class="about-credit"><a href="https://shauna.digital" target="_blank" rel="noopener">Built by</a></p>
       </div>
     </div>
   </div>

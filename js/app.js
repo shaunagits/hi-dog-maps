@@ -197,7 +197,8 @@
       dragRotate: true
     });
     map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
+    // Zoom control top-right (below the basemap toggle) so the bottom stays free for filters.
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     // Run setup once — 'load' can be missed if the first render is gated (e.g. the
     // container wasn't laid out / compositing yet), so 'idle' + a poll are fallbacks.
     let setupDone = false;

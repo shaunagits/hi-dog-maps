@@ -242,15 +242,12 @@
       });
     } catch (e) {}
 
-    // Location points (clustered)
+    // Location points (no clustering — every pin is always rendered).
     map.addSource("points", {
       type: "geojson",
-      data: currentFeatures(),
-      cluster: true,
-      clusterRadius: 50,
-      clusterMaxZoom: 13
+      data: currentFeatures()
     });
-    // Invisible hit layer so the clustered source loads + is queryable.
+    // Invisible hit layer so the source loads + is queryable via querySourceFeatures.
     map.addLayer({ id: "points-hit", type: "circle", source: "points",
       paint: { "circle-radius": 0, "circle-opacity": 0 } });
 
@@ -262,32 +259,9 @@
     syncMarkers();
   }
 
-  /* ---------- HTML marker sync (clusters + pins) ---------- */
+  /* ---------- HTML marker sync (pins) ---------- */
   const markers = {};
   let markersOnScreen = {};
-
-  // (Re)populate a cluster bubble element. Cluster ids are reused across zooms,
-  // so a reused marker must have its position, count, and click target refreshed.
-  function renderClusterEl(el, props, coords) {
-    const n = props.point_count;
-    const size = n < 10 ? 36 : n < 25 ? 42 : 48;
-    el.className = "cluster-bubble";
-    el.style.width = size + "px";
-    el.style.height = size + "px";
-    el.textContent = n;
-    el.onclick = function () {
-      const src = map.getSource("points");
-      Promise.resolve(src.getClusterExpansionZoom(props.cluster_id)).then(function (zoom) {
-        map.easeTo({ center: coords, zoom: (zoom || map.getZoom()) + 0.2, pitch: map.getPitch(), duration: 600 });
-      }).catch(function () {});
-    };
-  }
-
-  function clusterEl(props, coords) {
-    const el = document.createElement("div");
-    renderClusterEl(el, props, coords);
-    return el;
-  }
 
   function pinEl(props) {
     const park = PARKS[props.idx];
@@ -306,35 +280,18 @@
     const newMarkers = {};
     const features = map.querySourceFeatures("points");
     for (let i = 0; i < features.length; i++) {
-      const f = features[i];
-      const props = f.properties;
-      if (props.cluster) {
-        // Clusters: their centroid + count change as you zoom (cluster ids get
-        // recycled), so update position and content whenever a bubble is reused.
-        const id = "c" + props.cluster_id;
-        const coords = f.geometry.coordinates;
-        let marker = markers[id];
-        if (!marker) {
-          marker = markers[id] = new maplibregl.Marker({ element: clusterEl(props, coords), anchor: "center" }).setLngLat(coords);
-        } else {
-          marker.setLngLat(coords);
-          renderClusterEl(marker.getElement(), props, coords);
-        }
-        newMarkers[id] = marker;
-        if (!markersOnScreen[id]) marker.addTo(map);
-      } else {
-        // Individual pins never move — anchor once to the EXACT data coordinate.
-        // (querySourceFeatures geometry is tile-quantized and jitters frame to frame.)
-        const id = "p" + props.idx;
-        let marker = markers[id];
-        if (!marker) {
-          const park = PARKS[props.idx];
-          marker = markers[id] = new maplibregl.Marker({ element: pinEl(props), anchor: "bottom" })
-            .setLngLat([park.lng, park.lat]);
-        }
-        newMarkers[id] = marker;
-        if (!markersOnScreen[id]) marker.addTo(map);
+      const props = features[i].properties;
+      // Pins never move — anchor once to the EXACT data coordinate.
+      // (querySourceFeatures geometry is tile-quantized and jitters frame to frame.)
+      const id = "p" + props.idx;
+      let marker = markers[id];
+      if (!marker) {
+        const park = PARKS[props.idx];
+        marker = markers[id] = new maplibregl.Marker({ element: pinEl(props), anchor: "bottom" })
+          .setLngLat([park.lng, park.lat]);
       }
+      newMarkers[id] = marker;
+      if (!markersOnScreen[id]) marker.addTo(map);
     }
     for (const id in markersOnScreen) {
       if (!newMarkers[id]) markersOnScreen[id].remove();
@@ -359,11 +316,19 @@
     if (countEl) countEl.textContent = fc.features.length;
     if (map && map.getSource("points")) map.getSource("points").setData(fc);
     renderSearchResults();
+    updateFilterCounts();
   }
 
   function focusPark(park) {
     if (!map) return;
-    map.flyTo({ center: [park.lng, park.lat], zoom: 15, pitch: 20, bearing: 0, essential: true, duration: 900 });
+    // Keep the focused pin clear of the detail panel: on desktop the panel
+    // covers the right ~440px, on narrow screens it's a bottom sheet, so
+    // pad the camera on whichever side the panel will occupy.
+    const mobile = window.innerWidth <= 700;
+    const padding = mobile
+      ? { top: 60, bottom: Math.round(window.innerHeight * 0.5), left: 40, right: 40 }
+      : { top: 70, bottom: 70, left: 70, right: 440 };
+    map.flyTo({ center: [park.lng, park.lat], zoom: 15, pitch: 20, bearing: 0, essential: true, duration: 900, padding: padding });
     openModal(park);
   }
 
@@ -382,6 +347,49 @@
   });
 
   /* ---------- Filters ---------- */
+  // Reuse the same line-icon set as the markers/hero, so filter chips read as
+  // part of the same visual system instead of mismatched emoji.
+  document.querySelectorAll(".chip-icon").forEach(function (el) {
+    el.innerHTML = catIcon(el.getAttribute("data-icon"), 14, "currentColor");
+  });
+
+  const filterReset = document.getElementById("filter-reset");
+  const resetDivider = document.getElementById("reset-divider");
+
+  // Live per-chip counts: how many results this option would leave, given the
+  // OTHER axis's current selection and the active search — so counts update
+  // as you filter instead of always showing the unfiltered total.
+  function updateFilterCounts() {
+    document.querySelectorAll("[data-filter-type]").forEach(function (btn) {
+      const t = btn.getAttribute("data-filter-type");
+      const n = PARKS.filter(function (p) {
+        const typeOk = t === "all" || p.type === t;
+        const catOk = state.filterCat === "all" || p.category === state.filterCat;
+        return typeOk && catOk && matchesQuery(p);
+      }).length;
+      const el = btn.querySelector(".chip-count");
+      if (el) el.textContent = " (" + n + ")";
+      btn.classList.toggle("chip-empty", n === 0);
+    });
+    document.querySelectorAll("[data-filter-cat]").forEach(function (btn) {
+      const c = btn.getAttribute("data-filter-cat");
+      const n = PARKS.filter(function (p) {
+        const catOk = c === "all" || p.category === c;
+        const typeOk = state.filterType === "all" || p.type === state.filterType;
+        return catOk && typeOk && matchesQuery(p);
+      }).length;
+      const el = btn.querySelector(".chip-count");
+      if (el) el.textContent = " (" + n + ")";
+      btn.classList.toggle("chip-empty", n === 0);
+    });
+  }
+
+  function updateResetVisibility() {
+    const active = state.filterType !== "all" || state.filterCat !== "all";
+    filterReset.hidden = !active;
+    resetDivider.hidden = !active;
+  }
+
   document.querySelectorAll("[data-filter-type]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       document.querySelectorAll("[data-filter-type]").forEach(function (b) { b.classList.remove("active"); });
@@ -389,6 +397,7 @@
       state.filterType = btn.getAttribute("data-filter-type");
       refresh();
       fitAll(true);
+      updateResetVisibility();
     });
   });
 
@@ -399,7 +408,22 @@
       state.filterCat = btn.getAttribute("data-filter-cat");
       refresh();
       fitAll(true);
+      updateResetVisibility();
     });
+  });
+
+  filterReset.addEventListener("click", function () {
+    state.filterType = "all";
+    state.filterCat = "all";
+    document.querySelectorAll("[data-filter-type]").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-filter-type") === "all");
+    });
+    document.querySelectorAll("[data-filter-cat]").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-filter-cat") === "all");
+    });
+    refresh();
+    fitAll(true);
+    updateResetVisibility();
   });
 
   /* ---------- Search ---------- */
@@ -524,8 +548,10 @@
 
   function closeModal() { backdrop.hidden = true; }
 
+  // No click-outside-to-close: the backdrop is pointer-events:none (see CSS)
+  // so the map stays clickable while the panel is open. Close via the button
+  // or Escape only — clicking another pin just swaps the panel's content.
   document.getElementById("modal-close").addEventListener("click", closeModal);
-  backdrop.addEventListener("click", function (e) { if (e.target === backdrop) closeModal(); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !backdrop.hidden) closeModal();
   });

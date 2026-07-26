@@ -53,19 +53,21 @@
   <!-- Floating filter panel -->
   <div class="filter-panel">
     <div class="filter-group" role="group" aria-label="Leash rules filter">
-      <button class="chip active" data-filter-type="all">All</button>
-      <button class="chip" data-filter-type="off-leash"><span class="dot dot-offleash"></span>Off-leash</button>
-      <button class="chip" data-filter-type="leashed"><span class="dot dot-leashed"></span>Leashed</button>
+      <button class="chip active" data-filter-type="all">All<span class="chip-count"></span></button>
+      <button class="chip" data-filter-type="off-leash"><span class="dot dot-offleash"></span>Off-leash<span class="chip-count"></span></button>
+      <button class="chip" data-filter-type="leashed"><span class="dot dot-leashed"></span>Leashed<span class="chip-count"></span></button>
     </div>
     <div class="filter-divider" aria-hidden="true"></div>
     <div class="filter-group" role="group" aria-label="Category filter">
-      <button class="chip active" data-filter-cat="all">All types</button>
-      <button class="chip" data-filter-cat="dog-park">🐕 Dog parks</button>
-      <button class="chip" data-filter-cat="park">🌳 Parks</button>
-      <button class="chip" data-filter-cat="beach">🏖️ Beaches</button>
-      <button class="chip" data-filter-cat="trail">🥾 Trails</button>
-      <button class="chip" data-filter-cat="patio">🍽️ Patios</button>
+      <button class="chip active" data-filter-cat="all">All types<span class="chip-count"></span></button>
+      <button class="chip" data-filter-cat="dog-park"><span class="chip-icon" data-icon="dog-park"></span>Dog parks<span class="chip-count"></span></button>
+      <button class="chip" data-filter-cat="park"><span class="chip-icon" data-icon="park"></span>Parks<span class="chip-count"></span></button>
+      <button class="chip" data-filter-cat="beach"><span class="chip-icon" data-icon="beach"></span>Beaches<span class="chip-count"></span></button>
+      <button class="chip" data-filter-cat="trail"><span class="chip-icon" data-icon="trail"></span>Trails<span class="chip-count"></span></button>
+      <button class="chip" data-filter-cat="patio"><span class="chip-icon" data-icon="patio"></span>Patios<span class="chip-count"></span></button>
     </div>
+    <div class="filter-divider" id="reset-divider" aria-hidden="true" hidden></div>
+    <button class="chip chip-reset" id="filter-reset" hidden>&times; Reset</button>
   </div>
 
   <!-- Floating basemap toggle -->
@@ -74,9 +76,12 @@
     <button class="base-btn" data-base="satellite">Satellite</button>
   </div>
 
-  <!-- Park detail modal -->
+  <!-- Park detail panel: slides in from the right on desktop, up from the
+       bottom on narrow screens. Non-blocking — the map stays interactive
+       (see .modal-backdrop's pointer-events in styles.css) — so this is a
+       non-modal dialog. -->
   <div class="modal-backdrop" id="modal-backdrop" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal" role="dialog" aria-modal="false" aria-labelledby="modal-title">
       <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
       <div class="modal-hero" id="modal-hero"></div>
       <div class="modal-body">

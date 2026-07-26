@@ -12,6 +12,7 @@
   --glass: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(255, 255, 255, 0.55);
   --shadow-float: 0 10px 34px rgba(15, 23, 42, 0.18), 0 2px 8px rgba(15, 23, 42, 0.10);
+  --shadow-panel: 0 20px 60px rgba(15, 23, 42, 0.32), 0 4px 16px rgba(15, 23, 42, 0.16);
   /* Global brand typography — swap here to restyle the whole app + map labels. */
   --font: 'Nunito', system-ui, -apple-system, sans-serif;
   --font-map-label: 'Nunito', system-ui, sans-serif;
@@ -27,6 +28,8 @@ html, body {
   color: var(--ink);
   background: #dbeafe;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* ---------- Full-bleed map ---------- */
@@ -259,7 +262,7 @@ html, body {
   white-space: nowrap;
 }
 
-.chip:hover { background: rgba(14, 116, 144, 0.12); color: var(--ocean-deep); }
+.chip:hover { background: rgba(14, 116, 144, 0.12); color: var(--ocean-deep); transform: translateY(-1px); }
 .chip:active { transform: scale(0.96); }
 .chip.active {
   background: linear-gradient(135deg, #0e7490, #0d9488);
@@ -271,6 +274,24 @@ html, body {
 .dot-offleash { background: var(--offleash); }
 .dot-leashed { background: var(--leashed); }
 .chip.active .dot { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7); }
+
+/* Category chip icons — same line-icon set as the map markers/hero, so the
+   filter bar reads as one visual system instead of mismatched emoji. */
+.chip-icon { display: inline-flex; width: 14px; height: 14px; flex-shrink: 0; }
+.chip-icon svg { display: block; }
+
+/* Live result count per chip; dims when a combination would return nothing. */
+.chip-count { opacity: 0.6; font-weight: 700; }
+.chip.active .chip-count { opacity: 0.85; }
+.chip-empty { opacity: 0.45; }
+
+.chip-reset {
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+.chip-reset:hover { background: rgba(220, 38, 38, 0.16); color: #991b1b; }
+.chip-reset[hidden] { display: none; }
 
 /* Basemap toggle — always top-right */
 .basemap-toggle {
@@ -291,9 +312,10 @@ html, body {
   padding: 6px 15px;
   border-radius: 12px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
 }
-.base-btn:hover { color: var(--ocean-deep); }
+.base-btn:hover { color: var(--ocean-deep); transform: translateY(-1px); }
+.base-btn:active { transform: scale(0.96); }
 .base-btn.active {
   background: linear-gradient(135deg, #0e7490, #0d9488);
   color: #fff;
@@ -354,24 +376,6 @@ html, body {
 }
 .map-pin:hover .marker-tip { opacity: 1; }
 
-/* Cluster bubbles */
-.cluster-bubble {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #22a3b8, #0e7490);
-  color: #fff;
-  font-family: var(--font);
-  font-weight: 900;
-  font-size: 14px;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-.cluster-bubble:hover { transform: scale(1.08); }
-
 /* MapLibre controls — match the glass UI */
 .maplibregl-ctrl-group {
   border-radius: 12px !important;
@@ -384,35 +388,67 @@ html, body {
 /* Push the top-right zoom control below the floating Map/Satellite toggle */
 .maplibregl-ctrl-top-right { margin-top: 58px; }
 
-/* ---------- Modal ---------- */
+/* ---------- Park detail panel ---------- */
+/* .modal-backdrop is just a full-viewport positioning host now, not a
+   blocking overlay: pointer-events:none lets clicks pass through to the map
+   everywhere except the panel itself, so you can keep browsing/clicking
+   other pins while a detail panel is open. Dismiss is via the close button
+   or Escape, not click-outside (there's no dim layer to click). */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2000;
-  padding: 18px;
+  pointer-events: none;
 }
 .modal-backdrop[hidden] { display: none; }
 
 .modal {
+  pointer-events: auto;
   background: var(--card);
   border-radius: var(--radius);
-  width: min(560px, 100%);
-  max-height: min(88vh, 780px);
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: min(408px, calc(100vw - 32px));
   overflow-y: auto;
-  position: relative;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  animation: modal-in 0.22s ease-out;
+  box-shadow: var(--shadow-panel);
+  animation: panel-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes modal-in {
-  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+@keyframes panel-in {
+  from { opacity: 0; transform: translateX(28px); }
   to { opacity: 1; transform: none; }
+}
+
+@keyframes sheet-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Narrow screens: the side panel becomes a bottom sheet instead. */
+@media (max-width: 700px) {
+  .modal {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-height: 82vh;
+    border-radius: var(--radius) var(--radius) 0 0;
+    animation-name: sheet-in;
+  }
+  .modal::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(15, 23, 42, 0.18);
+  }
 }
 
 .modal-close {
@@ -429,8 +465,9 @@ html, body {
   z-index: 2;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  transition: background 0.15s, transform 0.15s;
 }
-.modal-close:hover { background: rgba(15, 23, 42, 0.8); }
+.modal-close:hover { background: rgba(15, 23, 42, 0.8); transform: scale(1.08); }
 
 .modal-hero {
   height: 172px;
@@ -474,6 +511,7 @@ html, body {
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 .info-dogs { background: #f0fdf4; border-color: #bbf7d0; }
 .info-card h3 {
@@ -533,6 +571,7 @@ html, body {
   .filter-panel { gap: 4px; padding: 5px 7px; bottom: 12px; }
   .chip { font-size: 11px; padding: 4px 8px; gap: 4px; }
   .dot { width: 8px; height: 8px; }
+  .chip-count { display: none; }
 }
 
 /* Compact the header + toggle so they share the top row on phones too */

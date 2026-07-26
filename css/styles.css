@@ -296,7 +296,11 @@ html, body {
 }
 
 /* ---------- Map markers (MapLibre HTML markers) ---------- */
-.map-pin { position: relative; width: 36px; height: 36px; cursor: pointer; }
+/* Do NOT set position here — MapLibre needs the marker element to stay
+   position:absolute (from its .maplibregl-marker class). Overriding it to
+   relative shoves every pin down by its stacking offset. The absolute pin is
+   still the positioning context for the hover label below. */
+.map-pin { width: 36px; height: 36px; cursor: pointer; }
 
 .paw-marker {
   display: flex;

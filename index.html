@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>HI Dog Maps — O&#699;ahu</title>
+  <meta name="description" content="Interactive map of dog-friendly parks, beaches, and trails on O'ahu, Hawaii." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 74'><path d='M32 6C44.5 6 54 15.2 54 27.5 54 41 40 52.5 32 65 24 52.5 10 41 10 27.5 10 15.2 19.5 6 32 6Z' fill='%230e7490'/><ellipse cx='21.5' cy='28' rx='3.3' ry='4.5' fill='white'/><ellipse cx='28.5' cy='20.5' rx='3.6' ry='5' fill='white'/><ellipse cx='35.5' cy='20.5' rx='3.6' ry='5' fill='white'/><ellipse cx='42.5' cy='28' rx='3.3' ry='4.5' fill='white'/><path d='M32 29.5C37.5 29.5 42 33 42 37.2 42 41 38.5 42.7 35.2 41.6 33.4 41 30.6 41 28.8 41.6 25.5 42.7 22 41 22 37.2 22 33 26.5 29.5 32 29.5Z' fill='white'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Full-bleed map -->
+  <div id="map" role="application" aria-label="Map of dog-friendly parks on Oahu"></div>
+
+  <!-- Floating header: brand + inline search -->
+  <div class="top-left">
+    <div class="header-bar">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 74" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="32" cy="66" rx="14" ry="3.6" fill="#a7d8c8"/>
+          <path d="M32 6C44.5 6 54 15.2 54 27.5C54 41 40 52.5 32 65C24 52.5 10 41 10 27.5C10 15.2 19.5 6 32 6Z" fill="#0e7490"/>
+          <ellipse cx="21.5" cy="28" rx="3.3" ry="4.5" fill="#ffffff"/>
+          <ellipse cx="28.5" cy="20.5" rx="3.6" ry="5" fill="#ffffff"/>
+          <ellipse cx="35.5" cy="20.5" rx="3.6" ry="5" fill="#ffffff"/>
+          <ellipse cx="42.5" cy="28" rx="3.3" ry="4.5" fill="#ffffff"/>
+          <path d="M32 29.5C37.5 29.5 42 33 42 37.2C42 41 38.5 42.7 35.2 41.6C33.4 41 30.6 41 28.8 41.6C25.5 42.7 22 41 22 37.2C22 33 26.5 29.5 32 29.5Z" fill="#ffffff"/>
+        </svg>
+      </span>
+      <div class="brand-text">
+        <h1>HI Dog Maps</h1>
+        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu</p>
+      </div>
+      <div class="header-divider" aria-hidden="true"></div>
+      <div class="search-panel">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input id="search-input" type="text" placeholder="Search…"
+                 autocomplete="off" aria-label="Search parks and beaches" />
+          <button id="search-clear" class="search-clear" hidden aria-label="Clear search">&times;</button>
+        </div>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating filter panel -->
+  <div class="filter-panel">
+    <div class="filter-group" role="group" aria-label="Leash rules filter">
+      <button class="chip active" data-filter-type="all">All</button>
+      <button class="chip" data-filter-type="off-leash"><span class="dot dot-offleash"></span>Off-leash</button>
+      <button class="chip" data-filter-type="leashed"><span class="dot dot-leashed"></span>Leashed</button>
+    </div>
+    <div class="filter-divider" aria-hidden="true"></div>
+    <div class="filter-group" role="group" aria-label="Category filter">
+      <button class="chip active" data-filter-cat="all">All types</button>
+      <button class="chip" data-filter-cat="dog-park">🐕 Dog parks</button>
+      <button class="chip" data-filter-cat="park">🌳 Parks</button>
+      <button class="chip" data-filter-cat="beach">🏖️ Beaches</button>
+      <button class="chip" data-filter-cat="trail">🥾 Trails</button>
+      <button class="chip" data-filter-cat="patio">🍽️ Patios</button>
+    </div>
+  </div>
+
+  <!-- Floating basemap toggle -->
+  <div class="basemap-toggle" role="group" aria-label="Basemap style">
+    <button class="base-btn active" data-base="map">Map</button>
+    <button class="base-btn" data-base="satellite">Satellite</button>
+  </div>
+
+  <!-- Park detail modal -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-hero" id="modal-hero"></div>
+      <div class="modal-body">
+        <div class="modal-badges" id="modal-badges"></div>
+        <h2 id="modal-title"></h2>
+        <p class="modal-address" id="modal-address"></p>
+        <p class="modal-desc" id="modal-desc"></p>
+
+        <div class="info-card info-dogs">
+          <h3>🐶 Dog rules</h3>
+          <p id="modal-dog-rules"></p>
+        </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>🕐 Hours</h3>
+            <p id="modal-hours"></p>
+          </div>
+          <div class="info-card">
+            <h3>✨ Amenities</h3>
+            <ul class="amenity-list" id="modal-amenities"></ul>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <a id="modal-directions" class="btn btn-primary" target="_blank" rel="noopener">🧭 Get directions</a>
+          <a id="modal-streetview" class="btn btn-secondary" target="_blank" rel="noopener">👀 View on Google Maps</a>
+        </div>
+        <p class="modal-disclaimer">Rules and hours can change — check posted signs on arrival. Always pick up after your pup! 🦴</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="js/parks-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

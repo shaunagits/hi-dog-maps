@@ -555,6 +555,84 @@ html, body {
 
 .modal-disclaimer { margin: 14px 0 0; font-size: 12px; color: #94a3b8; text-align: center; font-weight: 600; }
 
+/* ---------- List view ---------- */
+/* An alternative to the map for browsing every place; sits between the map
+   (z-index 1) and the always-on-top floating controls (z-index 1000) so
+   header/search/filters/basemap-toggle stay usable on top of it. The map
+   itself is never hidden/unmounted — this just visually covers it. */
+.list-view {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  overflow-y: auto;
+  background: #f4ecdc;
+}
+.list-view[hidden] { display: none; }
+
+.list-view-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 108px 20px 130px;
+}
+.list-view-inner h2 { margin: 0 0 4px; font-size: 26px; font-weight: 900; color: var(--ink); }
+.list-view-count { margin: 0 0 20px; font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+
+.list-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+
+.list-card {
+  width: 100%;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.list-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-float); }
+
+.list-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.list-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #fff;
+}
+.list-card-icon.icon-offleash { background: linear-gradient(150deg, #22c55e, #15803d); }
+.list-card-icon.icon-leashed { background: linear-gradient(150deg, #38bdf8, #0369a1); }
+.list-card-name { font-weight: 800; font-size: 15px; color: var(--ink); }
+.list-card-meta { font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; }
+.list-card-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.list-empty {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
 /* ---------- Responsive ---------- */
 /* Layout is consistent at every size: header+search top-left, Map/Satellite
    top-right, filter pills in a centered bottom bar that WRAPS (never scrolls).
@@ -566,6 +644,9 @@ html, body {
   .filter-group { gap: 4px; }
   .filter-divider { display: none; }
   .chip { font-size: 12px; padding: 5px 10px; gap: 5px; }
+  /* More chip groups now wrap to more rows on narrow screens — give the list
+     view extra bottom clearance so cards don't sit under the filter bar. */
+  .list-view-inner { padding-bottom: 170px; }
 }
 @media (max-width: 440px) {
   .filter-panel { gap: 4px; padding: 5px 7px; bottom: 12px; }
@@ -586,6 +667,7 @@ html, body {
   .base-btn { font-size: 12px; padding: 5px 10px; }
   .maplibregl-ctrl-top-right { margin-top: 52px; }
   .info-grid { grid-template-columns: 1fr; }
+  .list-view-inner { padding-top: 88px; }
 }
 @media (max-width: 400px) {
   .brand-sub { display: none; }

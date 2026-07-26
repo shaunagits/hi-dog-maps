@@ -317,6 +317,7 @@
     if (map && map.getSource("points")) map.getSource("points").setData(fc);
     renderSearchResults();
     updateFilterCounts();
+    renderListView();
   }
 
   function focusPark(park) {
@@ -424,6 +425,65 @@
     refresh();
     fitAll(true);
     updateResetVisibility();
+  });
+
+  /* ---------- List view ---------- */
+  // Alternative to the map for browsing every place. Its content is rebuilt
+  // by refresh() regardless of which view is active, so the text exists in
+  // the DOM at load — real content for search crawlers and screen readers,
+  // not something only created on demand when a user opens the panel.
+  let viewMode = "map";
+  const listView = document.getElementById("list-view");
+  const listGrid = document.getElementById("list-grid");
+  const listViewCount = document.getElementById("list-view-count");
+
+  function renderListView() {
+    const parks = visibleParks().slice().sort(function (a, b) { return a.name.localeCompare(b.name); });
+    listViewCount.textContent = parks.length + (parks.length === 1 ? " place" : " places") +
+      " matching your filters";
+    if (parks.length === 0) {
+      listGrid.innerHTML = '<li class="list-empty">No matches — try different filters or a different search.</li>';
+      return;
+    }
+    listGrid.innerHTML = parks.map(function (park) {
+      const dotCls = park.type === "off-leash" ? "icon-offleash" : "icon-leashed";
+      return (
+        '<li>' +
+          '<button class="list-card" data-list-idx="' + PARKS.indexOf(park) + '">' +
+            '<div class="list-card-head">' +
+              '<span class="list-card-icon ' + dotCls + '">' + catIcon(park.category, 13) + "</span>" +
+              '<span class="list-card-name">' + escapeHtml(park.name) + "</span>" +
+            "</div>" +
+            '<div class="list-card-meta">' +
+              escapeHtml((CATEGORY_LABEL[park.category] || "") + " · " + (park.region || "") +
+                (park.type === "off-leash" ? " · Off-leash" : " · Leashed")) +
+            "</div>" +
+            '<p class="list-card-desc">' + escapeHtml(park.description || "") + "</p>" +
+          "</button>" +
+        "</li>"
+      );
+    }).join("");
+  }
+
+  listGrid.addEventListener("click", function (e) {
+    const btn = e.target.closest("[data-list-idx]");
+    if (!btn) return;
+    const park = PARKS[Number(btn.getAttribute("data-list-idx"))];
+    if (!park) return;
+    setViewMode("map");
+    focusPark(park);
+  });
+
+  function setViewMode(mode) {
+    viewMode = mode;
+    listView.hidden = mode !== "list";
+    document.querySelectorAll("[data-view]").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-view") === mode);
+    });
+  }
+
+  document.querySelectorAll("[data-view]").forEach(function (btn) {
+    btn.addEventListener("click", function () { setViewMode(btn.getAttribute("data-view")); });
   });
 
   /* ---------- Search ---------- */
@@ -553,7 +613,9 @@
   // or Escape only — clicking another pin just swaps the panel's content.
   document.getElementById("modal-close").addEventListener("click", closeModal);
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !backdrop.hidden) closeModal();
+    if (e.key !== "Escape") return;
+    if (!backdrop.hidden) closeModal();
+    else if (viewMode === "list") setViewMode("map");
   });
 
   /* ---------- Utils ---------- */
@@ -564,6 +626,52 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
+
+  // schema.org type per category — used only for structured-data markup below.
+  const SCHEMA_TYPE = {
+    "dog-park": "Park", "park": "Park", "beach": "Beach",
+    "trail": "TouristAttraction", "patio": "FoodEstablishment"
+  };
+
+  // Generated live from PARKS at load time (not a static hand-maintained
+  // blob), so it can never drift out of sync with the dataset.
+  function injectStructuredData() {
+    const items = PARKS.map(function (p, i) {
+      return {
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": SCHEMA_TYPE[p.category] || "Place",
+          "name": p.name,
+          "description": p.description || "",
+          "address": { "@type": "PostalAddress", "streetAddress": p.address || "", "addressRegion": "HI", "addressCountry": "US" },
+          "geo": { "@type": "GeoCoordinates", "latitude": p.lat, "longitude": p.lng }
+        }
+      };
+    });
+    const data = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "HI Dog Maps",
+          "url": "https://hawaiidogmap.com/",
+          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios on O'ahu, Hawaii."
+        },
+        {
+          "@type": "ItemList",
+          "name": "Dog-friendly places on O'ahu",
+          "numberOfItems": items.length,
+          "itemListElement": items
+        }
+      ]
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+  injectStructuredData();
 
   /* ---------- Init ---------- */
   fetch("https://tiles.openfreemap.org/styles/positron")

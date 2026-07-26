@@ -1,0 +1,13 @@
+{
+  "name": "HI Dog Maps — Dog-Friendly Places on O'ahu",
+  "short_name": "HI Dog Maps",
+  "description": "Interactive map of dog-friendly parks, beaches, trails, and patios on O'ahu, Hawaii.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#dbeafe",
+  "theme_color": "#0e7490",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -24,6 +24,7 @@ const PARKS = [
     "dogRules": "Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Water stations and waste bag dispensers provided.",
     "amenities": ["Fenced", "Water stations", "Waste bags", "Shade", "Benches", "Picnic tables", "Parking", "Restrooms nearby"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -38,6 +39,7 @@ const PARKS = [
     "dogRules": "Fully fenced off-leash area with shade, seating and water; dogs must be licensed, vaccinated and leashed outside the enclosure.",
     "amenities": ["Fenced", "Water stations", "Waste bag dispensers", "Shade", "Seating", "Parking"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -52,6 +54,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fenced park; separate maintenance closures posted on site. Water stations and cleanup bags available.",
     "amenities": ["Fenced", "Small & large dog areas", "Water stations", "Shade", "Benches", "Picnic tables", "Parking", "Restrooms nearby"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -66,6 +69,7 @@ const PARKS = [
     "dogRules": "Off-leash inside the fence with separate large-dog and small-dog sections; water spigot on site, leash required outside.",
     "amenities": ["Fenced", "Small & large dog areas", "Water spigot", "Seating", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -80,6 +84,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fenced park, with a smaller separate pen for small or anxious dogs; drinking fountain for dogs and shady trees.",
     "amenities": ["Fenced", "Small & large dog areas", "Water fountain", "Shade", "Benches", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -94,6 +99,7 @@ const PARKS = [
     "dogRules": "Off-leash inside the fenced enclosure with separate small and large dog areas; leash required elsewhere in 'A'ala Park.",
     "amenities": ["Fenced", "Small & large dog areas", "Benches", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -108,6 +114,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fence with designated large-dog and small-dog areas; dogs must be leashed outside the enclosure.",
     "amenities": ["Fenced", "Small & large dog areas", "Benches", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -122,6 +129,7 @@ const PARKS = [
     "dogRules": "Off-leash inside the fenced park with separate areas for large and small dogs; seating available, leash required outside.",
     "amenities": ["Fenced", "Small & large dog areas", "Seating", "Street parking"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -136,6 +144,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fenced area; note there is no dedicated parking and no water fountain, so bring your own water.",
     "amenities": ["Fenced", "Benches", "Street parking only", "No water on site"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -150,6 +159,7 @@ const PARKS = [
     "dogRules": "Off-leash inside the fence with separate large and small dog areas; benches, shade and drinking fountains provided.",
     "amenities": ["Fenced", "Small & large dog areas", "Water fountains", "Shade", "Benches", "Parking"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -164,6 +174,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fenced enclosure with separate large-dog and small-dog areas; leash required in the rest of the park.",
     "amenities": ["Fenced", "Small & large dog areas", "Seating", "Nearby paid parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -178,6 +189,7 @@ const PARKS = [
     "dogRules": "Off-leash inside the fence with separate small and large dog sections; street parking is limited.",
     "amenities": ["Fenced", "Small & large dog areas", "Benches", "Limited street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -192,6 +204,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fence with separate big-dog and small-dog areas; drinking fountains, irrigation/sprinklers, and ADA-accessible paths.",
     "amenities": ["Fenced", "Small & large dog areas", "Water fountains", "Benches", "ADA accessible", "Parking"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -206,6 +219,7 @@ const PARKS = [
     "dogRules": "Off-leash within the fenced enclosure; dogs must be licensed and vaccinated, and leashed outside the gates.",
     "amenities": ["Fenced", "Shade", "Benches", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -220,6 +234,7 @@ const PARKS = [
     "dogRules": "Off-leash for registered members only (registration is free, donations encouraged); separate small and large dog areas, play structures, gazebos and water.",
     "amenities": ["Fenced", "Small & large dog areas", "Water stations", "Play structures", "Gazebos/shade", "Parking", "Free membership required"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -234,6 +249,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are now officially allowed under the city's 2026 on-leash park designation; pick up after your dog and keep leash on at all times.",
     "amenities": ["Beach access", "Parking", "Restrooms", "Showers", "Picnic areas", "Shade"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -248,6 +264,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in the park; the shorebreak is powerful and dangerous, so keep dogs away from the water's edge.",
     "amenities": ["Beach access", "Large lawns", "Parking", "Restrooms", "Showers"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -262,6 +279,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed throughout the park's lawns and paths; no swimming beach — clean up after your dog.",
     "amenities": ["Oceanfront paths", "Large lawns", "Parking", "Restrooms", "Picnic tables"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -276,6 +294,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in park areas; plenty of open space for long on-leash walks.",
     "amenities": ["Large lawns", "Parking", "Restrooms", "Picnic tables", "Shade"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -290,6 +309,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in the park and along the adjacent multi-use path; clean up required.",
     "amenities": ["Waterfront path", "Parking", "Restrooms", "Picnic areas", "Shade"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -304,6 +324,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in the park under the city's 2026 on-leash designation; keep dogs leashed and pick up waste.",
     "amenities": ["Beach access", "Calm water", "Large lawns", "Parking", "Restrooms", "Showers"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -318,6 +339,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in the park under the city's on-leash designation; keep dogs leashed at all times.",
     "amenities": ["Beach access", "Shade", "Parking", "Restrooms", "Picnic tables", "Camping"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -332,6 +354,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed; the area is undeveloped and quiet, ideal for long on-leash beach walks. Strong currents in winter.",
     "amenities": ["Beach access", "Parking", "Restrooms", "Picnic tables", "Camping"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -346,6 +369,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed in the park; keep dogs leashed and carry out waste — facilities are minimal.",
     "amenities": ["Beach access", "Parking", "Limited facilities"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -360,6 +384,7 @@ const PARKS = [
     "dogRules": "Frequently cited as dog-friendly with leashed dogs welcome, but it does NOT appear on the city's official on-leash park list — verify current signage before relying on it.",
     "amenities": ["Beach access", "Parking", "Restrooms", "Open space"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -374,6 +399,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed under Na Ala Hele rules; trail is often muddy, and dogs must stay leashed and be cleaned up after.",
     "amenities": ["Paid parking", "Restrooms at trailhead", "Shade", "Waterfall"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -388,6 +414,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the loop trail; state park rules require dogs on leash at all times and waste pickup.",
     "amenities": ["Parking", "Restrooms", "Picnic areas", "Shade", "Camping nearby"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -402,6 +429,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed under Na Ala Hele rules; keep dogs leashed — the upper stairs and summit section are steep and exposed.",
     "amenities": ["Street parking", "Shade on lower trail", "Covered rest shelters"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -416,6 +444,7 @@ const PARKS = [
     "dogRules": "Leashed dogs allowed; the paved path gets very hot at midday, so go early or late to protect paws. Clean up after your dog.",
     "amenities": ["Parking", "Paved trail", "Scenic overlooks", "No water or restrooms"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -430,6 +459,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome under state park and Na Ala Hele rules; picnic areas at the trailhead make it an easy shorter outing too.",
     "amenities": ["Parking", "Restrooms", "Picnic areas", "Shade"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -444,6 +474,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome but must be kept on a leash at all times; bring water as there is no shade and it gets hot on the exposed ridge.",
     "amenities": ["Street parking", "Ocean views", "No restrooms", "No water"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -458,6 +489,7 @@ const PARKS = [
     "dogRules": "Dogs are allowed but must remain on a leash; the connecting Nu'uanu Trail does NOT allow dogs, so stay on the Judd loop.",
     "amenities": ["Roadside parking", "Stream", "Shade", "Swimming hole", "No restrooms"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -472,6 +504,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on a leash; the climb is steep and exposed with no shade or water, so it is best for fit dogs in cooler hours.",
     "amenities": ["Roadside parking", "Ocean views", "No restrooms", "No water"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -486,6 +519,7 @@ const PARKS = [
     "dogRules": "Sources conflict on whether dogs are permitted, and even where allowed the steep, exposed railroad ties and lack of shade or water make it hazardous for dogs; verify current policy before bringing a dog.",
     "amenities": ["Park parking", "Restrooms at base park", "No shade", "No water on trail"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -500,6 +534,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City & County of Honolulu on-leash park designation; keep dogs leashed and clean up after them.",
     "amenities": ["Parking", "Restrooms", "Showers", "Lifeguard", "Picnic tables", "Grassy areas"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -514,6 +549,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; keep dogs on leash and pick up waste.",
     "amenities": ["Parking", "Restrooms", "Showers", "Playground", "Picnic tables"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -528,6 +564,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are permitted under the City on-leash park designation; leash and clean-up required.",
     "amenities": ["Parking", "Restrooms", "Sports fields", "Gymnasium", "Grassy areas"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -542,6 +579,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; keep dogs leashed and clean up after them.",
     "amenities": ["Parking", "Restrooms", "Sports fields", "Tennis courts", "Grassy areas"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -556,6 +594,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; leash required and owners must clean up.",
     "amenities": ["Parking", "Restrooms", "Playground", "Grassy areas", "Walking paths"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -570,6 +609,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are permitted under the City on-leash park designation; keep dogs leashed and pick up after them.",
     "amenities": ["Parking", "Restrooms", "Swimming pool", "Sports fields", "Tennis courts", "Grassy areas"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -584,6 +624,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; leash and clean-up required.",
     "amenities": ["Street parking", "Playground", "Grassy areas"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -598,6 +639,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; keep dogs leashed and clean up after them.",
     "amenities": ["Street parking", "Grassy areas", "City views", "Playground"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -612,6 +654,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are permitted under the City on-leash park designation; leash required and clean up after your dog.",
     "amenities": ["Parking", "Restrooms", "Sports fields", "Skate park", "Grassy areas"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -626,6 +669,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; keep dogs leashed and clean up after them.",
     "amenities": ["Parking", "Restrooms", "Sports fields", "Tennis courts", "Grassy areas"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -640,6 +684,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are permitted under the City on-leash park designation; leash and clean-up required.",
     "amenities": ["Parking", "Playground", "Basketball court", "Grassy areas"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -654,6 +699,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed under the City on-leash park designation; keep dogs leashed and clean up after them.",
     "amenities": ["Parking", "Playground", "Grassy areas"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -668,6 +714,7 @@ const PARKS = [
     "dogRules": "Dogs must be kept on a leash no longer than six feet at all times. Owners are required to pick up and dispose of all pet waste.",
     "amenities": ["Open lawn", "Playground", "Street parking", "Scenic views"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -682,6 +729,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on a leash of six feet or less; keep pets off active sports fields and clean up after them.",
     "amenities": ["Sports fields", "Inline hockey rink", "Parking", "Restrooms"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -696,6 +744,7 @@ const PARKS = [
     "dogRules": "Leashed dogs only (six-foot maximum leash); owners must remove all waste.",
     "amenities": ["Open lawn", "Playground", "Street parking"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -710,6 +759,7 @@ const PARKS = [
     "dogRules": "Dogs must remain leashed (six feet or less) and owners must pick up after them; space is very limited.",
     "amenities": ["Benches", "Shade trees", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -724,6 +774,7 @@ const PARKS = [
     "dogRules": "Keep dogs on a leash no longer than six feet and clean up all waste.",
     "amenities": ["Open lawn", "Benches", "Playground", "Street parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -738,6 +789,7 @@ const PARKS = [
     "dogRules": "Leashed dogs only (six-foot maximum); owners must remove pet waste and avoid the sports court and building interior.",
     "amenities": ["Multipurpose field", "Basketball court", "Community building", "Parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -752,6 +804,7 @@ const PARKS = [
     "dogRules": "Dogs are allowed on a leash of six feet or less; free waste bags are provided and owners must clean up.",
     "amenities": ["Playground", "Basketball court", "Open lawn", "Waste bag dispenser", "Parking"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -766,6 +819,7 @@ const PARKS = [
     "dogRules": "Leashed dogs only (six-foot maximum leash); free waste bags provided and owners must dispose of waste.",
     "amenities": ["Large open fields", "Playground", "Waste bag dispenser", "Parking", "Restrooms"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -780,6 +834,7 @@ const PARKS = [
     "dogRules": "Dogs must be leashed (six feet or less); owners must pick up after their pets using the provided waste bags.",
     "amenities": ["Sports fields", "Courts", "Community center", "Waste bag dispenser", "Parking"],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -794,6 +849,7 @@ const PARKS = [
     "dogRules": "Leashed dogs only (six-foot maximum); owners must remove all waste and mind surf and shorebreak conditions.",
     "amenities": ["Sandy beach", "Nearby restrooms", "Street parking"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -808,6 +864,7 @@ const PARKS = [
     "dogRules": "Dogs must be leashed (six feet or less) and owners must clean up after them.",
     "amenities": ["Historic bandstand", "Open lawn", "Shade trees", "Street parking"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -822,6 +879,7 @@ const PARKS = [
     "dogRules": "Leashed dogs only (six-foot maximum leash); owners must pack out all waste. No lifeguard - mind strong winter surf.",
     "amenities": ["Long sandy beach", "Surf spot", "Roadside parking only"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -836,6 +894,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome in the outdoor lanai/beer garden only. They offer a dog menu including a chicken, veggie, bacon and egg 'bibim-pup' bowl.",
     "amenities": ["Outdoor patio", "Beer garden", "Shade", "Dog menu", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -850,6 +909,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the outdoor patio only. Dog menu of grilled chicken strips or ground beef with white rice; half-off doggie meals on Tuesdays.",
     "amenities": ["Outdoor patio", "Shade", "Dog menu", "Water bowls", "Parking"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -864,6 +924,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the outdoor terrace/patio only, not inside the dining room.",
     "amenities": ["Outdoor patio", "Covered seating", "Harbor views", "Parking", "Live music"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -878,6 +939,7 @@ const PARKS = [
     "dogRules": "Leashed, well-behaved dogs welcome at the outdoor patio/picnic tables. Plenty of shade; BYOB permitted.",
     "amenities": ["Outdoor patio", "Beachfront", "Shade", "Ocean views", "Near dog-friendly park"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -892,6 +954,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the outdoor lanai seating only.",
     "amenities": ["Outdoor lanai", "Shade", "Happy hour", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -906,6 +969,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at outdoor tables only. Plenty of shade and space between tables.",
     "amenities": ["Outdoor patio", "Shade", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -920,6 +984,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the outdoor patio only. Offers 'Echigo's Four-Legged Menu' with pork or chicken and farm vegetables.",
     "amenities": ["Outdoor patio", "Dog menu", "Shade", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -934,6 +999,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the outdoor tables only.",
     "amenities": ["Outdoor patio", "Happy hour", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -948,6 +1014,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome in the outdoor courtyard only.",
     "amenities": ["Outdoor courtyard", "Shade", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -962,6 +1029,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome in the outdoor seating area only.",
     "amenities": ["Outdoor patio", "Self-serve taps", "Shade"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -976,6 +1044,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the upstairs open-air patio tables only.",
     "amenities": ["Outdoor patio", "Ocean views", "Shade", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -990,6 +1059,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome in the open-air seating area. Confirm current policy with staff on arrival.",
     "amenities": ["Open-air seating", "Craft beer", "Shade", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1004,6 +1074,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the covered outdoor patio tables only.",
     "amenities": ["Outdoor patio", "Covered seating", "Live music", "Water bowls"],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1018,6 +1089,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome on the outdoor patio only. Offers a dog menu with hot dogs, mini burgers and bacon.",
     "amenities": ["Outdoor patio", "Dog menu", "Shade", "Water bowls", "Parking"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1032,6 +1104,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the outdoor seats only.",
     "amenities": ["Outdoor seating", "Shade", "Water bowls", "Parking"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1046,6 +1119,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the small outdoor bar/seating area out front (seats about four).",
     "amenities": ["Outdoor seating", "Shade", "Water bowls"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1060,6 +1134,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome in the outdoor seating area only.",
     "amenities": ["Outdoor seating", "Shade", "Water bowls", "Parking"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1074,6 +1149,7 @@ const PARKS = [
     "dogRules": "Leashed dogs welcome at the outdoor cafe tables and around the garden grounds.",
     "amenities": ["Outdoor seating", "Garden grounds", "Shade", "Parking"],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1088,6 +1164,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed on the sand. This is state-jurisdiction shoreline fronting a residential area with no City beach-park prohibition and no wildlife-sanctuary designation. Keep dogs clear of any hauled-out monk seals.",
     "amenities": ["Street parking", "Calm swimming", "Public beach access paths"],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1102,6 +1179,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are allowed on this state-jurisdiction residential shoreline, which is not a City beach park and carries no sanctuary designation.",
     "amenities": ["Street parking", "Public beach access paths", "Calm swimming"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1116,6 +1194,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are commonly permitted on this state-jurisdiction shoreline, which is not a City beach park and has no sanctuary designation. Not confirmed by a specific City ordinance, so verify posted signs on arrival.",
     "amenities": ["Street parking", "Snorkeling"],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1130,6 +1209,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are commonly permitted on this state-jurisdiction shoreline. Keep well clear of resting turtles and monk seals, which are federally protected. Not confirmed by a specific City ordinance, so verify posted signs.",
     "amenities": ["Trail access", "Shade trees", "Calm swimming"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1144,6 +1224,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are commonly permitted on this state-jurisdiction shoreline (public beach below the high wash line). Resort-managed upland areas may set their own rules, so verify posted signs.",
     "amenities": ["Parking", "Restrooms nearby", "Snorkeling", "Coastal trail"],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1158,6 +1239,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1172,6 +1254,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1186,6 +1269,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1200,6 +1284,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1214,6 +1299,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1228,6 +1314,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1242,6 +1329,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1256,6 +1344,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1270,6 +1359,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1284,6 +1374,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1298,6 +1389,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1312,6 +1404,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1326,6 +1419,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1340,6 +1434,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1354,6 +1449,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1368,6 +1464,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1382,6 +1479,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1396,6 +1494,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1410,6 +1509,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1424,6 +1524,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1438,6 +1539,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1452,6 +1554,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1466,6 +1569,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1480,6 +1584,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1494,6 +1599,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1508,6 +1614,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1522,6 +1629,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1536,6 +1644,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1550,6 +1659,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1564,6 +1674,7 @@ const PARKS = [
     "dogRules": "Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs.",
     "amenities": [],
     "region": "Central Oahu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1578,6 +1689,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": false
   },
   {
@@ -1592,6 +1704,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1606,6 +1719,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1620,6 +1734,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1634,6 +1749,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1648,6 +1764,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1662,6 +1779,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1676,6 +1794,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1690,6 +1809,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1704,6 +1824,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1718,6 +1839,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1732,6 +1854,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1746,6 +1869,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1760,6 +1884,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1774,6 +1899,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1788,6 +1914,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1802,6 +1929,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1816,6 +1944,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1830,6 +1959,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1844,6 +1974,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1858,6 +1989,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1872,6 +2004,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1886,6 +2019,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1900,6 +2034,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1914,6 +2049,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "East Honolulu",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1928,6 +2064,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1942,6 +2079,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1956,6 +2094,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1970,6 +2109,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1984,6 +2124,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -1998,6 +2139,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2012,6 +2154,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2026,6 +2169,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2040,6 +2184,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2054,6 +2199,7 @@ const PARKS = [
     "dogRules": "Leashed dogs are welcome throughout this beach. Keep your dog leashed, always pick up after it, and steer clear of posted monk-seal, sea-turtle, and seabird protection zones.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2068,6 +2214,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2082,6 +2229,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2096,6 +2244,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "North Shore",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2110,6 +2259,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Leeward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2124,6 +2274,7 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
     "uncertain": true
   },
   {
@@ -2138,6 +2289,577 @@ const PARKS = [
     "dogRules": "Dogs are permitted only below the high-tide line (the ocean side of the debris/seaweed line) on this state shoreline — not on the dry upland beach. Keep leashed, clean up, and avoid monk-seal and seabird protection areas. Check posted signs before visiting.",
     "amenities": [],
     "region": "Windward",
+    "island": "Oahu",
+    "uncertain": true
+  },
+  {
+    "name": "Keopuolani Dog Park",
+    "lat": 20.89405,
+    "lng": -156.48234,
+    "type": "off-leash",
+    "category": "dog-park",
+    "address": "700 Halia Nakoa St, Kahului, HI 96732 (Keopuolani Park)",
+    "hours": "Daily, 7:00 AM - 7:00 PM",
+    "description": "A fenced off-leash dog park inside Kahului's large Keopuolani Park, one of Maui County's official dog parks.",
+    "dogRules": "Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Fenced", "Small & large dog areas", "Double-entry gate", "Parking"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kenolio Dog Park",
+    "lat": 20.77476,
+    "lng": -156.46034,
+    "type": "off-leash",
+    "category": "dog-park",
+    "address": "131 S. Kihei Rd, Kihei, HI 96753",
+    "hours": "Daily, 7:00 AM - 7:00 PM",
+    "description": "A fenced off-leash dog park in Kihei, wheelchair accessible with restrooms on site.",
+    "dogRules": "Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Fenced", "Wheelchair accessible", "Restrooms", "Parking"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kilohana Dog Park",
+    "lat": 20.70228,
+    "lng": -156.44476,
+    "type": "off-leash",
+    "category": "dog-park",
+    "address": "17 Kilohana Dr, Kihei, HI 96753",
+    "hours": "Daily, 7:00 AM - 8:00 PM",
+    "description": "A small fenced dog area in Kihei. Unlike Maui County's other dog parks, it isn't built to official off-leash-park standards, and there's no dedicated nearby parking.",
+    "dogRules": "Off-leash inside the fence, but explicitly called out by local sources as not an official/standard dog park — verify current condition and access before visiting. Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Fenced", "No dedicated parking"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Lahaina Recreation Center Dog Park",
+    "lat": 20.9044,
+    "lng": -156.68367,
+    "type": "off-leash",
+    "category": "dog-park",
+    "address": "280 Shaw St, Lahaina, HI 96761",
+    "hours": "Daily, 7:00 AM - 7:00 PM",
+    "description": "A fenced off-leash dog park at Lahaina's recreation/civic center complex.",
+    "dogRules": "Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs. Lahaina town was heavily affected by the August 2023 wildfire — confirm this facility is open and unchanged before visiting.",
+    "amenities": ["Fenced", "Double-entry gate"],
+    "region": "West Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Upcountry Dog Park",
+    "lat": 20.85054,
+    "lng": -156.31608,
+    "type": "off-leash",
+    "category": "dog-park",
+    "address": "58-98 Hale Kipa Rd, Makawao, HI 96768 (Eddie Tam Memorial Complex)",
+    "hours": "Daily, 7:00 AM - 7:00 PM",
+    "description": "Maui County's largest dog park at 3.5 acres, part of the Eddie Tam Memorial Complex in Makawao. Has a dog wash area and small swim pools in addition to open running space.",
+    "dogRules": "Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Fenced", "Dog wash area", "Swim pools", "Wheelchair accessible", "Parking"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Baldwin Beach Park",
+    "lat": 20.91412,
+    "lng": -156.3921,
+    "type": "leashed",
+    "category": "beach",
+    "address": "Hana Hwy, Paia, HI 96779",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A long sandy North Shore beach near Paia with a designated dog-friendly area, popular with locals for leashed dog walks and swims.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Restrooms", "Lifeguard"],
+    "region": "North Shore",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kepaniwai Park & Heritage Gardens",
+    "lat": 20.88337,
+    "lng": -156.53488,
+    "type": "leashed",
+    "category": "park",
+    "address": "870 Iao Valley Rd, Wailuku, HI 96793",
+    "hours": "Open daily, 7:00 AM - 7:00 PM",
+    "description": "A shaded riverside park at the entrance to Iao Valley, with heritage gardens honoring Maui's ethnic history — pavilions, streams, and lawns good for a leashed walk.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Restrooms", "Picnic pavilions", "Shade"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kahakapao Loop Trail (Makawao Forest Reserve)",
+    "lat": 20.83199,
+    "lng": -156.27558,
+    "type": "leashed",
+    "category": "trail",
+    "address": "Kahakapao Rd, Makawao, HI 96768",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A shaded loop trail through eucalyptus and Cook pine forest in Upcountry Maui's Makawao Forest Reserve, recommended by the Maui Humane Society for leashed dog hikes.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Shade", "Parking"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Waihou Spring Trail",
+    "lat": 20.80621,
+    "lng": -156.28008,
+    "type": "leashed",
+    "category": "trail",
+    "address": "Waipoli Rd, Kula, HI 96790",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A quiet forest loop trail in Kula, Upcountry Maui, through pine and eucalyptus with valley views — a Maui Humane Society-recommended spot for leashed dog walks.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Shade", "Parking"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kalama Park",
+    "lat": 20.73161,
+    "lng": -156.45225,
+    "type": "leashed",
+    "category": "park",
+    "address": "1900 S Kihei Rd, Kihei, HI 96753",
+    "hours": "Open daily, 7:00 AM - 10:00 PM",
+    "description": "A large beachfront park in central Kihei with open lawns, sports courts, and a skate park — a popular spot for a leashed walk along South Kihei Road.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Restrooms", "Sports courts", "Picnic tables"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kihei Regional Park (South Maui Community Park & Gymnasium)",
+    "lat": 20.74427,
+    "lng": -156.4469,
+    "type": "leashed",
+    "category": "park",
+    "address": "2211 Liloa Dr, Kihei, HI 96753",
+    "hours": "Open daily, 7:00 AM - 9:00 PM",
+    "description": "A large community park complex in Kihei with athletic fields, courts, and open lawns.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Restrooms", "Sports fields"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Maluaka Beach",
+    "lat": 20.64522,
+    "lng": -156.44335,
+    "type": "leashed",
+    "category": "beach",
+    "address": "Makena Rd, Kihei, HI 96753",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A calm, scenic beach in Mākena on Maui's south shore, recommended by the Maui Humane Society as a leashed dog-friendly outing spot.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kalepolepo Beach & Park",
+    "lat": 20.76423,
+    "lng": -156.45838,
+    "type": "leashed",
+    "category": "beach",
+    "address": "725 S Kihei Rd, Kihei, HI 96753",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A small North Kihei beach park beside the historic Ko'ie'ie Fishpond, recommended for leashed dog outings.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Shade"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Waipuilani Park / Kihei Beach Reserve",
+    "lat": 20.755,
+    "lng": -156.45885,
+    "type": "leashed",
+    "category": "beach",
+    "address": "South Kihei Rd, Kihei, HI 96753",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A small North Kihei beachfront reserve, recommended by the Maui Humane Society as a leashed dog-friendly spot.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Haycraft Park & Beach",
+    "lat": 20.79581,
+    "lng": -156.49832,
+    "type": "leashed",
+    "category": "beach",
+    "address": "North Kihei Rd, Kihei, HI 96753",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A small beach park along North Kihei Road near Maalaea, recommended by the Maui Humane Society for leashed dog outings.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Baby Beach (Sprecklesville)",
+    "lat": 20.91269,
+    "lng": -156.40351,
+    "type": "leashed",
+    "category": "beach",
+    "address": "Nonohe Pl, Kahului, HI 96732",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A calm, shallow North Shore beach near Sprecklesville, popular with families and recommended by the Maui Humane Society for leashed dog visits.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Shade"],
+    "region": "North Shore",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Wailea Beach Path",
+    "lat": 20.68462,
+    "lng": -156.44335,
+    "type": "leashed",
+    "category": "trail",
+    "address": "Wailea Alanui Dr, Wailea, HI 96753",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A paved coastal walking path connecting Wailea's resort beaches — a scenic, mostly flat route for a leashed walk with ocean views.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Paved path", "Ocean views"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Keokea Park",
+    "lat": 20.70588,
+    "lng": -156.35405,
+    "type": "leashed",
+    "category": "park",
+    "address": "Hwy 37, Kula, HI 96790",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A small Upcountry community park in Keōkea with views over south Maui, recommended by the Maui Humane Society as a quieter dog-walking spot.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking", "Views"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Kula Park",
+    "lat": 20.75931,
+    "lng": -156.33007,
+    "type": "leashed",
+    "category": "park",
+    "address": "Lower Kula Rd, Kula, HI 96790",
+    "hours": "Open daily, dawn to dusk",
+    "description": "A quiet Upcountry community park in Kula, recommended by the Maui Humane Society for a calmer leashed dog walk away from crowds.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Harold W. Rice Memorial Park",
+    "lat": 20.74194,
+    "lng": -156.33253,
+    "type": "leashed",
+    "category": "park",
+    "address": "Lower Kula Rd, Kula, HI 96790",
+    "hours": "Open daily, dawn to dusk",
+    "description": "An Upcountry community park in Kula with open lawns, recommended by the Maui Humane Society as a quieter dog-walking spot.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs.",
+    "amenities": ["Parking"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Tech Park (Maui Research & Technology Park)",
+    "lat": 20.75007,
+    "lng": -156.44123,
+    "type": "leashed",
+    "category": "park",
+    "address": "590 Lipoa Pkwy, Kihei, HI 96753",
+    "hours": "Business hours; open grounds",
+    "description": "An office park in Kihei with quiet walkways between buildings — recommended by the Maui Humane Society as a low-traffic leashed dog walking route.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs. This is private/business property, not a public park — be considerate and check for any posted restrictions.",
+    "amenities": [],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Thompson Road",
+    "lat": 20.69613,
+    "lng": -156.36461,
+    "type": "leashed",
+    "category": "trail",
+    "address": "Thompson Rd, Kula, HI 96790",
+    "hours": "Open daily",
+    "description": "A scenic, lightly-trafficked rural road through Upcountry ranchland, popular with locals for leashed dog walks with sweeping views.",
+    "dogRules": "Maui County requires dogs be leashed (10 ft max leash) at all public parks and beaches by default — there's no per-park designation list like O'ahu's, it's the county-wide baseline rule. Pick up after your dog and check posted signs. This is a public road, not a dedicated trail — stay alert for vehicle traffic.",
+    "amenities": ["Views"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Amigo's",
+    "lat": 20.75114,
+    "lng": -156.45549,
+    "type": "leashed",
+    "category": "patio",
+    "address": "1215 S Kihei Rd, Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "A Mexican restaurant in Kihei with outdoor seating recommended by the Maui Humane Society for dog outings.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Nalu's South Shore Grill",
+    "lat": 20.74938,
+    "lng": -156.45658,
+    "type": "leashed",
+    "category": "patio",
+    "address": "1280 S Kihei Rd, Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "A casual Kihei restaurant with outdoor seating, recommended by the Maui Humane Society as dog-friendly.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Maui Brewing Co. (Kihei)",
+    "lat": 20.74934,
+    "lng": -156.43802,
+    "type": "leashed",
+    "category": "patio",
+    "address": "605 Lipoa Pkwy, Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "The Kihei taproom and restaurant location of Maui Brewing Co., with outdoor seating recommended by the Maui Humane Society for dog outings.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Gilligans Bar & Grill",
+    "lat": 20.7479,
+    "lng": -156.44468,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "A Kihei bar and grill with outdoor seating recommended by the Maui Humane Society as dog-friendly.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Akamai Coffee (Wailea Village)",
+    "lat": 20.68639,
+    "lng": -156.43694,
+    "type": "leashed",
+    "category": "patio",
+    "address": "34 Wailea Gateway Pl, Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "A coffee shop in Wailea Village with outdoor seating recommended by the Maui Humane Society for dog outings.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "South Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Food Trucks by Costco",
+    "lat": 20.88818,
+    "lng": -156.44753,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Near Costco, Kahului, HI 96732",
+    "hours": "Varies by truck",
+    "description": "A cluster of food trucks near Costco in Kahului with outdoor seating, recommended by the Maui Humane Society for dog outings.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Ula'Ula Cafe",
+    "lat": 20.92465,
+    "lng": -156.5042,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Waihee area, Maui, HI",
+    "hours": "Check posted hours",
+    "description": "A cafe near Waihee recommended by the Maui Humane Society for outdoor, dog-friendly dining.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "The Parlay",
+    "lat": 20.88778,
+    "lng": -156.50283,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Wailuku, HI 96793",
+    "hours": "Check posted hours",
+    "description": "A restaurant/bar in the Wailuku area recommended by the Maui Humane Society as dog-friendly outdoor seating.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Sonic Drive-In (Kahului)",
+    "lat": 20.87998,
+    "lng": -156.44545,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Kahului, HI 96732",
+    "hours": "Check posted hours",
+    "description": "A drive-in restaurant in Kahului with outdoor seating recommended by the Maui Humane Society for a quieter dog outing.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Central Maui",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Freshies",
+    "lat": 20.8553,
+    "lng": -156.3116,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Pukalani, HI 96768",
+    "hours": "Check posted hours",
+    "description": "A casual eatery in Pukalani with outdoor seating recommended by the Maui Humane Society as dog-friendly.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Food Trucks by Longs Drugs (Pukalani)",
+    "lat": 20.82206,
+    "lng": -156.32966,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Pukalani, HI 96768",
+    "hours": "Varies by truck",
+    "description": "A cluster of food trucks near Longs Drugs in Pukalani with outdoor seating, recommended by the Maui Humane Society for dog outings.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Grandma's Coffee House",
+    "lat": 20.70522,
+    "lng": -156.35666,
+    "type": "leashed",
+    "category": "patio",
+    "address": "9232 Kula Hwy, Keokea, HI 96790",
+    "hours": "Daily, 6:30 AM - 5:00 PM",
+    "description": "A historic, multi-generation family coffee house in Keōkea, Upcountry Maui, with a shaded outdoor patio recommended by the Maui Humane Society for dog-friendly stops.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating", "Shade"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": false
+  },
+  {
+    "name": "Kalei's Lunchbox (Pukalani)",
+    "lat": 20.83806,
+    "lng": -156.34192,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Pukalani, HI 96768",
+    "hours": "Check posted hours",
+    "description": "A local lunch spot in Pukalani with outdoor seating recommended by the Maui Humane Society as dog-friendly.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Ohana Island Grindz",
+    "lat": 20.85484,
+    "lng": -156.31088,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Pukalani, HI 96768",
+    "hours": "Check posted hours",
+    "description": "A local food spot in Pukalani with outdoor seating recommended by the Maui Humane Society as dog-friendly.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "Upcountry",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "Paia Bay Coffee",
+    "lat": 20.91623,
+    "lng": -156.38153,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Paia, HI 96779",
+    "hours": "Check posted hours",
+    "description": "A North Shore coffee shop near Paia Bay with outdoor seating recommended by the Maui Humane Society for dog-friendly stops.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": ["Outdoor seating"],
+    "region": "North Shore",
+    "island": "Maui",
+    "uncertain": true
+  },
+  {
+    "name": "South Maui Gardens",
+    "lat": 20.72987,
+    "lng": -156.4503,
+    "type": "leashed",
+    "category": "patio",
+    "address": "Kihei, HI 96753",
+    "hours": "Check posted hours",
+    "description": "A Kihei outdoor spot recommended by the Maui Humane Society for dog outings — details are thin, so confirm exactly what's on site before visiting.",
+    "dogRules": "Outdoor seating recommended by the Maui Humane Society for dog outings. Restaurant pet policies can change — call ahead or check with staff before visiting.",
+    "amenities": [],
+    "region": "South Maui",
+    "island": "Maui",
     "uncertain": true
   }
 ];

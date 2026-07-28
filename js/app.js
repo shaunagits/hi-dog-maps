@@ -150,7 +150,7 @@
 
   function matchesQuery(p) {
     if (!state.query) return true;
-    const hay = (p.name + " " + (p.region || "") + " " + (p.address || "") + " " +
+    const hay = (p.name + " " + (p.region || "") + " " + (p.island || "") + " " + (p.address || "") + " " +
       (CATEGORY_LABEL[p.category] || "")).toLowerCase();
     return hay.indexOf(state.query) !== -1;
   }
@@ -188,8 +188,11 @@
     map = new maplibregl.Map({
       container: "map",
       style: style,
-      center: [-157.95, 21.45],
-      zoom: 9.4,
+      // Roughly midway between O'ahu and Maui — fitAll() jumps to the real
+      // fitted view on load anyway, this just keeps the very first frame
+      // (before data loads) from looking O'ahu-only now that it's multi-island.
+      center: [-157.1, 21.1],
+      zoom: 8.3,
       pitch: 20,
       bearing: 0,
       maxPitch: 72,
@@ -198,10 +201,18 @@
     });
     map.addControl(new maplibregl.AttributionControl({
       compact: true,
-      customAttribution: 'Park &amp; beach data: <a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">Honolulu DPR</a> &amp; <a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>'
+      customAttribution: 'Park &amp; beach data: <a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">Honolulu DPR</a>, ' +
+        '<a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>, ' +
+        '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a> ' +
+        '&amp; <a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>'
     }), "bottom-right");
-    // Zoom control top-right (below the basemap toggle) so the bottom stays free for filters.
+    // Zoom + geolocate stack top-right (below the basemap toggle) so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+    map.addControl(new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true,
+      showUserHeading: true
+    }), "top-right");
     // Run setup once — 'load' can be missed if the first render is gated (e.g. the
     // container wasn't laid out / compositing yet), so 'idle' + a poll are fallbacks.
     let setupDone = false;
@@ -459,6 +470,7 @@
             "</div>" +
             '<div class="list-card-meta">' +
               escapeHtml((CATEGORY_LABEL[park.category] || "") + " · " + (park.region || "") +
+                (park.island ? ", " + park.island : "") +
                 (park.type === "off-leash" ? " · Off-leash" : " · Leashed")) +
             "</div>" +
             '<p class="list-card-desc">' + escapeHtml(park.description || "") + "</p>" +
@@ -517,7 +529,7 @@
         '<span class="dot ' + (park.type === "off-leash" ? "dot-offleash" : "dot-leashed") + '"></span>' +
         '<span class="search-result-text">' +
           '<span class="search-result-name">' + escapeHtml(park.name) + "</span>" +
-          '<span class="search-result-meta">' + escapeHtml((CATEGORY_LABEL[park.category] || "") + " · " + (park.region || "")) + "</span>" +
+          '<span class="search-result-meta">' + escapeHtml((CATEGORY_LABEL[park.category] || "") + " · " + (park.region || "") + (park.island ? ", " + park.island : "")) + "</span>" +
         "</span>";
       li.addEventListener("click", function () {
         focusPark(park);
@@ -606,7 +618,7 @@
     document.getElementById("modal-directions").href =
       "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
     document.getElementById("modal-streetview").href =
-      "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(park.name + ", " + (park.address || "Oahu, HI"));
+      "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(park.name + ", " + (park.address || (park.island || "Hawaii") + ", HI"));
 
     backdrop.hidden = false;
   }
@@ -675,11 +687,11 @@
           "@type": "WebSite",
           "name": "HI Dog Maps",
           "url": "https://hawaiidogmap.com/",
-          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios on O'ahu, Hawaii."
+          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu and Maui, Hawaii."
         },
         {
           "@type": "ItemList",
-          "name": "Dog-friendly places on O'ahu",
+          "name": "Dog-friendly places on O'ahu and Maui",
           "numberOfItems": items.length,
           "itemListElement": items
         }

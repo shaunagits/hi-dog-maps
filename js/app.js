@@ -188,11 +188,11 @@
     map = new maplibregl.Map({
       container: "map",
       style: style,
-      // Roughly midway between O'ahu and Maui — fitAll() jumps to the real
-      // fitted view on load anyway, this just keeps the very first frame
-      // (before data loads) from looking O'ahu-only now that it's multi-island.
-      center: [-157.1, 21.1],
-      zoom: 8.3,
+      // Rough multi-island midpoint (O'ahu/Maui/Kaua'i) — fitAll() jumps to the
+      // real fitted view on load anyway, this just keeps the very first frame
+      // (before data loads) reasonable now that it's multi-island.
+      center: [-157.9, 21.4],
+      zoom: 8.0,
       pitch: 20,
       bearing: 0,
       maxPitch: 72,
@@ -203,10 +203,12 @@
       compact: true,
       customAttribution: 'Park &amp; beach data: <a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">Honolulu DPR</a>, ' +
         '<a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>, ' +
-        '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a> ' +
-        '&amp; <a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>'
+        '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a>, ' +
+        '<a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>, ' +
+        '<a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawai’i DOFAW/Nā Ala Hele</a> ' +
+        '&amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua’i Humane Society</a>'
     }), "bottom-right");
-    // Zoom + geolocate stack top-right (below the basemap toggle) so the bottom stays free for filters.
+    // Zoom + geolocate stack top-right so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     map.addControl(new maplibregl.GeolocateControl({
       positionOptions: { enableHighAccuracy: true },
@@ -347,19 +349,13 @@
     openModal(park);
   }
 
-  /* ---------- Basemap toggle ---------- */
+  /* ---------- Basemap style (Map / Satellite layer visibility) ---------- */
+  // Wired up alongside the Map/Satellite/List view-toggle chips below —
+  // basemap style and view mode share one button group in the filter bar.
   function setBasemap(name) {
     if (!map || !map.getLayer("satellite")) return;
     map.setLayoutProperty("satellite", "visibility", name === "satellite" ? "visible" : "none");
   }
-
-  document.querySelectorAll("[data-base]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      document.querySelectorAll("[data-base]").forEach(function (b) { b.classList.remove("active"); });
-      btn.classList.add("active");
-      setBasemap(btn.getAttribute("data-base"));
-    });
-  });
 
   /* ---------- Filters ---------- */
   // Reuse the same line-icon set as the markers/hero, so filter chips read as
@@ -446,7 +442,13 @@
   // by refresh() regardless of which view is active, so the text exists in
   // the DOM at load — real content for search crawlers and screen readers,
   // not something only created on demand when a user opens the panel.
+  //
+  // Shares one chip group with the Map/Satellite basemap toggle: viewMode
+  // ("map"|"list") and basemapName ("map"|"satellite") are tracked
+  // separately so returning to map view never clobbers whichever basemap
+  // style was last chosen.
   let viewMode = "map";
+  let basemapName = "map";
   const listView = document.getElementById("list-view");
   const listGrid = document.getElementById("list-grid");
   const listViewCount = document.getElementById("list-view-count");
@@ -485,16 +487,36 @@
     if (!btn) return;
     const park = PARKS[Number(btn.getAttribute("data-list-idx"))];
     if (!park) return;
-    setViewMode("map");
+    showMapView();
     focusPark(park);
   });
 
-  function setViewMode(mode) {
-    viewMode = mode;
-    listView.hidden = mode !== "list";
+  function updateViewButtons() {
     document.querySelectorAll("[data-view]").forEach(function (b) {
-      b.classList.toggle("active", b.getAttribute("data-view") === mode);
+      const v = b.getAttribute("data-view");
+      const active = viewMode === "list" ? v === "list" : v === basemapName;
+      b.classList.toggle("active", active);
     });
+  }
+
+  // Return to map view without changing whichever basemap style was active.
+  function showMapView() {
+    viewMode = "map";
+    listView.hidden = true;
+    updateViewButtons();
+  }
+
+  function setViewMode(mode) {
+    if (mode === "list") {
+      viewMode = "list";
+      listView.hidden = false;
+    } else {
+      basemapName = mode; // "map" or "satellite"
+      setBasemap(mode);
+      viewMode = "map";
+      listView.hidden = true;
+    }
+    updateViewButtons();
   }
 
   document.querySelectorAll("[data-view]").forEach(function (btn) {
@@ -646,7 +668,7 @@
     if (e.key !== "Escape") return;
     if (!backdrop.hidden) closeModal();
     else if (!aboutBackdrop.hidden) closeAbout();
-    else if (viewMode === "list") setViewMode("map");
+    else if (viewMode === "list") showMapView();
   });
 
   /* ---------- Utils ---------- */
@@ -687,11 +709,11 @@
           "@type": "WebSite",
           "name": "HI Dog Maps",
           "url": "https://hawaiidogmap.com/",
-          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu and Maui, Hawaii."
+          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, and Kaua'i, Hawaii."
         },
         {
           "@type": "ItemList",
-          "name": "Dog-friendly places on O'ahu and Maui",
+          "name": "Dog-friendly places on O'ahu, Maui, and Kaua'i",
           "numberOfItems": items.length,
           "itemListElement": items
         }

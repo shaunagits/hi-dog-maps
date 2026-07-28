@@ -43,15 +43,13 @@ html, body {
 }
 
 /* ---------- Floating glass panels ---------- */
-.filter-panel,
-.basemap-toggle {
+.filter-panel {
   position: fixed;
   z-index: 1000;
 }
 
 .header-bar,
 .filter-panel,
-.basemap-toggle,
 .search-results {
   background: var(--glass);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
@@ -307,34 +305,6 @@ html, body {
 .chip-reset:hover { background: rgba(220, 38, 38, 0.16); color: #991b1b; }
 .chip-reset[hidden] { display: none; }
 
-/* Basemap toggle — always top-right */
-.basemap-toggle {
-  top: 16px;
-  right: 16px;
-  display: flex;
-  padding: 4px;
-  gap: 3px;
-}
-
-.base-btn {
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--ink-soft);
-  padding: 6px 15px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, transform 0.1s;
-}
-.base-btn:hover { color: var(--ocean-deep); transform: translateY(-1px); }
-.base-btn:active { transform: scale(0.96); }
-.base-btn.active {
-  background: linear-gradient(135deg, #0e7490, #0d9488);
-  color: #fff;
-}
-
 /* ---------- Map markers (MapLibre HTML markers) ---------- */
 /* Do NOT set position here — MapLibre needs the marker element to stay
    position:absolute (from its .maplibregl-marker class). Overriding it to
@@ -399,8 +369,6 @@ html, body {
 }
 .maplibregl-ctrl-group button { width: 32px; height: 32px; }
 .maplibregl-ctrl-attrib.maplibregl-compact { border-radius: 10px; }
-/* Push the top-right zoom control below the floating Map/Satellite toggle */
-.maplibregl-ctrl-top-right { margin-top: 58px; }
 
 /* ---------- Park detail panel ---------- */
 /* .modal-backdrop is just a full-viewport positioning host now, not a
@@ -581,8 +549,8 @@ html, body {
 /* ---------- List view ---------- */
 /* An alternative to the map for browsing every place; sits between the map
    (z-index 1) and the always-on-top floating controls (z-index 1000) so
-   header/search/filters/basemap-toggle stay usable on top of it. The map
-   itself is never hidden/unmounted — this just visually covers it. */
+   header/search/filters stay usable on top of it. The map itself is never
+   hidden/unmounted — this just visually covers it. */
 .list-view {
   position: fixed;
   inset: 0;
@@ -678,22 +646,19 @@ html, body {
   .chip-count { display: none; }
 }
 
-/* Compact the header + toggle so they share the top row on phones too */
+/* Compact the header so it shares the top row with the (now much narrower)
+   zoom/geolocate control cluster on phones too */
 @media (max-width: 640px) {
-  .top-left { top: 12px; left: 12px; right: auto; max-width: calc(100vw - 126px); }
+  .top-left { top: 12px; left: 12px; right: auto; max-width: calc(100vw - 70px); }
   .header-bar { gap: 9px; padding: 7px 10px 7px 9px; }
   .brand-text h1 { font-size: 15px; }
   .brand-sub { font-size: 10.5px; }
   .search-panel { width: auto; flex: 1; min-width: 60px; }
   .search-results { width: min(300px, calc(100vw - 24px)); }
-  .basemap-toggle { top: 12px; right: 12px; padding: 3px; }
-  .base-btn { font-size: 12px; padding: 5px 10px; }
-  .maplibregl-ctrl-top-right { margin-top: 52px; }
   .info-grid { grid-template-columns: 1fr; }
   .list-view-inner { padding-top: 88px; }
 }
 @media (max-width: 400px) {
   .brand-sub { display: none; }
   .brand-icon svg { width: 20px; height: 24px; }
-  .base-btn { font-size: 11.5px; padding: 5px 8px; }
 }

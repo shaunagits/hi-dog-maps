@@ -1,7 +1,7 @@
 {
-  "name": "HI Dog Maps — Dog-Friendly Places on O'ahu & Maui",
+  "name": "HI Dog Maps — Dog-Friendly Places on O'ahu, Maui & Kaua'i",
   "short_name": "HI Dog Maps",
-  "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu and Maui, Hawaii.",
+  "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, and Kaua'i, Hawaii.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#dbeafe",

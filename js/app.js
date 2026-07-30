@@ -531,6 +531,34 @@
   // photo's Image() has resolved) — only the most recent call may paint.
   let heroLoadToken = 0;
 
+  // Required CC attribution for a Commons photo — never render a Commons hero
+  // without it. Aerials carry their own Esri credit instead.
+  function commonsCredit(park) {
+    if (!park.photoCredit) return "";
+    return "Photo: " + escapeHtml(park.photoCredit) +
+      (park.photoLicense ? " / " + escapeHtml(park.photoLicense) : "") +
+      ', via <a href="' + escapeHtml(park.photoSource || "https://commons.wikimedia.org/") +
+      '" target="_blank" rel="noopener">Wikimedia Commons</a>';
+  }
+
+  // Esri World Imagery export, framed on the place's own coordinates — so it is
+  // correct by construction for every entry, needs no API key, and adds no repo
+  // weight. This is the middle hero tier: it covers the ~156 places that have no
+  // Commons photo and realistically never will (patios, small neighbourhood
+  // parks, bark parks are not subjects Commons contributors photograph).
+  const AERIAL_SPAN_M = 420; // ground width of the frame; ~2:1 suits the hero box
+  function aerialUrl(park, w, h) {
+    if (typeof park.lat !== "number" || typeof park.lng !== "number") return "";
+    // bbox aspect must match the requested pixel aspect or Esri stretches it
+    const halfLat = (AERIAL_SPAN_M * (h / w)) / 2 / 111320;
+    const halfLng = AERIAL_SPAN_M / 2 / (111320 * Math.cos(park.lat * Math.PI / 180));
+    const bbox = [park.lng - halfLng, park.lat - halfLat,
+                  park.lng + halfLng, park.lat + halfLat].join(",");
+    return "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery" +
+      "/MapServer/export?bbox=" + bbox + "&bboxSR=4326&imageSR=3857" +
+      "&size=" + w + "," + h + "&format=jpg&f=image";
+  }
+
   function openModal(park) {
     aboutBackdrop.hidden = true; // only one panel open at a time
     const myToken = ++heroLoadToken;
@@ -541,24 +569,38 @@
     hero.innerHTML = catIcon(park.category, 66);
     heroCredit.hidden = true;
     heroCredit.innerHTML = "";
-    if (park.photo) {
-      // Load off-DOM first; a 404/broken Commons URL then just leaves the
-      // icon fallback in place instead of showing an empty gradient box.
+
+    // Load off-DOM first, and only paint on a successful load — a broken URL
+    // then falls through to the next tier instead of showing an empty box.
+    const load = function (url, creditHtml, onFail) {
       const img = new Image();
       img.onload = function () {
         if (myToken !== heroLoadToken) return;
-        hero.style.backgroundImage = "url('" + park.photo + "')";
+        hero.style.backgroundImage = "url('" + url + "')";
         hero.innerHTML = "";
-        if (park.photoCredit) {
-          heroCredit.innerHTML =
-            "Photo: " + escapeHtml(park.photoCredit) +
-            (park.photoLicense ? " / " + escapeHtml(park.photoLicense) : "") +
-            ', via <a href="' + escapeHtml(park.photoSource || "https://commons.wikimedia.org/") +
-            '" target="_blank" rel="noopener">Wikimedia Commons</a>';
+        if (creditHtml) {
+          heroCredit.innerHTML = creditHtml;
           heroCredit.hidden = false;
         }
       };
-      img.src = park.photo;
+      img.onerror = function () {
+        if (myToken !== heroLoadToken) return;
+        if (onFail) onFail();
+      };
+      img.src = url;
+    };
+
+    const showAerial = function () {
+      const url = aerialUrl(park, 900, 450);
+      if (!url) return; // no coords — leave the category icon in place
+      load(url, 'Satellite imagery &copy; <a href="https://www.esri.com/"' +
+                ' target="_blank" rel="noopener">Esri</a>', null);
+    };
+
+    if (park.photo) {
+      load(park.photo, commonsCredit(park), showAerial);
+    } else {
+      showAerial();
     }
 
     document.getElementById("modal-title").textContent = park.name;

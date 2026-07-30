@@ -709,9 +709,21 @@ html, body {
 
 /* Condense the filter pills — they wrap to more rows instead of scrolling */
 @media (max-width: 760px) {
-  .filter-panel { gap: 5px; padding: 6px 8px; }
+  /* Once the groups stack, the only thing separating them is gap — so the row
+     gap has to be clearly bigger than the gap between chips inside a group,
+     or the three groups read as one undifferentiated mass of chips. Vertical
+     dividers are meaningless between stacked rows, so they become full-width
+     hairlines instead of disappearing. */
+  .filter-panel { column-gap: 5px; row-gap: 7px; padding: 7px 8px; }
   .filter-group { gap: 4px; }
-  .filter-divider { display: none; }
+  .filter-divider {
+    width: 100%;
+    flex-basis: 100%;
+    min-height: 0;
+    height: 1px;
+    margin: 0;
+    align-self: auto;
+  }
   .chip { font-size: 12px; padding: 5px 10px; gap: 5px; }
   /* More chip groups now wrap to more rows on narrow screens — give the list
      view extra bottom clearance so cards don't sit under the filter bar. */
@@ -733,7 +745,9 @@ html, body {
   .filter-group { gap: 3px; }
 }
 @media (max-width: 440px) {
-  .filter-panel { gap: 4px; padding: 5px 7px; bottom: 12px; }
+  /* column-gap/row-gap, not the `gap` shorthand — the shorthand would reset the
+     larger row gap set above and collapse the groups back together. */
+  .filter-panel { column-gap: 4px; row-gap: 7px; padding: 6px 7px; bottom: 12px; }
   .chip { font-size: 11px; padding: 4px 8px; gap: 4px; }
   .dot { width: 8px; height: 8px; }
 }

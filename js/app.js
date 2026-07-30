@@ -194,6 +194,19 @@
       // south-east and zoomed out when Hawai'i Island was added.
       center: [-157.0, 20.6],
       zoom: 7.0,
+      // Floor the zoom-out. Past this there is only empty Pacific that will
+      // never fill in, and the 289 unclustered HTML markers pile into an
+      // illegible smudge while still costing a DOM node each.
+      //
+      // Deliberately loose, because the zoom that fits all four islands
+      // depends on viewport width — roughly 6.35 at 320px, 6.6 at 375px, 7.0
+      // at 508px, 8.3 at 1280px (the chain spans ~5.5° of longitude). 6 sits
+      // below the tightest of those, so "zoom out to see everything" still
+      // works on the narrowest phone. Anything tighter would break that on
+      // small screens. No maxBounds on purpose: that one creates invisible
+      // walls, and would clamp panning for someone whose geolocate puts them
+      // on the mainland.
+      minZoom: 6,
       pitch: 20,
       bearing: 0,
       maxPitch: 72,
@@ -323,7 +336,13 @@
     if (!map || !fc.features.length) return;
     const b = new maplibregl.LngLatBounds();
     fc.features.forEach(function (f) { b.extend(f.geometry.coordinates); });
-    const cam = map.cameraForBounds(b, { padding: { top: 130, bottom: 90, left: 90, right: 90 }, maxZoom: 12.5 });
+    // The floating panels sit top and bottom, so wide SIDE padding buys nothing
+    // — and on a 320px phone 90px each side ate 56% of the viewport, pushing the
+    // fit-everything zoom down to 5.37 and colliding with minZoom. Narrow the
+    // sides on small screens; that lifts the tightest fit to ~6.33 and keeps
+    // "zoom out to see all four islands" working on the smallest phone.
+    const side = window.innerWidth <= 560 ? 24 : 90;
+    const cam = map.cameraForBounds(b, { padding: { top: 130, bottom: 90, left: side, right: side }, maxZoom: 12.5 });
     if (!cam) return;
     const target = { center: cam.center, zoom: cam.zoom, pitch: 20, bearing: 0 };
     if (animate) map.easeTo(Object.assign({ duration: 800 }, target));

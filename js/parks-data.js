@@ -307,6 +307,10 @@ const PARKS = [
     "amenities": ["Large lawns", "Parking", "Restrooms", "Picnic tables", "Shade"],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/US_Navy_030601-N-0106C-001_Members_of_the_Honolulu_Pearl_Canoe_Club_%28HPCC%29_sit_in_the_sand_with_their_canoe%2C_called_a_Honaunau%2C_and_are_blessed_by_a_Hawaiian_Kahuna.jpg/960px-thumbnail.jpg",
+    "photoCredit": "U.S. Navy photo by Journalist 1st Class Daniel J. Calderon.",
+    "photoLicense": "Public domain",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:US_Navy_030601-N-0106C-001_Members_of_the_Honolulu_Pearl_Canoe_Club_(HPCC)_sit_in_the_sand_with_their_canoe,_called_a_Honaunau,_and_are_blessed_by_a_Hawaiian_Kahuna.jpg",
     "uncertain": false
   },
   {
@@ -371,6 +375,10 @@ const PARKS = [
     "amenities": ["Beach access", "Parking", "Restrooms", "Picnic tables", "Camping"],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/2023-04-19%2C_Mokul%C4%93%CA%BBia_Beach_Park%2C_Mokul%C4%93ia%2C_Hawaii%2C_04.jpg/960px-2023-04-19%2C_Mokul%C4%93%CA%BBia_Beach_Park%2C_Mokul%C4%93ia%2C_Hawaii%2C_04.jpg",
+    "photoCredit": "Steven Pavlov",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:2023-04-19,_Mokul%C4%93%CA%BBia_Beach_Park,_Mokul%C4%93ia,_Hawaii,_04.jpg",
     "uncertain": false
   },
   {
@@ -450,6 +458,10 @@ const PARKS = [
     "amenities": ["Street parking", "Shade on lower trail", "Covered rest shelters"],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kuliouou_Ridge_Trail_View.jpg/960px-Kuliouou_Ridge_Trail_View.jpg",
+    "photoCredit": "Julianibarra",
+    "photoLicense": "CC0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kuliouou_Ridge_Trail_View.jpg",
     "uncertain": false
   },
   {
@@ -499,6 +511,10 @@ const PARKS = [
     "amenities": ["Street parking", "Ocean views", "No restrooms", "No water"],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Ka%27iwa_Ridge_Trail_%2827795151016%29.jpg/960px-Ka%27iwa_Ridge_Trail_%2827795151016%29.jpg",
+    "photoCredit": "Thomas Woodtli from Zürich, Switzerland",
+    "photoLicense": "CC BY-SA 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Ka%27iwa_Ridge_Trail_(27795151016).jpg",
     "uncertain": false
   },
   {
@@ -1246,6 +1262,10 @@ const PARKS = [
     "amenities": ["Trail access", "Shade trees", "Calm swimming"],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Banyan_Tree._Kawela_Bay_Beach_Park%2C_Kahuku_%28503549%29_%2819909831319%29.jpg/960px-Banyan_Tree._Kawela_Bay_Beach_Park%2C_Kahuku_%28503549%29_%2819909831319%29.jpg",
+    "photoCredit": "Robert Linsdell from St. Andrews, Canada",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Banyan_Tree._Kawela_Bay_Beach_Park,_Kahuku_(503549)_(19909831319).jpg",
     "uncertain": true
   },
   {
@@ -1385,6 +1405,10 @@ const PARKS = [
     "amenities": [],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ala_Wai_Promenade_And_Canal_-_Honolulu_Cutler_2016.jpg/960px-Ala_Wai_Promenade_And_Canal_-_Honolulu_Cutler_2016.jpg",
+    "photoCredit": "Wendy Cutler",
+    "photoLicense": "CC BY-SA 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Ala_Wai_Promenade_And_Canal_-_Honolulu_Cutler_2016.jpg",
     "uncertain": false
   },
   {
@@ -2017,6 +2041,10 @@ const PARKS = [
     "amenities": [],
     "region": "Leeward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/M%C4%81kaha-Beach-Park.jpg/960px-M%C4%81kaha-Beach-Park.jpg",
+    "photoCredit": "Nicolai Edgar Andersen",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:M%C4%81kaha-Beach-Park.jpg",
     "uncertain": true
   },
   {
@@ -2337,6 +2365,10 @@ const PARKS = [
     "amenities": [],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Laniakea_Beach%2C_Haleiwa_%28503570%29_%2819587514554%29.jpg/960px-Laniakea_Beach%2C_Haleiwa_%28503570%29_%2819587514554%29.jpg",
+    "photoCredit": "Robert Linsdell from St. Andrews, Canada",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Laniakea_Beach,_Haleiwa_(503570)_(19587514554).jpg",
     "uncertain": true
   },
   {

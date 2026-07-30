@@ -593,7 +593,6 @@
 
   /* ---------- Modal ---------- */
   const backdrop = document.getElementById("modal-backdrop");
-  const aboutBackdrop = document.getElementById("about-backdrop");
 
   // Guards against a stale photo load finishing after a newer park has
   // already been opened (openModal can be called again before a prior
@@ -667,7 +666,6 @@
   // isStep is true only when arriving via the prev/next arrows, swipe or arrow
   // keys — a fresh selection (pin or list card) re-anchors the nearby walk.
   function openModal(park, isStep) {
-    aboutBackdrop.hidden = true; // only one panel open at a time
     if (!isStep) buildNav(park);
     renderNav();
     const modalEl = document.querySelector("#modal-backdrop .modal");
@@ -757,32 +755,59 @@
 
   document.getElementById("modal-close").addEventListener("click", closeModal);
 
-  /* ---------- About panel ---------- */
-  // Same non-modal side-panel component as the park detail panel; triggered
-  // by clicking the header logo. Only one of the two panels is open at once.
-  function openAbout() {
+  /* ---------- Rules & safety guide ---------- */
+  // A full-page section rather than the side-panel component, so the island
+  // table has room to read as a table. It also absorbed what used to be the
+  // separate About panel — one page, one entry point.
+  const guideEl = document.getElementById("guide");
+
+  function openGuide(currentIsland) {
     closeModal();
-    aboutBackdrop.hidden = false;
+    // Highlight the reader's own island when the guide is opened from a place,
+    // so the table lands as "here's your rule" rather than a generic chart.
+    const rows = guideEl.querySelectorAll(".guide-table tbody tr");
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].classList.toggle("is-current",
+        !!currentIsland && rows[i].getAttribute("data-island") === currentIsland);
+    }
+    guideEl.hidden = false;
+    guideEl.scrollTop = 0;
+    if (history.replaceState) history.replaceState(null, "", "#rules");
   }
-  function closeAbout() { aboutBackdrop.hidden = true; }
 
-  document.getElementById("about-trigger").addEventListener("click", openAbout);
-  document.getElementById("about-close").addEventListener("click", closeAbout);
+  function closeGuide() {
+    guideEl.hidden = true;
+    if (history.replaceState) history.replaceState(null, "", location.pathname);
+  }
 
-  // Click outside either panel closes it. The backdrop itself is
+  document.getElementById("guide-trigger").addEventListener("click", function () { openGuide(); });
+  document.getElementById("guide-logo").addEventListener("click", function () { openGuide(); });
+  document.getElementById("guide-close").addEventListener("click", closeGuide);
+  // Opened from a place, so pass its island through to highlight that row.
+  document.getElementById("guide-link").addEventListener("click", function (e) {
+    e.stopPropagation();
+    const p = navList[navIndex];
+    openGuide(p ? p.island : null);
+  });
+
+  // Deep link: /#rules opens the guide directly, so it can be linked to from
+  // anywhere and crawlers have a stable URL for it.
+  if (location.hash === "#rules") openGuide();
+
+  // Click outside the detail panel closes it. The backdrop itself is
   // pointer-events:none (see CSS), so clicks on the map/markers/filter bar
   // reach their real targets first — a marker's own click handler already
   // calls stopPropagation() (swap content, don't close), and a list-card
   // click already manages the panel itself, so both are excluded here to
-  // avoid this listener immediately undoing what they just did. The About
-  // trigger is excluded too since opening the About panel is itself a click
-  // "outside" the (now-closing) detail panel.
+  // avoid this listener immediately undoing what they just did. The guide
+  // triggers are excluded since opening the guide is itself a click "outside"
+  // the (now-closing) detail panel.
   document.addEventListener("click", function (e) {
     if (e.target.closest(".modal")) return;
-    if (e.target.closest("#about-trigger")) return;
+    if (e.target.closest("#guide")) return;
+    if (e.target.closest("#guide-trigger") || e.target.closest("#guide-logo")) return;
     if (e.target.closest(".list-card")) return;
     if (!backdrop.hidden) closeModal();
-    if (!aboutBackdrop.hidden) closeAbout();
   });
 
   document.getElementById("modal-prev").addEventListener("click", function (e) {
@@ -832,7 +857,7 @@
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     if (!backdrop.hidden) closeModal();
-    else if (!aboutBackdrop.hidden) closeAbout();
+    else if (!guideEl.hidden) closeGuide();
     else if (viewMode === "list") showMapView();
   });
 

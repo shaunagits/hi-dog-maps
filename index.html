@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=7" />
 </head>
 <body>
   <!-- Full-bleed map -->
@@ -61,7 +61,7 @@
   <!-- Floating header: brand + inline search -->
   <div class="top-left">
     <div class="header-bar">
-      <button class="brand-icon" id="about-trigger" type="button" aria-label="About Hawaii Dog Map">
+      <button class="brand-icon" id="guide-logo" type="button" aria-label="Rules and safety">
         <svg viewBox="0 0 64 74" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <ellipse cx="32" cy="66" rx="14" ry="3.6" fill="#a7d8c8"/>
           <path d="M32 6C44.5 6 54 15.2 54 27.5C54 41 40 52.5 32 65C24 52.5 10 41 10 27.5C10 15.2 19.5 6 32 6Z" fill="#0e7490"/>
@@ -76,6 +76,9 @@
         <h1>Hawai&#699;i Dog Map</h1>
         <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu, Maui, Kaua&#699;i &amp; Hawai&#699;i Island</p>
       </div>
+      <button class="guide-trigger" id="guide-trigger" type="button">
+        <span aria-hidden="true">⚠️</span><span class="guide-trigger-label">Rules &amp; safety</span>
+      </button>
     </div>
   </div>
 
@@ -143,22 +146,90 @@
           <a id="modal-directions" class="btn btn-primary" target="_blank" rel="noopener">🧭 Get directions</a>
           <a id="modal-streetview" class="btn btn-secondary" target="_blank" rel="noopener">👀 View on Google Maps</a>
         </div>
-        <p class="modal-disclaimer">Rules and hours can change — check posted signs on arrival. Always pick up after your pup! 🦴</p>
+        <p class="modal-disclaimer">Check posted signs on arrival — rules and access change.
+          Pick up after your pup.
+          <button type="button" class="disclaimer-link" id="guide-link">Before you go &rarr;</button></p>
       </div>
     </div>
   </div>
 
-  <!-- About panel: same non-modal side-panel component as the park detail
-       panel, different content. Triggered by clicking the header logo. -->
-  <div class="modal-backdrop" id="about-backdrop" hidden>
-    <div class="modal about-modal" role="dialog" aria-modal="false" aria-labelledby="about-title">
-      <button class="modal-close" id="about-close" aria-label="Close">&times;</button>
-      <div class="modal-body about-body">
-        <h2 id="about-title">About Hawai&#699;i Dog Map</h2>
+  <!-- Rules &amp; safety guide. A full-page section rather than the side-panel
+       component the park detail uses, for two reasons: the island table needs
+       real width to read as a table, and this is the site's only genuinely
+       crawlable prose — "can dogs go on beaches in Hawai'i" is a far higher
+       volume query than any individual park name. Like the list view, it lives
+       in the DOM whether or not it's on screen, so crawlers see it. -->
+  <section class="guide" id="guide" hidden aria-labelledby="guide-title">
+    <button class="guide-close" id="guide-close" aria-label="Close rules and safety">&times;</button>
+    <div class="guide-inner">
+      <h2 id="guide-title">Dogs in Hawai&#699;i: rules &amp; safety</h2>
+      <p class="guide-lede">Every county sets its own rules, and they genuinely contradict each
+        other — what's fine on Maui can be an offence on Kaua&#699;i. Here's what carries across
+        the whole state, and what changes island by island.</p>
+
+      <div class="guide-block guide-warn">
+        <h3>⚠️ Before you go</h3>
+        <p><strong>Check on arrival.</strong> Rules, hours and access change without notice.
+          Posted signs win over anything on this map.</p>
+      </div>
+
+      <div class="guide-block">
+        <h3>Two rules apply everywhere in Hawai&#699;i</h3>
+        <ul class="guide-list">
+          <li><strong>State-park beaches are closed to dogs</strong> — leashed or not, on every
+            island. Service animals excepted. This quietly rules out many of the best-known
+            beaches, whichever island you're on.</li>
+          <li><strong>Give monk seals, honu and n&#275;n&#275; a wide berth.</strong> A dog can
+            seriously injure a seal pup — and a protective mother seal can badly injure your dog.</li>
+        </ul>
+      </div>
+
+      <div class="guide-block">
+        <h3>Where dogs stand, island by island</h3>
+        <div class="guide-table-wrap">
+          <table class="guide-table">
+            <thead>
+              <tr><th scope="col">Island</th><th scope="col">County parks</th><th scope="col">County beaches</th></tr>
+            </thead>
+            <tbody>
+              <tr data-island="Oahu">
+                <th scope="row">O&#699;ahu</th><td>Designated parks only</td><td>Designated beaches only</td>
+              </tr>
+              <tr data-island="Maui">
+                <th scope="row">Maui &middot; Moloka&#699;i &middot; L&#257;na&#699;i</th>
+                <td>Leashed, 10 ft max</td><td>Leashed, 10 ft max</td>
+              </tr>
+              <tr data-island="Kauai">
+                <th scope="row">Kaua&#699;i</th><td>Permit only</td><td>Permit only</td>
+              </tr>
+              <tr data-island="Hawaii Island">
+                <th scope="row">Hawai&#699;i Island</th><td>Leashed, 6 ft max</td>
+                <td><strong>Not permitted</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="guide-note">State parks and National Park Service land run their own rules —
+          state parks are stricter (no dogs on beaches), NPS is often more permissive (leashed,
+          six feet). Each entry says which applies.</p>
+      </div>
+
+      <div class="guide-block">
+        <h3>Stay aware</h3>
+        <ul class="guide-list">
+          <li>Sand, lava rock and pavement get hot enough to burn paws — test it with your hand first.</li>
+          <li>Shorebreak and rip currents turn dangerous fast, even on calm-looking days.</li>
+          <li>Some trails cross active hunting areas — wear bright colours.</li>
+          <li>Carry water for both of you. Shade is scarce, and so is cell signal.</li>
+        </ul>
+      </div>
+
+      <div class="guide-block">
+        <h3>About this map</h3>
         <p>Hawai&#699;i Dog Map is a hand-curated guide to every place across Hawai&#699;i where you can
           actually bring your dog — off-leash dog parks, leash-friendly parks and beaches,
           hiking trails, and dog-welcoming restaurant patios. It currently covers O&#699;ahu, Maui,
-          Kaua&#699;i, and Hawai&#699;i Island, with Moloka&#699;i and L&#257;na&#699;i still to come.</p>
+          Kaua&#699;i, and Hawai&#699;i Island.</p>
         <p>Every spot here comes from official designations and verified lists, not a scrape
           or a guess — sites with unclear or nuanced rules are flagged
           <span class="tag tag-uncertain">⚠️ Verify before visiting</span> rather than
@@ -185,10 +256,10 @@
         <p class="about-credit"><a href="https://shauna.digital" target="_blank" rel="noopener">Built by</a></p>
       </div>
     </div>
-  </div>
+  </section>
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="js/parks-data.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/parks-data.js?v=7"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>

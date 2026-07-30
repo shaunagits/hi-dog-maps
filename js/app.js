@@ -335,7 +335,7 @@
     renderListView();
   }
 
-  function focusPark(park) {
+  function flyToPark(park) {
     if (!map) return;
     // Keep the focused pin clear of the detail panel: on desktop the panel
     // covers the right ~440px, on narrow screens it's a bottom sheet, so
@@ -345,7 +345,73 @@
       ? { top: 60, bottom: Math.round(window.innerHeight * 0.5), left: 40, right: 40 }
       : { top: 70, bottom: 70, left: 70, right: 440 };
     map.flyTo({ center: [park.lng, park.lat], zoom: 15, pitch: 20, bearing: 0, essential: true, duration: 900, padding: padding });
+  }
+
+  function focusPark(park) {
+    flyToPark(park);
     openModal(park);
+  }
+
+  /* ---------- Nearby navigation (prev/next through neighbouring places) ---------- */
+  // Opening a place builds an "outward walk" from it: the place itself, then
+  // its nearest neighbours in distance order. Stepping never rebuilds the
+  // list, so the walk stays anchored to wherever you started and stepping
+  // back returns the way you came, rather than drifting.
+  //
+  // Neighbours are drawn from visibleParks(), NOT all of PARKS — if someone
+  // has filtered to off-leash only, stepping into a leashed park would
+  // silently contradict the filter they set.
+  //
+  // The distance cap matters on a multi-island map: without it, the "nearest"
+  // place to a Kaua'i entry (only 9 of them) is on O'ahu, 150km across open
+  // ocean, which is not a nearby place in any useful sense.
+  const NEARBY_MAX_KM = 25;
+  const NEARBY_MAX = 12;
+  let navList = [];
+  let navIndex = 0;
+
+  function distKm(aLat, aLng, bLat, bLng) {
+    const R = 6371, r = Math.PI / 180;
+    const dLat = (bLat - aLat) * r, dLng = (bLng - aLng) * r;
+    const s = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(aLat * r) * Math.cos(bLat * r) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+
+  function buildNav(anchor) {
+    const near = visibleParks()
+      .filter(function (p) { return p !== anchor; })
+      .map(function (p) { return { p: p, d: distKm(anchor.lat, anchor.lng, p.lat, p.lng) }; })
+      .filter(function (x) { return x.d <= NEARBY_MAX_KM; })
+      .sort(function (a, b) { return a.d - b.d; })
+      .slice(0, NEARBY_MAX - 1)
+      .map(function (x) { return x.p; });
+    navList = [anchor].concat(near);
+    navIndex = 0;
+  }
+
+  function stepNav(delta) {
+    const next = navIndex + delta;
+    if (next < 0 || next >= navList.length) return;
+    navIndex = next;
+    const park = navList[navIndex];
+    flyToPark(park);
+    openModal(park, true);
+  }
+
+  function renderNav() {
+    const prev = document.getElementById("modal-prev");
+    const next = document.getElementById("modal-next");
+    if (!prev || !next) return;
+    const has = navList.length > 1;
+    prev.hidden = !has;
+    next.hidden = !has;
+    if (!has) return;
+    prev.disabled = navIndex <= 0;
+    next.disabled = navIndex >= navList.length - 1;
+    const p = navList[navIndex - 1], n = navList[navIndex + 1];
+    prev.title = p ? "Back to " + p.name : "";
+    next.title = n ? "Nearby: " + n.name : "";
   }
 
   /* ---------- Basemap style (Map / Satellite layer visibility) ---------- */
@@ -559,8 +625,14 @@
       "&size=" + w + "," + h + "&format=jpg&f=image";
   }
 
-  function openModal(park) {
+  // isStep is true only when arriving via the prev/next arrows, swipe or arrow
+  // keys — a fresh selection (pin or list card) re-anchors the nearby walk.
+  function openModal(park, isStep) {
     aboutBackdrop.hidden = true; // only one panel open at a time
+    if (!isStep) buildNav(park);
+    renderNav();
+    const modalEl = document.querySelector("#modal-backdrop .modal");
+    if (modalEl) modalEl.scrollTop = 0; // don't land mid-way down the next place
     const myToken = ++heroLoadToken;
     const hero = document.getElementById("modal-hero");
     const heroCredit = document.getElementById("modal-hero-credit");
@@ -670,6 +742,50 @@
     if (!backdrop.hidden) closeModal();
     if (!aboutBackdrop.hidden) closeAbout();
   });
+
+  document.getElementById("modal-prev").addEventListener("click", function (e) {
+    e.stopPropagation();
+    stepNav(-1);
+  });
+  document.getElementById("modal-next").addEventListener("click", function (e) {
+    e.stopPropagation();
+    stepNav(1);
+  });
+
+  // Horizontal swipe across the panel steps through nearby places. The panel
+  // scrolls vertically, so only act on a flick that is clearly horizontal —
+  // otherwise an ordinary scroll would fire it. Listeners are passive: we
+  // never preventDefault, so vertical scrolling stays native and smooth.
+  (function () {
+    const panel = document.querySelector("#modal-backdrop .modal");
+    if (!panel) return;
+    let sx = 0, sy = 0, st = 0;
+    panel.addEventListener("touchstart", function (e) {
+      const t = e.changedTouches[0];
+      sx = t.clientX; sy = t.clientY; st = Date.now();
+    }, { passive: true });
+    panel.addEventListener("touchend", function (e) {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx, dy = t.clientY - sy;
+      if (Date.now() - st > 600) return;              // too slow for a flick
+      if (Math.abs(dx) < 55) return;                  // too short to be intentional
+      if (Math.abs(dx) < Math.abs(dy) * 1.6) return;  // really a vertical scroll
+      stepNav(dx < 0 ? 1 : -1);                       // swipe left => next
+    }, { passive: true });
+  })();
+
+  // Capture phase, so this wins over MapLibre's own arrow-key panning: its
+  // handler sits on the map container and would otherwise fire first whenever
+  // the canvas still holds focus, panning the map *and* stepping the panel.
+  // Only claims the keys while the panel is open — arrow-key panning is
+  // untouched the rest of the time.
+  document.addEventListener("keydown", function (e) {
+    if (backdrop.hidden) return;
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    e.stopPropagation();
+    stepNav(e.key === "ArrowRight" ? 1 : -1);
+  }, true);
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;

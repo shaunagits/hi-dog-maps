@@ -1,6 +1,6 @@
 # HI Dog Maps 🐾
 
-An interactive map of dog-friendly places across Hawai‘i: dog parks, leash-allowed parks and beaches, trails, and dog-welcoming restaurant patios. Currently covers O‘ahu, Maui, and Kaua‘i, with more islands planned.
+An interactive map of dog-friendly places across Hawai‘i: dog parks, leash-allowed parks and beaches, trails, and dog-welcoming restaurant patios. Covers O‘ahu, Maui, Kaua‘i, and Hawai‘i Island.
 
 **🌺 Live site: https://hawaiidogmap.com** (also works: https://shaunagits.github.io/hi-dog-maps/)
 

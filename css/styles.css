@@ -129,7 +129,12 @@ html, body {
   justify-content: center;
 }
 
-.filter-group { display: flex; gap: 5px; flex-wrap: wrap; }
+/* justify-content matters here, not just on .filter-panel: each group is a
+   single flex item of the panel, so the panel only centres the groups as
+   blocks. Once a group's own chips wrap — which the category group does first,
+   having six — those inner lines fall back to flex-start and hang off to the
+   left. Centre them here so every wrapped row stays centred. */
+.filter-group { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
 
 .filter-divider {
   width: 1px;
@@ -598,11 +603,25 @@ html, body {
      view extra bottom clearance so cards don't sit under the filter bar. */
   .list-view-inner { padding-bottom: 170px; }
 }
+/* The per-chip counts are ~20% of the bar's total chip width, and the six
+   category chips are what force a second wrapped row. Dropping the counts (and
+   a little padding) below this width keeps that group on one line, taking the
+   bar from four rows to three. Groups are separate flex items so they can never
+   share a row — that's the floor, and why two rows isn't reachable here without
+   dropping labels entirely. */
+@media (max-width: 620px) {
+  .chip-count { display: none; }
+  .chip { padding: 5px 7px; }
+  /* The six category chips land within a few px of the available width, so
+     claw back a little outer margin and inter-chip gap rather than squeezing
+     the chips themselves any tighter — that keeps all six on one row. */
+  .filter-panel { max-width: calc(100vw - 16px); padding: 6px 7px; }
+  .filter-group { gap: 3px; }
+}
 @media (max-width: 440px) {
   .filter-panel { gap: 4px; padding: 5px 7px; bottom: 12px; }
   .chip { font-size: 11px; padding: 4px 8px; gap: 4px; }
   .dot { width: 8px; height: 8px; }
-  .chip-count { display: none; }
 }
 
 /* Compact the header so it shares the top row with the (now much narrower)

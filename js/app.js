@@ -1,4 +1,4 @@
-/* HI Dog Maps — native MapLibre GL implementation */
+/* Hawaii Dog Map — native MapLibre GL implementation */
 (function () {
   "use strict";
 
@@ -331,7 +331,6 @@
     const fc = currentFeatures();
     if (countEl) countEl.textContent = fc.features.length;
     if (map && map.getSource("points")) map.getSource("points").setData(fc);
-    renderSearchResults();
     updateFilterCounts();
     renderListView();
   }
@@ -523,90 +522,43 @@
     btn.addEventListener("click", function () { setViewMode(btn.getAttribute("data-view")); });
   });
 
-  /* ---------- Search ---------- */
-  const searchInput = document.getElementById("search-input");
-  const searchClear = document.getElementById("search-clear");
-  const searchResults = document.getElementById("search-results");
-
-  function renderSearchResults() {
-    if (!state.query) {
-      searchResults.hidden = true;
-      searchResults.innerHTML = "";
-      return;
-    }
-    const parks = visibleParks();
-    searchResults.innerHTML = "";
-    if (parks.length === 0) {
-      const li = document.createElement("li");
-      li.className = "search-empty";
-      li.textContent = "No matches — try a different name or region.";
-      searchResults.appendChild(li);
-      searchResults.hidden = false;
-      return;
-    }
-    parks.forEach(function (park) {
-      const li = document.createElement("li");
-      li.className = "search-result";
-      li.innerHTML =
-        '<span class="dot ' + (park.type === "off-leash" ? "dot-offleash" : "dot-leashed") + '"></span>' +
-        '<span class="search-result-text">' +
-          '<span class="search-result-name">' + escapeHtml(park.name) + "</span>" +
-          '<span class="search-result-meta">' + escapeHtml((CATEGORY_LABEL[park.category] || "") + " · " + (park.region || "") + (park.island ? ", " + park.island : "")) + "</span>" +
-        "</span>";
-      li.addEventListener("click", function () {
-        focusPark(park);
-        searchResults.hidden = true;
-      });
-      searchResults.appendChild(li);
-    });
-    searchResults.hidden = false;
-  }
-
-  function clearSearch() {
-    searchInput.value = "";
-    state.query = "";
-    searchClear.hidden = true;
-    searchResults.hidden = true;
-    searchResults.innerHTML = "";
-    refresh();
-    fitAll(true);
-  }
-
-  searchInput.addEventListener("input", function () {
-    state.query = searchInput.value.trim().toLowerCase();
-    searchClear.hidden = state.query.length === 0;
-    refresh();
-  });
-
-  searchInput.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      const parks = visibleParks();
-      if (parks.length > 0) { focusPark(parks[0]); searchResults.hidden = true; searchInput.blur(); }
-    } else if (e.key === "Escape") {
-      if (state.query) { e.stopPropagation(); clearSearch(); }
-    }
-  });
-
-  searchInput.addEventListener("focus", function () { if (state.query) renderSearchResults(); });
-  searchClear.addEventListener("click", function () { clearSearch(); searchInput.focus(); });
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".search-panel")) searchResults.hidden = true;
-  });
-
   /* ---------- Modal ---------- */
   const backdrop = document.getElementById("modal-backdrop");
   const aboutBackdrop = document.getElementById("about-backdrop");
 
+  // Guards against a stale photo load finishing after a newer park has
+  // already been opened (openModal can be called again before a prior
+  // photo's Image() has resolved) — only the most recent call may paint.
+  let heroLoadToken = 0;
+
   function openModal(park) {
     aboutBackdrop.hidden = true; // only one panel open at a time
+    const myToken = ++heroLoadToken;
     const hero = document.getElementById("modal-hero");
+    const heroCredit = document.getElementById("modal-hero-credit");
     hero.className = "modal-hero hero-" + park.category;
+    hero.style.backgroundImage = "";
+    hero.innerHTML = catIcon(park.category, 66);
+    heroCredit.hidden = true;
+    heroCredit.innerHTML = "";
     if (park.photo) {
-      hero.style.backgroundImage = "url('" + park.photo + "')";
-      hero.innerHTML = "";
-    } else {
-      hero.style.backgroundImage = "";
-      hero.innerHTML = catIcon(park.category, 66);
+      // Load off-DOM first; a 404/broken Commons URL then just leaves the
+      // icon fallback in place instead of showing an empty gradient box.
+      const img = new Image();
+      img.onload = function () {
+        if (myToken !== heroLoadToken) return;
+        hero.style.backgroundImage = "url('" + park.photo + "')";
+        hero.innerHTML = "";
+        if (park.photoCredit) {
+          heroCredit.innerHTML =
+            "Photo: " + escapeHtml(park.photoCredit) +
+            (park.photoLicense ? " / " + escapeHtml(park.photoLicense) : "") +
+            ', via <a href="' + escapeHtml(park.photoSource || "https://commons.wikimedia.org/") +
+            '" target="_blank" rel="noopener">Wikimedia Commons</a>';
+          heroCredit.hidden = false;
+        }
+      };
+      img.src = park.photo;
     }
 
     document.getElementById("modal-title").textContent = park.name;
@@ -647,9 +599,6 @@
 
   function closeModal() { backdrop.hidden = true; }
 
-  // No click-outside-to-close: the backdrop is pointer-events:none (see CSS)
-  // so the map stays clickable while the panel is open. Close via the button
-  // or Escape only — clicking another pin just swaps the panel's content.
   document.getElementById("modal-close").addEventListener("click", closeModal);
 
   /* ---------- About panel ---------- */
@@ -663,6 +612,22 @@
 
   document.getElementById("about-trigger").addEventListener("click", openAbout);
   document.getElementById("about-close").addEventListener("click", closeAbout);
+
+  // Click outside either panel closes it. The backdrop itself is
+  // pointer-events:none (see CSS), so clicks on the map/markers/filter bar
+  // reach their real targets first — a marker's own click handler already
+  // calls stopPropagation() (swap content, don't close), and a list-card
+  // click already manages the panel itself, so both are excluded here to
+  // avoid this listener immediately undoing what they just did. The About
+  // trigger is excluded too since opening the About panel is itself a click
+  // "outside" the (now-closing) detail panel.
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".modal")) return;
+    if (e.target.closest("#about-trigger")) return;
+    if (e.target.closest(".list-card")) return;
+    if (!backdrop.hidden) closeModal();
+    if (!aboutBackdrop.hidden) closeAbout();
+  });
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
@@ -690,24 +655,22 @@
   // blob), so it can never drift out of sync with the dataset.
   function injectStructuredData() {
     const items = PARKS.map(function (p, i) {
-      return {
-        "@type": "ListItem",
-        "position": i + 1,
-        "item": {
-          "@type": SCHEMA_TYPE[p.category] || "Place",
-          "name": p.name,
-          "description": p.description || "",
-          "address": { "@type": "PostalAddress", "streetAddress": p.address || "", "addressRegion": "HI", "addressCountry": "US" },
-          "geo": { "@type": "GeoCoordinates", "latitude": p.lat, "longitude": p.lng }
-        }
+      const item = {
+        "@type": SCHEMA_TYPE[p.category] || "Place",
+        "name": p.name,
+        "description": p.description || "",
+        "address": { "@type": "PostalAddress", "streetAddress": p.address || "", "addressRegion": "HI", "addressCountry": "US" },
+        "geo": { "@type": "GeoCoordinates", "latitude": p.lat, "longitude": p.lng }
       };
+      if (p.photo) item.image = p.photo;
+      return { "@type": "ListItem", "position": i + 1, "item": item };
     });
     const data = {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebSite",
-          "name": "HI Dog Maps",
+          "name": "Hawaii Dog Map",
           "url": "https://hawaiidogmap.com/",
           "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, and Kaua'i, Hawaii."
         },

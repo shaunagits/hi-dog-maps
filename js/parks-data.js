@@ -250,6 +250,10 @@ const PARKS = [
     "amenities": ["Beach access", "Parking", "Restrooms", "Showers", "Picnic areas", "Shade"],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kailua_Beach_Park_-_Oahu_-_Hawaii.jpg/960px-Kailua_Beach_Park_-_Oahu_-_Hawaii.jpg",
+    "photoCredit": "Tony Webster",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kailua_Beach_Park_-_Oahu_-_Hawaii.jpg",
     "uncertain": false
   },
   {
@@ -265,6 +269,10 @@ const PARKS = [
     "amenities": ["Beach access", "Large lawns", "Parking", "Restrooms", "Showers"],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg/960px-Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg",
+    "photoCredit": "Robert Linsdell from St. Andrews, Canada",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Sandy_Beach_Park,_Kalanianaole_Hwy,_Honolulu_(503339)_(17994299526).jpg",
     "uncertain": false
   },
   {
@@ -280,6 +288,10 @@ const PARKS = [
     "amenities": ["Oceanfront paths", "Large lawns", "Parking", "Restrooms", "Picnic tables"],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Kakaako_Waterfront_Park_hilltop_S_20100422.jpg/960px-Kakaako_Waterfront_Park_hilltop_S_20100422.jpg",
+    "photoCredit": "Daniel Ramirez from Honolulu, USA",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kakaako_Waterfront_Park_hilltop_S_20100422.jpg",
     "uncertain": false
   },
   {
@@ -325,6 +337,10 @@ const PARKS = [
     "amenities": ["Beach access", "Calm water", "Large lawns", "Parking", "Restrooms", "Showers"],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Haleiwa_Beach_and_Maeaea_Beach_-_Haleiwa_Oahu_Hawaii.jpg/960px-Haleiwa_Beach_and_Maeaea_Beach_-_Haleiwa_Oahu_Hawaii.jpg",
+    "photoCredit": "Tony Webster",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Haleiwa_Beach_and_Maeaea_Beach_-_Haleiwa_Oahu_Hawaii.jpg",
     "uncertain": false
   },
   {
@@ -400,6 +416,10 @@ const PARKS = [
     "amenities": ["Paid parking", "Restrooms at trailhead", "Shade", "Waterfall"],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Manoa_Falls_trail.jpg/960px-Manoa_Falls_trail.jpg",
+    "photoCredit": "Carol miranda of Themirandaroute",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Manoa_Falls_trail.jpg",
     "uncertain": false
   },
   {
@@ -445,6 +465,10 @@ const PARKS = [
     "amenities": ["Parking", "Paved trail", "Scenic overlooks", "No water or restrooms"],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Makapu%27u_Point_Hawaii_%2814494360192%29.jpg/960px-Makapu%27u_Point_Hawaii_%2814494360192%29.jpg",
+    "photoCredit": "Eric Tessmer from Honolulu Hawaii, USA",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Makapu%27u_Point_Hawaii_(14494360192).jpg",
     "uncertain": false
   },
   {
@@ -520,6 +544,10 @@ const PARKS = [
     "amenities": ["Park parking", "Restrooms at base park", "No shade", "No water on trail"],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Koko_Crater_%2827626660360%29.jpg/960px-Koko_Crater_%2827626660360%29.jpg",
+    "photoCredit": "Thomas Woodtli from Zürich, Switzerland",
+    "photoLicense": "CC BY-SA 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Koko_Crater_(27626660360).jpg",
     "uncertain": true
   },
   {
@@ -1165,6 +1193,10 @@ const PARKS = [
     "amenities": ["Street parking", "Calm swimming", "Public beach access paths"],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Lanikai_Beach.jpg/960px-Lanikai_Beach.jpg",
+    "photoCredit": "R. Sullivan Sullynyflhi",
+    "photoLicense": "CC BY-SA 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Lanikai_Beach.jpg",
     "uncertain": false
   },
   {
@@ -1180,6 +1212,10 @@ const PARKS = [
     "amenities": ["Street parking", "Public beach access paths", "Calm swimming"],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Walk_by_the_beach_%284807552983%29.jpg/960px-Walk_by_the_beach_%284807552983%29.jpg",
+    "photoCredit": "Daniel Ramirez from Honolulu, USA",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Walk_by_the_beach_(4807552983).jpg",
     "uncertain": false
   },
   {
@@ -1225,6 +1261,10 @@ const PARKS = [
     "amenities": ["Parking", "Restrooms nearby", "Snorkeling", "Coastal trail"],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Turtle_Bay_Oahu%2C_Hawaii_%2816237259041%29.jpg/960px-Turtle_Bay_Oahu%2C_Hawaii_%2816237259041%29.jpg",
+    "photoCredit": "Edmund Garman from Salem, Oregon, USA",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Turtle_Bay_Oahu,_Hawaii_(16237259041).jpg",
     "uncertain": true
   },
   {
@@ -1465,6 +1505,10 @@ const PARKS = [
     "amenities": [],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/View_of_Honolulu_around_sunset_from_Alewa_Heights.jpg/960px-View_of_Honolulu_around_sunset_from_Alewa_Heights.jpg",
+    "photoCredit": "Jokazoo",
+    "photoLicense": "CC0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:View_of_Honolulu_around_sunset_from_Alewa_Heights.jpg",
     "uncertain": false
   },
   {
@@ -1480,6 +1524,10 @@ const PARKS = [
     "amenities": [],
     "region": "Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Busy_day_in_Thomas_Square%2C_Honolulu%2C_Hawaii.jpg/960px-Busy_day_in_Thomas_Square%2C_Honolulu%2C_Hawaii.jpg",
+    "photoCredit": "Daniel Ramirez",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Busy_day_in_Thomas_Square,_Honolulu,_Hawaii.jpg",
     "uncertain": false
   },
   {
@@ -1690,6 +1738,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/2021-10-06_11_10_29_Palm_trees_along_the_beach_at_Punalu%27u_Beach_Park_in_Punaluu%2C_Oahu%2C_Hawaii.jpg/960px-2021-10-06_11_10_29_Palm_trees_along_the_beach_at_Punalu%27u_Beach_Park_in_Punaluu%2C_Oahu%2C_Hawaii.jpg",
+    "photoCredit": "Famartin",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:2021-10-06_11_10_29_Palm_trees_along_the_beach_at_Punalu%27u_Beach_Park_in_Punaluu,_Oahu,_Hawaii.jpg",
     "uncertain": false
   },
   {
@@ -1705,6 +1757,10 @@ const PARKS = [
     "amenities": [],
     "region": "Leeward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Barbers_Point_Beach_Park%2C_July_2010_-_panoramio.jpg/960px-Barbers_Point_Beach_Park%2C_July_2010_-_panoramio.jpg",
+    "photoCredit": "Kevin.Daniels",
+    "photoLicense": "CC BY 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Barbers_Point_Beach_Park,_July_2010_-_panoramio.jpg",
     "uncertain": true
   },
   {
@@ -1825,6 +1881,10 @@ const PARKS = [
     "amenities": [],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/2015-365-82_Where_I_Hung_Out_Today_%2816887174996%29.jpg/960px-2015-365-82_Where_I_Hung_Out_Today_%2816887174996%29.jpg",
+    "photoCredit": "cogdogblog",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:2015-365-82_Where_I_Hung_Out_Today_(16887174996).jpg",
     "uncertain": true
   },
   {
@@ -1855,6 +1915,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Kokololio_Beach_%286434885243%29.jpg/960px-Kokololio_Beach_%286434885243%29.jpg",
+    "photoCredit": "Phil Whitehouse from London, United Kingdom",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kokololio_Beach_(6434885243).jpg",
     "uncertain": true
   },
   {
@@ -1870,6 +1934,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/2021-10-06_10_16_26_View_west_from_Kualoa_Point_toward_the_mountains_and_along_the_beach_at_Kualoa_Regional_Park_on_Oahu%2C_Hawaii.jpg/960px-2021-10-06_10_16_26_View_west_from_Kualoa_Point_toward_the_mountains_and_along_the_beach_at_Kualoa_Regional_Park_on_Oahu%2C_Hawaii.jpg",
+    "photoCredit": "Famartin",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:2021-10-06_10_16_26_View_west_from_Kualoa_Point_toward_the_mountains_and_along_the_beach_at_Kualoa_Regional_Park_on_Oahu,_Hawaii.jpg",
     "uncertain": true
   },
   {
@@ -1930,6 +1998,10 @@ const PARKS = [
     "amenities": [],
     "region": "Leeward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Pacific_Ocean_at_M%C4%81%CA%BBili_Beach_Park_-_Maili%2C_Oahu%2C_Hawaii.jpg/960px-Pacific_Ocean_at_M%C4%81%CA%BBili_Beach_Park_-_Maili%2C_Oahu%2C_Hawaii.jpg",
+    "photoCredit": "Tony Webster",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Pacific_Ocean_at_M%C4%81%CA%BBili_Beach_Park_-_Maili,_Oahu,_Hawaii.jpg",
     "uncertain": true
   },
   {
@@ -1960,6 +2032,10 @@ const PARKS = [
     "amenities": [],
     "region": "East Honolulu",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Makapuu_Beach_Park.jpeg/960px-Makapuu_Beach_Park.jpeg",
+    "photoCredit": "blahedo",
+    "photoLicense": "CC BY-SA 2.5",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Makapuu_Beach_Park.jpeg",
     "uncertain": true
   },
   {
@@ -2065,6 +2141,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Waimanalo_Beach_Park.JPG/960px-Waimanalo_Beach_Park.JPG",
+    "photoCredit": "AlaskaDave",
+    "photoLicense": "CC BY-SA 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Waimanalo_Beach_Park.JPG",
     "uncertain": true
   },
   {
@@ -2080,6 +2160,10 @@ const PARKS = [
     "amenities": [],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Waimea_Bay_Beach_%2812598979504%29.jpg/960px-Waimea_Bay_Beach_%2812598979504%29.jpg",
+    "photoCredit": "Daniel Ramirez from Honolulu, USA",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Waimea_Bay_Beach_(12598979504).jpg",
     "uncertain": true
   },
   {
@@ -2155,6 +2239,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/2021-10-06_11_24_32_View_south_down_the_beach_at_L%C4%81%CA%BBielohelohe_Beach_Park_in_Laie%2C_Oahu%2C_Hawaii.jpg/960px-2021-10-06_11_24_32_View_south_down_the_beach_at_L%C4%81%CA%BBielohelohe_Beach_Park_in_Laie%2C_Oahu%2C_Hawaii.jpg",
+    "photoCredit": "Famartin",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:2021-10-06_11_24_32_View_south_down_the_beach_at_L%C4%81%CA%BBielohelohe_Beach_Park_in_Laie,_Oahu,_Hawaii.jpg",
     "uncertain": true
   },
   {
@@ -2215,6 +2303,10 @@ const PARKS = [
     "amenities": [],
     "region": "North Shore",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Chuns_Reef_Beach.jpg/960px-Chuns_Reef_Beach.jpg",
+    "photoCredit": "Syced",
+    "photoLicense": "CC0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Chuns_Reef_Beach.jpg",
     "uncertain": true
   },
   {
@@ -2290,6 +2382,10 @@ const PARKS = [
     "amenities": [],
     "region": "Windward",
     "island": "Oahu",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/HI_Oahu_Waiahole_Beach1.jpg/960px-HI_Oahu_Waiahole_Beach1.jpg",
+    "photoCredit": "PaulT (Gunther Tschuch)",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:HI_Oahu_Waiahole_Beach1.jpg",
     "uncertain": true
   },
   {
@@ -2380,6 +2476,10 @@ const PARKS = [
     "amenities": ["Parking", "Restrooms", "Lifeguard"],
     "region": "North Shore",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Baldwin_Beach.jpg/960px-Baldwin_Beach.jpg",
+    "photoCredit": "Simple Maui Wedding",
+    "photoLicense": "CC BY-SA 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Baldwin_Beach.jpg",
     "uncertain": false
   },
   {
@@ -2395,6 +2495,10 @@ const PARKS = [
     "amenities": ["Parking", "Restrooms", "Picnic pavilions", "Shade"],
     "region": "Central Maui",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Kepaniwai_Heritage_Gardens_China_Area_2021.jpg/960px-Kepaniwai_Heritage_Gardens_China_Area_2021.jpg",
+    "photoCredit": "Larry D. Moore",
+    "photoLicense": "CC BY 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kepaniwai_Heritage_Gardens_China_Area_2021.jpg",
     "uncertain": false
   },
   {
@@ -2410,6 +2514,10 @@ const PARKS = [
     "amenities": ["Shade", "Parking"],
     "region": "Upcountry",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Starr_050825-4205_Acacia_koa.jpg/960px-Starr_050825-4205_Acacia_koa.jpg",
+    "photoCredit": "Forest & Kim Starr",
+    "photoLicense": "CC BY 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Starr_050825-4205_Acacia_koa.jpg",
     "uncertain": false
   },
   {
@@ -2425,6 +2533,10 @@ const PARKS = [
     "amenities": ["Shade", "Parking"],
     "region": "Upcountry",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Starr-221205-0266-Pinus_sp-trail_entrance_and_signs-Waihou_Spring-Maui_%2852655557078%29.jpg/960px-Starr-221205-0266-Pinus_sp-trail_entrance_and_signs-Waihou_Spring-Maui_%2852655557078%29.jpg",
+    "photoCredit": "Forest and Kim Starr",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Starr-221205-0266-Pinus_sp-trail_entrance_and_signs-Waihou_Spring-Maui_(52655557078).jpg",
     "uncertain": false
   },
   {
@@ -2470,6 +2582,10 @@ const PARKS = [
     "amenities": ["Parking"],
     "region": "South Maui",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Maluaka_Beach_Coastline_Maui_Hawaii_%2831869241188%29.jpg/960px-Maluaka_Beach_Coastline_Maui_Hawaii_%2831869241188%29.jpg",
+    "photoCredit": "dronepicr",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Maluaka_Beach_Coastline_Maui_Hawaii_(31869241188).jpg",
     "uncertain": false
   },
   {
@@ -2485,6 +2601,10 @@ const PARKS = [
     "amenities": ["Parking", "Shade"],
     "region": "South Maui",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Kalepolepo_Fishpond_Sunset.jpg/960px-Kalepolepo_Fishpond_Sunset.jpg",
+    "photoCredit": "Rodrigues808",
+    "photoLicense": "CC BY-SA 4.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kalepolepo_Fishpond_Sunset.jpg",
     "uncertain": true
   },
   {
@@ -2500,6 +2620,10 @@ const PARKS = [
     "amenities": ["Parking"],
     "region": "South Maui",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Kihei_Maui%2C_Hawaii_-_panoramio_%281%29.jpg",
+    "photoCredit": "Michelle Maria",
+    "photoLicense": "CC BY 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kihei_Maui,_Hawaii_-_panoramio_(1).jpg",
     "uncertain": true
   },
   {
@@ -2545,6 +2669,10 @@ const PARKS = [
     "amenities": ["Paved path", "Ocean views"],
     "region": "South Maui",
     "island": "Maui",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Starr-160517-0280-Scaevola_taccada-path_to_beach_and_beachgoers-Wailea_Coastal_Walk-Maui_%2827060592000%29.jpg/960px-Starr-160517-0280-Scaevola_taccada-path_to_beach_and_beachgoers-Wailea_Coastal_Walk-Maui_%2827060592000%29.jpg",
+    "photoCredit": "Forest and Kim Starr",
+    "photoLicense": "CC BY 3.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Starr-160517-0280-Scaevola_taccada-path_to_beach_and_beachgoers-Wailea_Coastal_Walk-Maui_(27060592000).jpg",
     "uncertain": false
   },
   {
@@ -2935,6 +3063,10 @@ const PARKS = [
     "amenities": ["Parking", "Views"],
     "region": "Waimea/Koke'e",
     "island": "Kauai",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg/960px-Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg",
+    "photoCredit": "Robert Linsdell from St. Andrews, Canada",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Waimea_Canyon,_Waimea_(502959)_(16953446122).jpg",
     "uncertain": false
   },
   {
@@ -2980,6 +3112,10 @@ const PARKS = [
     "amenities": ["Parking", "Undeveloped/wild"],
     "region": "South Shore",
     "island": "Kauai",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Maha%27ulepo_Beach_%288724615971%29.jpg/960px-Maha%27ulepo_Beach_%288724615971%29.jpg",
+    "photoCredit": "cogdogblog",
+    "photoLicense": "CC BY 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Maha%27ulepo_Beach_(8724615971).jpg",
     "uncertain": true
   },
   {
@@ -2995,6 +3131,10 @@ const PARKS = [
     "amenities": ["Parking"],
     "region": "Lihue",
     "island": "Kauai",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kalapaki_Beach_Sunset_-_Kauai_-_Hawaii_%2854032044730%29.jpg/960px-Kalapaki_Beach_Sunset_-_Kauai_-_Hawaii_%2854032044730%29.jpg",
+    "photoCredit": "Tony Webster",
+    "photoLicense": "CC BY-SA 2.0",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Kalapaki_Beach_Sunset_-_Kauai_-_Hawaii_(54032044730).jpg",
     "uncertain": true
   }
 ];

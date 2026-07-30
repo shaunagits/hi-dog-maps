@@ -6,15 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>HI Dog Maps — Dog-Friendly Parks, Beaches &amp; Trails on O&#699;ahu, Maui &amp; Kaua&#699;i</title>
+  <title>Hawaii Dog Map — Dog-Friendly Parks, Beaches &amp; Trails on O&#699;ahu, Maui &amp; Kaua&#699;i</title>
   <meta name="description" content="Find 190+ verified dog-friendly places across O'ahu, Maui, and Kaua'i: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios. Interactive map with hours, rules, and amenities for every spot." />
   <link rel="canonical" href="https://hawaiidogmap.com/" />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hawaiidogmap.com/" />
-  <meta property="og:site_name" content="HI Dog Maps" />
-  <meta property="og:title" content="HI Dog Maps — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui & Kaua'i" />
+  <meta property="og:site_name" content="Hawaii Dog Map" />
+  <meta property="og:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui & Kaua'i" />
   <meta property="og:description" content="Find 190+ verified dog-friendly places across O'ahu, Maui, and Kaua'i: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta property="og:image" content="https://hawaiidogmap.com/icons/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
 
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="HI Dog Maps — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui & Kaua'i" />
+  <meta name="twitter:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui & Kaua'i" />
   <meta name="twitter:description" content="Find 190+ verified dog-friendly places across O'ahu, Maui, and Kaua'i: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta name="twitter:image" content="https://hawaiidogmap.com/icons/og-image.png" />
 
@@ -61,7 +61,7 @@
   <!-- Floating header: brand + inline search -->
   <div class="top-left">
     <div class="header-bar">
-      <button class="brand-icon" id="about-trigger" type="button" aria-label="About HI Dog Maps">
+      <button class="brand-icon" id="about-trigger" type="button" aria-label="About Hawaii Dog Map">
         <svg viewBox="0 0 64 74" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <ellipse cx="32" cy="66" rx="14" ry="3.6" fill="#a7d8c8"/>
           <path d="M32 6C44.5 6 54 15.2 54 27.5C54 41 40 52.5 32 65C24 52.5 10 41 10 27.5C10 15.2 19.5 6 32 6Z" fill="#0e7490"/>
@@ -73,18 +73,8 @@
         </svg>
       </button>
       <div class="brand-text">
-        <h1>HI Dog Maps</h1>
-        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu, Maui &amp; Kaua&#699;i · <a href="https://shauna.digital" target="_blank" rel="noopener" class="credit-link">Built by</a></p>
-      </div>
-      <div class="header-divider" aria-hidden="true"></div>
-      <div class="search-panel">
-        <div class="search-box">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <input id="search-input" type="text" placeholder="Search…"
-                 autocomplete="off" aria-label="Search parks and beaches" />
-          <button id="search-clear" class="search-clear" hidden aria-label="Clear search">&times;</button>
-        </div>
-        <ul class="search-results" id="search-results" hidden></ul>
+        <h1>Hawai&#699;i Dog Map</h1>
+        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu, Maui &amp; Kaua&#699;i</p>
       </div>
     </div>
   </div>
@@ -123,6 +113,7 @@
     <div class="modal" role="dialog" aria-modal="false" aria-labelledby="modal-title">
       <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
       <div class="modal-hero" id="modal-hero"></div>
+      <p class="modal-hero-credit" id="modal-hero-credit" hidden></p>
       <div class="modal-body">
         <div class="modal-badges" id="modal-badges"></div>
         <h2 id="modal-title"></h2>
@@ -159,8 +150,8 @@
     <div class="modal about-modal" role="dialog" aria-modal="false" aria-labelledby="about-title">
       <button class="modal-close" id="about-close" aria-label="Close">&times;</button>
       <div class="modal-body about-body">
-        <h2 id="about-title">About HI Dog Maps</h2>
-        <p>HI Dog Maps is a hand-curated guide to every place across Hawai&#699;i where you can
+        <h2 id="about-title">About Hawai&#699;i Dog Map</h2>
+        <p>Hawai&#699;i Dog Map is a hand-curated guide to every place across Hawai&#699;i where you can
           actually bring your dog — off-leash dog parks, leash-friendly parks and beaches,
           hiking trails, and dog-welcoming restaurant patios. It currently covers O&#699;ahu, Maui,
           and Kaua&#699;i, with more islands planned.</p>
@@ -180,6 +171,7 @@
             <li><a href="https://www.kauai.gov/Government/Departments-Agencies/Parks-Recreation" target="_blank" rel="noopener">Kaua&#699;i County</a> &amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua&#699;i Humane Society</a> — Kaua&#699;i park ordinances &amp; dog park info</li>
             <li><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> &amp; <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre GL JS</a> — map tiles &amp; rendering</li>
             <li><a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — satellite imagery &amp; hillshade</li>
+            <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> — place photos (public domain &amp; Creative Commons licensed)</li>
           </ul>
         </div>
 

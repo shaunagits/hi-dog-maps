@@ -188,11 +188,12 @@
     map = new maplibregl.Map({
       container: "map",
       style: style,
-      // Rough multi-island midpoint (O'ahu/Maui/Kaua'i) — fitAll() jumps to the
-      // real fitted view on load anyway, this just keeps the very first frame
-      // (before data loads) reasonable now that it's multi-island.
-      center: [-157.9, 21.4],
-      zoom: 8.0,
+      // Rough midpoint of the four covered islands (O'ahu/Maui/Kaua'i/Hawai'i
+      // Island) — fitAll() jumps to the real fitted view on load anyway, this
+      // just keeps the very first frame (before data loads) reasonable. Nudged
+      // south-east and zoomed out when Hawai'i Island was added.
+      center: [-157.0, 20.6],
+      zoom: 7.0,
       pitch: 20,
       bearing: 0,
       maxPitch: 72,
@@ -206,7 +207,9 @@
         '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a>, ' +
         '<a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>, ' +
         '<a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawai’i DOFAW/Nā Ala Hele</a> ' +
-        '&amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua’i Humane Society</a>'
+        '<a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua’i Humane Society</a>, ' +
+        '<a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawai’i Statewide GIS</a> ' +
+        '&amp; <a href="https://hihs.org/" target="_blank" rel="noopener">Hawai’i Island Humane Society</a>'
     }), "bottom-right");
     // Zoom + geolocate stack top-right so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
@@ -830,11 +833,11 @@
           "@type": "WebSite",
           "name": "Hawaii Dog Map",
           "url": "https://hawaiidogmap.com/",
-          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, and Kaua'i, Hawaii."
+          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, Kaua'i, and Hawai'i Island."
         },
         {
           "@type": "ItemList",
-          "name": "Dog-friendly places on O'ahu, Maui, and Kaua'i",
+          "name": "Dog-friendly places on O'ahu, Maui, Kaua'i, and Hawai'i Island",
           "numberOfItems": items.length,
           "itemListElement": items
         }

@@ -334,6 +334,7 @@ html, body {
 .modal-close:hover { background: rgba(15, 23, 42, 0.8); transform: scale(1.08); }
 
 .modal-hero {
+  position: relative; /* containing block for the loading spinner */
   height: 172px;
   display: flex;
   align-items: center;
@@ -343,14 +344,47 @@ html, body {
   background-size: cover;
   background-position: center;
 }
-.hero-dog-park { background: linear-gradient(135deg, #86efac, #16a34a); }
-.hero-park { background: linear-gradient(135deg, #a7f3d0, #059669); }
-.hero-beach { background: linear-gradient(135deg, #7dd3fc, #0284c7); }
-.hero-trail { background: linear-gradient(135deg, #fde68a, #d97706); }
-.hero-patio { background: linear-gradient(135deg, #fca5a5, #e11d48); }
+/* background-IMAGE, not the `background` shorthand: the shorthand resets
+   background-size back to auto, and since these rules come after .modal-hero
+   they silently clobbered its `background-size: cover` — which made every hero
+   photo render as a 1:1 top-left crop instead of filling the box. */
+.hero-dog-park { background-image: linear-gradient(135deg, #86efac, #16a34a); }
+.hero-park { background-image: linear-gradient(135deg, #a7f3d0, #059669); }
+.hero-beach { background-image: linear-gradient(135deg, #7dd3fc, #0284c7); }
+.hero-trail { background-image: linear-gradient(135deg, #fde68a, #d97706); }
+.hero-patio { background-image: linear-gradient(135deg, #fca5a5, #e11d48); }
 
 /* Required CC attribution for Commons photos — small, unobtrusive, sits
    right under the hero. Only shown when a photo actually loaded. */
+/* Hero loading state. The hero can take a moment — a Commons photo is a plain
+   CDN file (~450ms) but the Esri aerial is generated per request, so it is the
+   slow one. The category icon still shows underneath, so this is a progress
+   hint on top of a meaningful placeholder rather than a substitute for one. */
+.hero-spinner {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: hero-spin 0.7s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-spinner[hidden] { display: none; }
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+
+/* Soften the swap from placeholder to image so it reads as intentional. */
+@keyframes hero-fade-in { from { opacity: 0.4; } to { opacity: 1; } }
+.modal-hero.hero-loaded { animation: hero-fade-in 0.32s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spinner { animation-duration: 1.6s; }
+  .modal-hero.hero-loaded { animation: none; }
+}
+
 /* Prev/next arrows for stepping through nearby places. Sat over the hero so
    they're visible the moment the panel opens — that's the affordance telling
    people the feature exists. They scroll with the panel content, which is

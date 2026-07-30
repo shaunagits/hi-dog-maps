@@ -600,6 +600,20 @@
   // photo's Image() has resolved) — only the most recent call may paint.
   let heroLoadToken = 0;
 
+  // Held as a live reference, NOT re-queried per open: painting the hero clears
+  // its children via innerHTML, which detaches this node from the document. A
+  // fresh getElementById would then return null on the next open.
+  const heroSpinner = document.getElementById("hero-spinner");
+
+  // Replace the hero's contents while keeping the spinner node alive.
+  function setHeroContent(hero, html, spinning) {
+    hero.innerHTML = html;
+    if (heroSpinner) {
+      hero.appendChild(heroSpinner);
+      heroSpinner.hidden = !spinning;
+    }
+  }
+
   // Required CC attribution for a Commons photo — never render a Commons hero
   // without it. Aerials carry their own Esri credit instead.
   function commonsCredit(park) {
@@ -615,7 +629,13 @@
   // weight. This is the middle hero tier: it covers the ~156 places that have no
   // Commons photo and realistically never will (patios, small neighbourhood
   // parks, bark parks are not subjects Commons contributors photograph).
+  // Requested pixel size matters far more than you'd expect: this endpoint renders
+  // each image on demand, and cost climbs steeply past ~720px wide. Measured cold,
+  // same endpoint, different places: 480px 555ms | 600px 671ms | 720px 1109ms |
+  // 900px 3244ms. 720x360 is the knee of that curve — still ~1.75x the hero's CSS
+  // width, and roughly three times faster than the 900px version this used to request.
   const AERIAL_SPAN_M = 420; // ground width of the frame; ~2:1 suits the hero box
+  const AERIAL_PX = [720, 360];
   function aerialUrl(park, w, h) {
     if (typeof park.lat !== "number" || typeof park.lng !== "number") return "";
     // bbox aspect must match the requested pixel aspect or Esri stretches it
@@ -626,6 +646,22 @@
     return "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery" +
       "/MapServer/export?bbox=" + bbox + "&bboxSR=4326&imageSR=3857" +
       "&size=" + w + "," + h + "&format=jpg&f=image";
+  }
+
+  // Warm the browser cache for the places either side of the current one, so
+  // stepping through neighbours is instant instead of paying the load again.
+  // Only the immediate neighbours — prefetching the whole walk would fire a
+  // dozen on-demand aerial renders for images most people never look at.
+  const prefetched = Object.create(null);
+  function prefetchNeighbourHeroes() {
+    [navList[navIndex - 1], navList[navIndex + 1]].forEach(function (p) {
+      if (!p) return;
+      const url = p.photo || aerialUrl(p, AERIAL_PX[0], AERIAL_PX[1]);
+      if (!url || prefetched[url]) return;
+      prefetched[url] = true;
+      const img = new Image();
+      img.src = url;
+    });
   }
 
   // isStep is true only when arriving via the prev/next arrows, swipe or arrow
@@ -641,7 +677,7 @@
     const heroCredit = document.getElementById("modal-hero-credit");
     hero.className = "modal-hero hero-" + park.category;
     hero.style.backgroundImage = "";
-    hero.innerHTML = catIcon(park.category, 66);
+    setHeroContent(hero, catIcon(park.category, 66), true);
     heroCredit.hidden = true;
     heroCredit.innerHTML = "";
 
@@ -652,7 +688,8 @@
       img.onload = function () {
         if (myToken !== heroLoadToken) return;
         hero.style.backgroundImage = "url('" + url + "')";
-        hero.innerHTML = "";
+        setHeroContent(hero, "", false);
+        hero.classList.add("hero-loaded");
         if (creditHtml) {
           heroCredit.innerHTML = creditHtml;
           heroCredit.hidden = false;
@@ -660,14 +697,15 @@
       };
       img.onerror = function () {
         if (myToken !== heroLoadToken) return;
-        if (onFail) onFail();
+        if (onFail) { onFail(); return; }
+        if (heroSpinner) heroSpinner.hidden = true; // nothing left to try; keep the icon
       };
       img.src = url;
     };
 
     const showAerial = function () {
-      const url = aerialUrl(park, 900, 450);
-      if (!url) return; // no coords — leave the category icon in place
+      const url = aerialUrl(park, AERIAL_PX[0], AERIAL_PX[1]);
+      if (!url) { if (heroSpinner) heroSpinner.hidden = true; return; } // no coords
       load(url, 'Satellite imagery &copy; <a href="https://www.esri.com/"' +
                 ' target="_blank" rel="noopener">Esri</a>', null);
     };
@@ -677,6 +715,7 @@
     } else {
       showAerial();
     }
+    prefetchNeighbourHeroes();
 
     document.getElementById("modal-title").textContent = park.name;
     document.getElementById("modal-address").textContent = park.address || "";

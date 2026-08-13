@@ -86,7 +86,25 @@
         if (ly.type === "line") ly.paint["line-color"] = MAP_COLORS.water;
       } else if (sl === "landcover" || sl === "park" ||
                  /wood|forest|grass|park|landcover|wetland|cemetery|golf|pitch|garden|scrub/i.test(id)) {
-        if (ly.type === "fill") ly.paint["fill-color"] = MAP_COLORS.green;
+        if (ly.type === "fill") {
+          ly.paint["fill-color"] = MAP_COLORS.green;
+          // The `park` source-layer carries marine protected areas as well as
+          // land parks, and Papahānaumokuākea is an enormous one sitting in open
+          // ocean north-west of Kauaʻi. It draws ABOVE the bathymetry raster and
+          // BELOW the water fill, so it was invisible only because that fill
+          // used to be opaque — the moment WATER_FILL went translucent for the
+          // bathymetry, it surfaced as a big green blob in the empty Pacific,
+          // most obvious at full zoom-out.
+          // Fading it across the same range the bathymetry uses keeps the two in
+          // step and costs nothing real: at these zooms an individual park
+          // polygon isn't legible anyway, and the islands still get their green
+          // from the landcover layers, which draw above the water fill.
+          if (sl === "park") {
+            ly.paint["fill-opacity"] = ["interpolate", ["linear"], ["zoom"],
+              BATHY_FADE.start, 0,
+              BATHY_FADE.end, 1];
+          }
+        }
       } else if (sl === "building" || /building/i.test(id)) {
         if (ly.type === "fill") {
           ly.paint["fill-color"] = MAP_COLORS.building;

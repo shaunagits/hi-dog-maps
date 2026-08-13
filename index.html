@@ -52,11 +52,32 @@
        else; see the typography note in CLAUDE.md. -->
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="css/styles.css?v=12" />
+  <link rel="stylesheet" href="css/styles.css?v=18" />
 </head>
 <body>
+  <!-- Gradient defs for the paw-print markers, defined once and referenced by
+       id from every marker's SVG. Inlining them per marker would repeat the
+       same two gradients up to 289 times. Must live in the document (not in a
+       marker) so the references resolve however markers are added/removed. -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="paw-offleash" x1="0" y1="0" x2="0.35" y2="1">
+        <stop offset="0" stop-color="#2ad06a" /><stop offset="1" stop-color="#15803d" />
+      </linearGradient>
+      <linearGradient id="paw-leashed" x1="0" y1="0" x2="0.35" y2="1">
+        <stop offset="0" stop-color="#45c6fb" /><stop offset="1" stop-color="#0369a1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
   <!-- Full-bleed map -->
   <div id="map" role="application" aria-label="Map of dog-friendly parks on Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island"></div>
+
+  <!-- Paper grain. A fixed overlay above the map canvas (z-index 1) but below
+       every floating control (z-index 500+), multiplied over the map so it
+       reads as printed stock rather than a screen. pointer-events:none is
+       load-bearing — without it this swallows every pan, zoom and pin click. -->
+  <div class="map-grain" aria-hidden="true"></div>
 
   <!-- List view: an alternative to the map for browsing every place. Content
        is rendered into the DOM by refresh() regardless of whether this is the

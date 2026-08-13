@@ -45,6 +45,22 @@
     labelHalo: "#ffffff"
   };
 
+  /* Zoom at which the seafloor relief has fully faded and the map is back to
+     the flat brand water. Shared by the raster's opacity ramp and the water
+     fill's alpha ramp — the two are complements and MUST stay in step, or
+     you get either a double-darkened ocean or a see-through one. */
+  const BATHY_FADE = { start: 9.5, end: 11.5 };
+
+  /* Water fill, as a zoom expression rather than a flat colour.
+     Below BATHY_FADE.start it's a translucent brand tint laid OVER the
+     bathymetry raster, so the reef shelves and the Maui Nui platform read
+     through it in brand colours instead of Esri's slate blue. By .end the
+     raster is gone and this is the original opaque #a7dbe2, so nothing changes
+     at the street zooms where depth is irrelevant. */
+  const WATER_FILL = ["interpolate", ["linear"], ["zoom"],
+    BATHY_FADE.start, "rgba(146, 205, 216, 0.45)",
+    BATHY_FADE.end, MAP_COLORS.water];
+
   // Font used for map-canvas labels (must exist in the glyph server).
   // Swap here once Urbanist glyph tiles are hosted; see --font-map-label in CSS.
   // Note this one is NOT ours to pick freely: it has to be a fontstack the tile
@@ -61,7 +77,10 @@
       if (ly.type === "background") {
         ly.paint["background-color"] = MAP_COLORS.land;
       } else if (sl === "water" || /water|ocean|sea|bay/i.test(id)) {
-        if (ly.type === "fill") ly.paint["fill-color"] = MAP_COLORS.water;
+        // Fill gets the zoom-ramped tint (see WATER_FILL); the outline stays a
+        // flat colour, since a translucent line over its own translucent fill
+        // double-darkens into a visible seam along every coastline.
+        if (ly.type === "fill") ly.paint["fill-color"] = WATER_FILL;
         if (ly.type === "line") ly.paint["line-color"] = MAP_COLORS.water;
       } else if (sl === "waterway") {
         if (ly.type === "line") ly.paint["line-color"] = MAP_COLORS.water;
@@ -93,6 +112,74 @@
     brandStyle(style);
     style.sources = style.sources || {};
 
+    /* Seafloor relief. At the zooms this map opens on, ~80% of the frame is
+       ocean, and a flat fill wastes all of it — this puts the reef shelves,
+       the submerged Maui Nui platform (Maui/Molokaʻi/Lānaʻi/Kahoʻolawe are one
+       drowned landmass) and the Hawaiian Ridge into that space.
+       Esri's ocean basemap, same free CORS-enabled, no-key family as the
+       hillshade below it. Note the {z}/{y}/{x} order — Esri, not XYZ. */
+    style.sources.bathymetry = {
+      type: "raster",
+      tiles: ["https://services.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}"],
+      tileSize: 256,
+      maxzoom: 12,
+      attribution: "Bathymetry &copy; Esri, GEBCO, NOAA"
+    };
+    // Directly above the background so every vector layer — landcover, roads,
+    // buildings, hillshade, labels — still draws on top of it. The raster
+    // carries its own rendering of the land, which is why it has to fade out
+    // (below) rather than sit under the map permanently.
+    let bgIdx = 0;
+    for (let i = 0; i < style.layers.length; i++) {
+      if (style.layers[i].type === "background") { bgIdx = i + 1; break; }
+    }
+    style.layers.splice(bgIdx, 0, {
+      id: "bathymetry",
+      type: "raster",
+      source: "bathymetry",
+      // Layer maxzoom, not just source maxzoom: without it MapLibre keeps
+      // fetching (overzoomed) ocean tiles at street level for a layer that is
+      // fully transparent by then.
+      maxzoom: BATHY_FADE.end + 0.5,
+      paint: {
+        "raster-opacity": ["interpolate", ["linear"], ["zoom"],
+          BATHY_FADE.start, 0.92,
+          BATHY_FADE.end, 0],
+        // Contrast, NOT hue-rotate/desaturation. The raster paints land as well
+        // as sea, so anything that drains its colour drains the islands too —
+        // an earlier hue-rotate left Oʻahu as a grey smudge barely separable
+        // from the water. Contrast pushes the two ends apart instead: land is
+        // the bright end and deep ocean the dark end, so it brightens the
+        // islands and deepens the trenches in one move.
+        "raster-contrast": 0.18,
+        "raster-saturation": -0.08
+      }
+    });
+
+    /* Coastline. The raster's own land/sea edge is soft, and laying a
+       translucent water tint over it softens it further — at island-overview
+       zoom the shorelines went mushy without this. A crisp coast is also just
+       what a printed chart has, so it earns its place twice. Fades back as the
+       bathymetry does, leaving the untouched vector coastline at street zoom. */
+    const waterIdx = style.layers.findIndex(function (ly) { return ly.id === "water"; });
+    if (waterIdx !== -1) {
+      const waterSrc = style.layers[waterIdx].source;
+      style.layers.splice(waterIdx + 1, 0, {
+        id: "coastline",
+        type: "line",
+        source: waterSrc,
+        "source-layer": "water",
+        filter: ["match", ["geometry-type"], ["MultiPolygon", "Polygon"], true, false],
+        paint: {
+          "line-color": "#4f8fa3",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 5, 0.7, 9, 1.2, 12, 1.6],
+          "line-opacity": ["interpolate", ["linear"], ["zoom"],
+            5, 0.85,
+            BATHY_FADE.end, 0.28]
+        }
+      });
+    }
+
     style.sources.hillshade = {
       type: "raster",
       tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Hillshade/MapServer/tile/{z}/{y}/{x}"],
@@ -109,7 +196,16 @@
       id: "hillshade",
       type: "raster",
       source: "hillshade",
-      paint: { "raster-opacity": 0.28, "raster-saturation": -1 }
+      paint: {
+        // Held back while the bathymetry is up: that raster already carries its
+        // own relief shading, and stacking this on top at full strength was
+        // what turned the islands muddy. Returns to the original 0.28 exactly
+        // as the bathymetry finishes fading out.
+        "raster-opacity": ["interpolate", ["linear"], ["zoom"],
+          BATHY_FADE.start, 0.12,
+          BATHY_FADE.end, 0.28],
+        "raster-saturation": -1
+      }
     });
 
     style.sources.satellite = {
@@ -300,12 +396,64 @@
     map.addLayer({ id: "points-hit", type: "circle", source: "points",
       paint: { "circle-radius": 0, "circle-opacity": 0 } });
 
+    addIslandLabels();
     map.on("render", syncMarkers);
     map.on("idle", syncMarkers);
     map.on("moveend", syncMarkers);
     refresh();
     fitAll(false);
     syncMarkers();
+    // After fitAll, so the deep link's flyTo isn't immediately overwritten by
+    // the all-islands jump.
+    openFromQuery();
+  }
+
+  /* ---------- Island name labels ---------- */
+  /* Big letterspaced island names over the overview view, the way a printed
+     chart names a landmass. These are HTML markers rather than a symbol layer
+     on purpose: canvas labels can only use a fontstack the tile server
+     publishes (see MAP_LABEL_FONT), which pins every label on the map to Noto
+     Sans — so the one piece of type that most sets the map's character was the
+     one piece we couldn't set. As HTML they're Urbanist like the rest of the UI.
+     Only the four covered islands are named; Molokaʻi and Lānaʻi are
+     deliberately out of the dataset (see CLAUDE.md) and naming them would
+     imply coverage that isn't there.
+     Positions sit off-centre from each island's centroid, which is where the
+     cluster bubbles land — they're added before any pin so they stay behind
+     them in DOM order either way. */
+  const ISLAND_LABELS = [
+    { name: "Kauaʻi", lng: -159.53, lat: 21.90 },
+    { name: "Oʻahu", lng: -158.02, lat: 21.30 },
+    { name: "Maui", lng: -156.45, lat: 20.65 },
+    { name: "Hawaiʻi Island", lng: -155.60, lat: 19.20 }
+  ];
+  // Full strength at the zooms that show whole islands; gone by the time you're
+  // looking at a neighbourhood, where a 13px island name is just clutter.
+  const ISLAND_LABEL_FADE = { full: 8.2, gone: 9.4 };
+  const islandLabelEls = [];
+
+  function addIslandLabels() {
+    ISLAND_LABELS.forEach(function (isle) {
+      const el = document.createElement("div");
+      el.className = "island-label";
+      el.textContent = isle.name;
+      islandLabelEls.push(el);
+      new maplibregl.Marker({ element: el, anchor: "center" })
+        .setLngLat([isle.lng, isle.lat])
+        .addTo(map);
+    });
+    updateIslandLabels();
+    map.on("zoom", updateIslandLabels);
+  }
+
+  function updateIslandLabels() {
+    const z = map.getZoom();
+    const span = ISLAND_LABEL_FADE.gone - ISLAND_LABEL_FADE.full;
+    const o = z <= ISLAND_LABEL_FADE.full ? 1
+      : (z >= ISLAND_LABEL_FADE.gone ? 0 : (ISLAND_LABEL_FADE.gone - z) / span);
+    for (let i = 0; i < islandLabelEls.length; i++) {
+      islandLabelEls[i].style.opacity = o;
+    }
   }
 
   /* ---------- HTML marker sync (pins + clusters) ---------- */
@@ -321,13 +469,33 @@
   const markers = {};
   let markersOnScreen = {};
 
+  /* The marker silhouette: an actual paw print rather than the generic map
+     teardrop. Four toes over a big pad, and the pad is sized to still hold the
+     category line-icon — dropping that to get the shape would have traded real
+     information (dog park vs beach vs trail) for decoration.
+     `paint-order="stroke"` puts the white keyline UNDER the fill, so only its
+     outer half shows: one clean outline around the whole print, plus the gaps
+     between the toes that make it read as a paw rather than a blob.
+     Gradients live in one <defs> in index.html, referenced by id — 289 markers
+     each carrying their own gradient definition would be 289 redundant defs. */
+  const PAW_SVG =
+    '<svg class="paw-shape" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">' +
+      '<g stroke="#fff" stroke-width="2.4" paint-order="stroke">' +
+        '<ellipse cx="7.2" cy="16.2" rx="4.5" ry="5.8" transform="rotate(-22 7.2 16.2)"/>' +
+        '<ellipse cx="15.7" cy="8.9" rx="4.7" ry="6.1" transform="rotate(-8 15.7 8.9)"/>' +
+        '<ellipse cx="24.3" cy="8.9" rx="4.7" ry="6.1" transform="rotate(8 24.3 8.9)"/>' +
+        '<ellipse cx="32.8" cy="16.2" rx="4.5" ry="5.8" transform="rotate(22 32.8 16.2)"/>' +
+        '<path d="M20 19c8 0 14 5.4 14 11.6 0 5.6-5 8.6-9.7 6.9-2.7-1-5.9-1-8.6 0C11 39.2 6 36.2 6 30.6 6 24.4 12 19 20 19Z"/>' +
+      "</g></svg>";
+
   function pinEl(props) {
     const park = PARKS[props.idx];
     const cls = props.type === "off-leash" ? "paw-marker-offleash" : "paw-marker-leashed";
     const el = document.createElement("div");
     el.className = "map-pin";
     el.innerHTML =
-      '<div class="paw-marker ' + cls + '"><span>' + catIcon(props.category, 17) + "</span></div>" +
+      '<div class="paw-marker ' + cls + '">' + PAW_SVG +
+        '<span class="paw-icon">' + catIcon(props.category, 14) + "</span></div>" +
       '<div class="marker-tip">' + escapeHtml(props.name) + "</div>";
     el.addEventListener("click", function (e) { e.stopPropagation(); openModal(park); });
     return el;
@@ -518,6 +686,60 @@
     openModal(park);
   }
 
+  /* ---------- Deep link from the generated static pages ---------- */
+  /* Every page under /place/<slug>/ has a "Show on the map" button pointing at
+     /?place=<slug>. Without this the button would just dump you at the
+     all-islands view and you'd have to find the place yourself.
+
+     MUST stay byte-identical to slugify() in tools/build-pages.mjs — the two
+     independently turn the same name into the same string, and a mismatch
+     silently degrades every one of those buttons to a no-op. Same reasoning
+     there: NFD + combining-mark strip removes macrons, and the ʻokina/quote
+     family is deleted rather than hyphenated so "Puʻuhonua" doesn't become
+     "pu-uhonua". */
+  function slugifyName(s) {
+    return String(s)
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[ʻʼ‘’']/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  /* Rebuilds the builder's slug→place assignment rather than just slugifying
+     each name and comparing. The two differ only for duplicate names, which
+     the builder disambiguates by appending the island and then a counter — and
+     a plain name match would hand every one of those duplicates back the FIRST
+     place with that name, i.e. confidently open the wrong park. There are no
+     duplicate names today; this keeps that from becoming a silent bug the day
+     someone adds one. Must stay in step with the same loop in
+     tools/build-pages.mjs, including iterating PARKS in dataset order. */
+  let slugMap = null;
+  function getSlugMap() {
+    if (slugMap) return slugMap;
+    slugMap = Object.create(null);
+    for (let i = 0; i < PARKS.length; i++) {
+      let s = slugifyName(PARKS[i].name);
+      if (slugMap[s]) s = s + "-" + slugifyName(PARKS[i].island);
+      const base = s;
+      let n = 2;
+      while (slugMap[s]) s = base + "-" + n++;
+      slugMap[s] = PARKS[i];
+    }
+    return slugMap;
+  }
+
+  function openFromQuery() {
+    let slug;
+    try {
+      slug = new URLSearchParams(window.location.search).get("place");
+    } catch (e) { return; }
+    if (!slug) return;
+    const park = getSlugMap()[slug];
+    if (park) focusPark(park);
+  }
+
   /* ---------- Nearby navigation (prev/next through neighbouring places) ---------- */
   // Opening a place builds an "outward walk" from it: the place itself, then
   // its nearest neighbours in distance order. Stepping never rebuilds the
@@ -586,6 +808,10 @@
   function setBasemap(name) {
     if (!map || !map.getLayer("satellite")) return;
     map.setLayoutProperty("satellite", "visibility", name === "satellite" ? "visible" : "none");
+    // The island labels are HTML, so they sit above whichever basemap is up and
+    // can't be restyled by the style itself. Their default ocean-teal-on-white-
+    // halo is invisible over satellite imagery, so flag the mode for CSS.
+    document.body.classList.toggle("basemap-satellite", name === "satellite");
   }
 
   /* ---------- Filters ---------- */

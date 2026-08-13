@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1897b8"/><stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+    <mask id="m">
+      <rect width="64" height="64" fill="#000"/>
+      <g transform="translate(32 34) scale(1.06) translate(-32 -35.5)">
+        <path d="M32 6C44.5 6 54 15.2 54 27.5C54 41 40 52.5 32 65C24 52.5 10 41 10 27.5C10 15.2 19.5 6 32 6Z" fill="#fff"/>
+        <g transform="translate(32 27.5) scale(1.16) translate(-32 -27.5)" fill="#000">
+          <ellipse cx="21.5" cy="28" rx="3.3" ry="4.5"/>
+          <ellipse cx="28.5" cy="20.5" rx="3.6" ry="5"/>
+          <ellipse cx="35.5" cy="20.5" rx="3.6" ry="5"/>
+          <ellipse cx="42.5" cy="28" rx="3.3" ry="4.5"/>
+          <path d="M32 29.5C37.5 29.5 42 33 42 37.2C42 41 38.5 42.7 35.2 41.6C33.4 41 30.6 41 28.8 41.6C25.5 42.7 22 41 22 37.2C22 33 26.5 29.5 32 29.5Z"/>
+        </g>
+      </g>
+    </mask>
+  </defs>
+  <rect width="64" height="64" fill="url(#g)"/>
+  <rect width="64" height="64" fill="#fff" mask="url(#m)"/>
+</svg>

@@ -30,11 +30,17 @@
   <meta name="theme-color" content="#0e7490" />
   <link rel="manifest" href="manifest.json" />
 
-  <!-- Favicons -->
-  <link rel="icon" href="favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+  <!-- Favicons. Two treatments on purpose, generated from icons/src/*.svg:
+       the tab mark is transparent and cropped tight so the pin fills the 16px
+       tile (a white plate around it made the mark ~60% of the tile and it
+       vanished in the tab strip); the app tile is full-bleed and square, since
+       iOS/Android apply their own corner mask and pre-rounding leaves gaps.
+       ?v= is a cache-bust — browsers hold onto favicons far past a normal reload. -->
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=2" />
+  <link rel="icon" href="favicon.ico?v=2" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png?v=2" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

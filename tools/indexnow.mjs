@@ -110,9 +110,29 @@ const MEANING = {
   200: "OK — URLs accepted.",
   202: "Accepted; key validation pending. Normal on a first submission.",
   400: "Bad request — malformed JSON or key format.",
-  403: "Key not valid. The key file is probably not live yet at the URL above — push, confirm it returns 200, then re-run.",
+  403: "Key rejected — see errorCode above.",
   422: "URLs don't match the host, or the key doesn't match the host's key file.",
   429: "Rate limited — too many requests. Wait and retry."
 };
 console.log(MEANING[res.status] || "Unrecognised status; see https://www.indexnow.org/documentation");
+
+/* A 403 has two very different causes and they need opposite responses, so
+   split them rather than printing one guess:
+   SiteVerificationNotCompleted means the key file IS reachable and IndexNow
+   has queued an ownership check — the only fix is to wait. Anything else means
+   the key file genuinely isn't serving correctly. */
+if (res.status === 403) {
+  if (text.includes("SiteVerificationNotCompleted")) {
+    console.log(
+      "\nThis is the async ownership check, not a misconfiguration — IndexNow has\n" +
+        "fetched (or queued a fetch of) the key file and hasn't finished verifying.\n" +
+        "Wait a few minutes and re-run; no changes needed."
+    );
+  } else {
+    console.log(
+      `\nCheck the key file actually serves: curl -i https://${HOST}/${keyFile}\n` +
+        "It must return 200 with the key as its entire body."
+    );
+  }
+}
 process.exit(res.status === 200 || res.status === 202 ? 0 : 1);

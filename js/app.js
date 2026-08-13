@@ -633,7 +633,12 @@
     // fit-everything zoom down to 4.37 and well under minZoom. Narrow the sides
     // on small screens; that lifts the tightest fit to 5.33 and keeps "zoom out
     // to see all four islands" working on the smallest phone.
-    const side = window.innerWidth <= 560 ? 24 : 90;
+    //
+    // 700 is the same width the rest of the app already calls mobile (the CSS
+    // breakpoint, and flyToPark's panel-side padding), rather than a threshold
+    // of its own. It was 560, which cost 561-700px widths 180px of side padding
+    // — 32% of the viewport at 568 — for no reason the fit needed.
+    const side = window.innerWidth <= 700 ? 24 : 90;
     // Bottom clears the filter panel, top clears the header — BOTH measured, not
     // assumed. The panel wraps to three rows on a phone (148px portrait, 124px
     // landscape) and sits on one row on a desktop (86px). CLUSTER_OVERHANG is

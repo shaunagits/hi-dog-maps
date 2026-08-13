@@ -297,15 +297,18 @@
       // never fill in. (Pin pile-up used to be the other half of this reason;
       // clustering handles that now, but the empty-ocean half still stands.)
       //
-      // Deliberately loose, because the zoom that fits all four islands
-      // depends on viewport width — roughly 6.35 at 320px, 6.6 at 375px, 7.0
-      // at 508px, 8.3 at 1280px (the chain spans ~5.5° of longitude). 6 sits
-      // below the tightest of those, so "zoom out to see everything" still
-      // works on the narrowest phone. Anything tighter would break that on
-      // small screens. No maxBounds on purpose: that one creates invisible
-      // walls, and would clamp panning for someone whose geolocate puts them
-      // on the mainland.
-      minZoom: 6,
+      // Must stay BELOW the zoom that fits all four islands, which depends on
+      // viewport width — MapLibre's world is 512 * 2^zoom px, and the chain
+      // spans 4.75° of longitude. Measured live against the 289-place bounds:
+      // 5.33 at 320px, 5.53 at 360px, 5.60 at 375px, 5.76 at 414px, 6.89 at
+      // 1280px. 320px portrait is the binding case at 5.33, so this sits just
+      // under it. It used to be 6 — derived from a 256px-tile formula, a full
+      // zoom level too high — which silently clamped fitAll on EVERY phone and
+      // cropped Kaua'i and Hawai'i Island out of the default view. Anything
+      // above 5.33 brings that back. No maxBounds on purpose: that one creates
+      // invisible walls, and would clamp panning for someone whose geolocate
+      // puts them on the mainland.
+      minZoom: 5.3,
       pitch: 20,
       bearing: 0,
       maxPitch: 72,
@@ -627,13 +630,14 @@
     fc.features.forEach(function (f) { b.extend(f.geometry.coordinates); });
     // The floating panels sit top and bottom, so wide SIDE padding buys nothing
     // — and on a 320px phone 90px each side ate 56% of the viewport, pushing the
-    // fit-everything zoom down to 5.37 and colliding with minZoom. Narrow the
-    // sides on small screens; that lifts the tightest fit to ~6.33 and keeps
-    // "zoom out to see all four islands" working on the smallest phone.
+    // fit-everything zoom down to 4.37 and well under minZoom. Narrow the sides
+    // on small screens; that lifts the tightest fit to 5.33 and keeps "zoom out
+    // to see all four islands" working on the smallest phone. (568px landscape
+    // still misses this branch by 8px and clamps — see CLAUDE.md.)
     const side = window.innerWidth <= 560 ? 24 : 90;
     // Bottom clears the filter panel, whose height is MEASURED, not assumed: it
-    // wraps to three rows on a phone (~152px) and sits on one row on a desktop
-    // (~70px). CLUSTER_OVERHANG is added on top because the southernmost marker
+    // wraps to three rows on a phone (148px portrait, 124px landscape) and sits
+    // on one row on a desktop (86px). CLUSTER_OVERHANG is added because the marker
     // at these zooms is a cluster bubble, and bubbles are centre-anchored — half
     // of a 60px one hangs BELOW its coordinate, where a pin sits entirely above
     // its own.
@@ -643,13 +647,15 @@
     // Roomiest first, then progressively less. Which padding is affordable
     // depends entirely on viewport SHAPE, so it can't be a constant:
     //   - Portrait phone (320x568): the island chain spans 4.75° of longitude
-    //     against 3.26° of (Mercator) latitude, so WIDTH is what limits the fit.
-    //     Vertical padding is therefore free — the full 186 leaves the zoom at
-    //     ~6.33, exactly where 90 left it.
-    //   - Landscape phone (812x375): almost no height to begin with, and the
-    //     roomy option demands ~5.16 — below minZoom. cameraForBounds returns
-    //     that happily and the map then clamps it, silently cropping islands out
-    //     of a view whose whole job is showing all of them.
+    //     against 3.05° of latitude, so WIDTH is what limits the fit. Vertical
+    //     padding is therefore free — every entry below returns the SAME 5.33,
+    //     so the roomiest is always the one taken.
+    //   - Landscape phone (812x375): almost no height to begin with, so padding
+    //     really does bite — 158 demands 4.23, and only 40 (5.47) clears
+    //     minZoom. Below minZoom cameraForBounds returns the camera happily and
+    //     the map then clamps it, silently cropping islands out of a view whose
+    //     whole job is showing all of them.
+    //   - Desktop (1280x800): HEIGHT binds instead, and 120 (6.89) is taken.
     // So: take the roomiest padding whose camera the map can actually adopt.
     let cam = null, tightest = null;
     const pads = [panelH + CLUSTER_OVERHANG, 120, 90, 40];

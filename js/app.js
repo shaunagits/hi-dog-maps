@@ -195,8 +195,8 @@
       center: [-157.0, 20.6],
       zoom: 7.0,
       // Floor the zoom-out. Past this there is only empty Pacific that will
-      // never fill in, and the 289 unclustered HTML markers pile into an
-      // illegible smudge while still costing a DOM node each.
+      // never fill in. (Pin pile-up used to be the other half of this reason;
+      // clustering handles that now, but the empty-ocean half still stands.)
       //
       // Deliberately loose, because the zoom that fits all four islands
       // depends on viewport width — roughly 6.35 at 320px, 6.6 at 375px, 7.0
@@ -274,10 +274,24 @@
       });
     } catch (e) {}
 
-    // Location points (no clustering — every pin is always rendered).
+    // Location points, clustered. Zoomed out, 289 individual pins overlap into
+    // an unreadable smudge (and O'ahu's 152 are the worst of it), so nearby
+    // places collapse into one counted bubble until you zoom past
+    // CLUSTER_MAX_ZOOM, at which point every pin is drawn individually again.
+    //
+    // clusterProperties tallies the off-leash share so the bubble can carry the
+    // same green/blue meaning the individual pins do (see clusterEl()) — without
+    // it a cluster would be a colourless dot that throws away the one attribute
+    // the map is actually about.
     map.addSource("points", {
       type: "geojson",
-      data: currentFeatures()
+      data: currentFeatures(),
+      cluster: true,
+      clusterRadius: CLUSTER_RADIUS,
+      clusterMaxZoom: CLUSTER_MAX_ZOOM,
+      clusterProperties: {
+        offleash: ["+", ["case", ["==", ["get", "type"], "off-leash"], 1, 0]]
+      }
     });
     // Invisible hit layer so the source loads + is queryable via querySourceFeatures.
     map.addLayer({ id: "points-hit", type: "circle", source: "points",
@@ -291,7 +305,16 @@
     syncMarkers();
   }
 
-  /* ---------- HTML marker sync (pins) ---------- */
+  /* ---------- HTML marker sync (pins + clusters) ---------- */
+  // Grouping radius in screen pixels. A pin is 36px wide, so 60 means two
+  // bubbles never touch — smaller values leave overlapping pairs behind at the
+  // island-wide zooms this exists to clean up.
+  const CLUSTER_RADIUS = 60;
+  // Above this zoom nothing is grouped. ~14 is street level: by then the pins
+  // are genuinely distinguishable places you'd walk between, and grouping them
+  // would hide the one thing you zoomed in to see.
+  const CLUSTER_MAX_ZOOM = 13;
+
   const markers = {};
   let markersOnScreen = {};
 
@@ -307,28 +330,110 @@
     return el;
   }
 
+  /* A grouped bubble standing in for `point_count` nearby places. The ring is a
+     conic gradient split by the off-leash share, so the cluster keeps the same
+     colour language as the pins it replaced — a mostly-green bubble is a
+     mostly-off-leash area at a glance, before you zoom in at all. */
+  function clusterEl(props, coords) {
+    const count = props.point_count;
+    const offleash = props.offleash || 0;
+    const pct = count ? Math.round((offleash / count) * 100) : 0;
+    const size = count < 10 ? "cluster-sm" : (count < 50 ? "cluster-md" : "cluster-lg");
+    const el = document.createElement("div");
+    el.className = "cluster-pin " + size;
+    el.innerHTML =
+      '<div class="cluster-ring" style="--offleash-pct:' + pct + '%">' +
+        '<div class="cluster-body">' + (props.point_count_abbreviated || count) + "</div>" +
+      "</div>" +
+      '<div class="marker-tip">' + count + " places · " + offleash + " off-leash</div>";
+    el.addEventListener("click", function (e) {
+      e.stopPropagation();
+      zoomToCluster(props.cluster_id, coords);
+    });
+    return el;
+  }
+
+  /* Clicking a cluster zooms exactly far enough to break it apart — one step,
+     not a guess. */
+  function zoomToCluster(clusterId, coords) {
+    const src = map.getSource("points");
+    if (!src) return;
+    const guess = function () { return map.getZoom() + 2; };
+    const go = function (zoom) {
+      if (typeof zoom !== "number" || !isFinite(zoom)) zoom = guess();
+      // Never overshoot: for near-coincident places supercluster reports an
+      // expansion zoom up in the high teens, which would slam the camera from
+      // island view to rooftop in one tap. One step past CLUSTER_MAX_ZOOM
+      // already guarantees the group is fully broken up, since nothing is
+      // clustered at all beyond that.
+      map.easeTo({ center: coords, zoom: Math.min(zoom, CLUSTER_MAX_ZOOM + 1), duration: 600 });
+    };
+    // Promise-based in MapLibre v4, and it round-trips to the worker, so it can
+    // reject. A tapped bubble that doesn't move the camera reads as a broken
+    // map, so every failure path still zooms — two levels in splits most
+    // groups, and anything it doesn't split can just be tapped again.
+    try {
+      Promise.resolve(src.getClusterExpansionZoom(clusterId))
+        .then(go)
+        .catch(function () { go(guess()); });
+    } catch (e) {
+      go(guess());
+    }
+  }
+
   function syncMarkers() {
     if (!map.isSourceLoaded("points")) return;
     const newMarkers = {};
     const features = map.querySourceFeatures("points");
     for (let i = 0; i < features.length; i++) {
       const props = features[i].properties;
-      // Pins never move — anchor once to the EXACT data coordinate.
-      // (querySourceFeatures geometry is tile-quantized and jitters frame to frame.)
-      const id = "p" + props.idx;
-      let marker = markers[id];
-      if (!marker) {
-        const park = PARKS[props.idx];
-        marker = markers[id] = new maplibregl.Marker({ element: pinEl(props), anchor: "bottom" })
-          .setLngLat([park.lng, park.lat]);
+      let id, marker;
+      if (props.cluster) {
+        // A cluster has no fixed real-world home, so unlike a pin it does take
+        // its position from the (tile-quantized) feature geometry. Set once at
+        // creation — a cluster_id identifies one group at one zoom, so it never
+        // needs re-positioning and never picks up the frame-to-frame jitter.
+        id = "c" + props.cluster_id;
+        marker = markers[id];
+        if (!marker) {
+          const coords = features[i].geometry.coordinates;
+          marker = markers[id] = new maplibregl.Marker({ element: clusterEl(props, coords), anchor: "center" })
+            .setLngLat(coords);
+        }
+      } else {
+        // Pins never move — anchor once to the EXACT data coordinate.
+        // (querySourceFeatures geometry is tile-quantized and jitters frame to frame.)
+        id = "p" + props.idx;
+        marker = markers[id];
+        if (!marker) {
+          const park = PARKS[props.idx];
+          marker = markers[id] = new maplibregl.Marker({ element: pinEl(props), anchor: "bottom" })
+            .setLngLat([park.lng, park.lat]);
+        }
       }
       newMarkers[id] = marker;
       if (!markersOnScreen[id]) marker.addTo(map);
     }
     for (const id in markersOnScreen) {
-      if (!newMarkers[id]) markersOnScreen[id].remove();
+      if (!newMarkers[id]) {
+        markersOnScreen[id].remove();
+        // Pins are a fixed set of 289, so caching them all is bounded and worth
+        // it. Clusters are not: there's a different grouping at every zoom and
+        // every filter combination, so keeping them would pile up detached
+        // nodes for the whole session. Drop them and rebuild on demand.
+        if (id.charAt(0) === "c") delete markers[id];
+      }
     }
     markersOnScreen = newMarkers;
+  }
+
+  function clearClusterMarkers() {
+    for (const id in markersOnScreen) {
+      if (id.charAt(0) !== "c") continue;
+      markersOnScreen[id].remove();
+      delete markersOnScreen[id];
+      delete markers[id];
+    }
   }
 
   function fitAll(animate) {
@@ -342,7 +447,15 @@
     // sides on small screens; that lifts the tightest fit to ~6.33 and keeps
     // "zoom out to see all four islands" working on the smallest phone.
     const side = window.innerWidth <= 560 ? 24 : 90;
-    const cam = map.cameraForBounds(b, { padding: { top: 130, bottom: 90, left: side, right: side }, maxZoom: 12.5 });
+    // Bottom carries 30px more than it used to, and only that: at these zooms
+    // the southernmost marker is a cluster bubble, and bubbles are
+    // centre-anchored, so half of a 60px one hangs BELOW its coordinate where a
+    // pin sits entirely above its own. Deliberately NOT scaled to the filter
+    // panel's real height (~185px when it wraps to three rows on a phone) —
+    // that much vertical padding risks pushing the fit-everything zoom into the
+    // minZoom floor on small screens, which is the same trap the side padding
+    // above had to be narrowed to escape.
+    const cam = map.cameraForBounds(b, { padding: { top: 130, bottom: 120, left: side, right: side }, maxZoom: 12.5 });
     if (!cam) return;
     const target = { center: cam.center, zoom: cam.zoom, pitch: 20, bearing: 0 };
     if (animate) map.easeTo(Object.assign({ duration: 800 }, target));
@@ -352,7 +465,15 @@
   function refresh() {
     const fc = currentFeatures();
     if (countEl) countEl.textContent = fc.features.length;
-    if (map && map.getSource("points")) map.getSource("points").setData(fc);
+    if (map && map.getSource("points")) {
+      // Every cluster on screen was computed from the OLD filter set — its
+      // count, its off-leash ring and even its position are all about to be
+      // wrong. cluster_ids are reused across data updates, so a cached bubble
+      // would survive the swap still showing the previous numbers. Drop them
+      // all; syncMarkers rebuilds from the new data on the next frame.
+      clearClusterMarkers();
+      map.getSource("points").setData(fc);
+    }
     updateFilterCounts();
     renderListView();
   }

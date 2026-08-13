@@ -632,18 +632,21 @@
     // — and on a 320px phone 90px each side ate 56% of the viewport, pushing the
     // fit-everything zoom down to 4.37 and well under minZoom. Narrow the sides
     // on small screens; that lifts the tightest fit to 5.33 and keeps "zoom out
-    // to see all four islands" working on the smallest phone. (568px landscape
-    // still misses this branch by 8px and clamps — see CLAUDE.md.)
+    // to see all four islands" working on the smallest phone.
     const side = window.innerWidth <= 560 ? 24 : 90;
-    // Bottom clears the filter panel, whose height is MEASURED, not assumed: it
-    // wraps to three rows on a phone (148px portrait, 124px landscape) and sits
-    // on one row on a desktop (86px). CLUSTER_OVERHANG is added because the marker
-    // at these zooms is a cluster bubble, and bubbles are centre-anchored — half
-    // of a 60px one hangs BELOW its coordinate, where a pin sits entirely above
-    // its own.
+    // Bottom clears the filter panel, top clears the header — BOTH measured, not
+    // assumed. The panel wraps to three rows on a phone (148px portrait, 124px
+    // landscape) and sits on one row on a desktop (86px). CLUSTER_OVERHANG is
+    // added to the bottom because the southernmost marker at these zooms is a
+    // cluster bubble, and bubbles are centre-anchored — half of a 60px one hangs
+    // BELOW its coordinate, where a pin sits entirely above its own.
     const panel = document.querySelector(".filter-panel");
     const panelH = panel ? Math.ceil(panel.getBoundingClientRect().height) : 90;
     const CLUSTER_OVERHANG = 34;
+    // .bottom, not .height — the header floats 12-16px down from the top, and
+    // what matters is where it ENDS. +12 is the gap below it.
+    const header = document.querySelector(".top-left");
+    const headerClear = (header ? Math.ceil(header.getBoundingClientRect().bottom) : 76) + 12;
     // Roomiest first, then progressively less. Which padding is affordable
     // depends entirely on viewport SHAPE, so it can't be a constant:
     //   - Portrait phone (320x568): the island chain spans 4.75° of longitude
@@ -656,11 +659,25 @@
     //     the map then clamps it, silently cropping islands out of a view whose
     //     whole job is showing all of them.
     //   - Desktop (1280x800): HEIGHT binds instead, and 120 (6.89) is taken.
+    //   - Smallest landscape (568x320): 130 of fixed top padding plus 40 of
+    //     bottom is 53% of the viewport, so even the tightest of the first four
+    //     only reaches 5.02 and clamps. Hence the last three entries, which give
+    //     up header clearance rather than crop an island: 568x320 lands on the
+    //     fifth (5.42). The top is what has to give on these — the width-limited
+    //     fit there is 5.84, nowhere near binding.
     // So: take the roomiest padding whose camera the map can actually adopt.
     let cam = null, tightest = null;
-    const pads = [panelH + CLUSTER_OVERHANG, 120, 90, 40];
+    const pads = [
+      { top: 130, bottom: panelH + CLUSTER_OVERHANG },
+      { top: 130, bottom: 120 },
+      { top: 130, bottom: 90 },
+      { top: 130, bottom: 40 },
+      { top: headerClear, bottom: 40 },
+      { top: headerClear, bottom: 24 },
+      { top: 24, bottom: 24 }
+    ];
     for (let i = 0; i < pads.length; i++) {
-      const c = map.cameraForBounds(b, { padding: { top: 130, bottom: pads[i], left: side, right: side }, maxZoom: 12.5 });
+      const c = map.cameraForBounds(b, { padding: { top: pads[i].top, bottom: pads[i].bottom, left: side, right: side }, maxZoom: 12.5 });
       if (!c) continue;
       tightest = c;
       if (c.zoom >= map.getMinZoom()) { cam = c; break; }

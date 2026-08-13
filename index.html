@@ -6,16 +6,16 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>Hawaii Dog Map — Dog-Friendly Parks, Beaches &amp; Trails on O&#699;ahu, Maui, Kaua&#699;i &amp; Hawai&#699;i Island</title>
-  <meta name="description" content="Find 280+ verified dog-friendly places across O'ahu, Maui, Kaua'i, and Hawai'i Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios. Interactive map with hours, rules, and amenities for every spot." />
+  <title>Hawaii Dog Map — Dog-Friendly Parks, Beaches &amp; Trails on Oʻahu, Maui, Kauaʻi &amp; Hawaiʻi Island</title>
+  <meta name="description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios. Interactive map with hours, rules, and amenities for every spot." />
   <link rel="canonical" href="https://hawaiidogmap.com/" />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hawaiidogmap.com/" />
   <meta property="og:site_name" content="Hawaii Dog Map" />
-  <meta property="og:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui, Kaua'i & Hawai'i Island" />
-  <meta property="og:description" content="Find 280+ verified dog-friendly places across O'ahu, Maui, Kaua'i, and Hawai'i Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
+  <meta property="og:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on Oʻahu, Maui, Kauaʻi & Hawaiʻi Island" />
+  <meta property="og:description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta property="og:image" content="https://hawaiidogmap.com/icons/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -23,8 +23,8 @@
 
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on O'ahu, Maui, Kaua'i & Hawai'i Island" />
-  <meta name="twitter:description" content="Find 280+ verified dog-friendly places across O'ahu, Maui, Kaua'i, and Hawai'i Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
+  <meta name="twitter:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on Oʻahu, Maui, Kauaʻi & Hawaiʻi Island" />
+  <meta name="twitter:description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta name="twitter:image" content="https://hawaiidogmap.com/icons/og-image.png" />
 
   <meta name="theme-color" content="#0e7490" />
@@ -38,21 +38,27 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Urbanist, as ONE variable file per subset rather than five static weights.
+       Chosen over the obvious alternatives because it actually contains U+02BB, the
+       ʻokina — Poppins, DM Sans, Rubik, Figtree, Outfit, Manrope and Plus Jakarta
+       Sans all lack it and silently substitute a system glyph, in a wordmark that
+       reads "Hawaiʻi Dog Map". Verify any future swap against that before anything
+       else; see the typography note in CLAUDE.md. -->
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="css/styles.css?v=11" />
+  <link rel="stylesheet" href="css/styles.css?v=12" />
 </head>
 <body>
   <!-- Full-bleed map -->
-  <div id="map" role="application" aria-label="Map of dog-friendly parks on O'ahu, Maui, Kaua'i, and Hawai'i Island"></div>
+  <div id="map" role="application" aria-label="Map of dog-friendly parks on Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island"></div>
 
   <!-- List view: an alternative to the map for browsing every place. Content
        is rendered into the DOM by refresh() regardless of whether this is the
        active view, so it's real, crawlable, screen-reader-accessible text —
        not something only created on demand when a user opens this panel. -->
-  <section class="list-view" id="list-view" hidden aria-label="All dog-friendly places on O'ahu, Maui, Kaua'i, and Hawai'i Island">
+  <section class="list-view" id="list-view" hidden aria-label="All dog-friendly places on Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island">
     <div class="list-view-inner">
-      <h2>Dog-friendly places on O&#699;ahu, Maui, Kaua&#699;i &amp; Hawai&#699;i Island</h2>
+      <h2>Dog-friendly places on Oʻahu, Maui, Kauaʻi &amp; Hawaiʻi Island</h2>
       <p class="list-view-count" id="list-view-count"></p>
       <ul class="list-grid" id="list-grid"></ul>
     </div>
@@ -73,8 +79,8 @@
         </svg>
       </button>
       <div class="brand-text">
-        <h1>Hawai&#699;i Dog Map</h1>
-        <p class="brand-sub"><span id="result-count">0</span> spots on O&#699;ahu, Maui, Kaua&#699;i &amp; Hawai&#699;i Island</p>
+        <h1>Hawaiʻi Dog Map</h1>
+        <p class="brand-sub"><span id="result-count">0</span> spots on Oʻahu, Maui, Kauaʻi &amp; Hawaiʻi Island</p>
       </div>
       <button class="guide-trigger" id="guide-trigger" type="button">
         <span aria-hidden="true">⚠️</span><span class="guide-trigger-label">Rules &amp; safety</span>
@@ -156,15 +162,15 @@
   <!-- Rules &amp; safety guide. A full-page section rather than the side-panel
        component the park detail uses, for two reasons: the island table needs
        real width to read as a table, and this is the site's only genuinely
-       crawlable prose — "can dogs go on beaches in Hawai'i" is a far higher
+       crawlable prose — "can dogs go on beaches in Hawaiʻi" is a far higher
        volume query than any individual park name. Like the list view, it lives
        in the DOM whether or not it's on screen, so crawlers see it. -->
   <section class="guide" id="guide" hidden aria-labelledby="guide-title">
     <button class="guide-close" id="guide-close" aria-label="Close rules and safety">&times;</button>
     <div class="guide-inner">
-      <h2 id="guide-title">Dogs in Hawai&#699;i: rules &amp; safety</h2>
+      <h2 id="guide-title">Dogs in Hawaiʻi: rules &amp; safety</h2>
       <p class="guide-lede">Every county sets its own rules, and they genuinely contradict each
-        other — what's fine on Maui can be an offence on Kaua&#699;i. Here's what carries across
+        other — what's fine on Maui can be an offence on Kauaʻi. Here's what carries across
         the whole state, and what changes island by island.</p>
 
       <div class="guide-block guide-warn">
@@ -174,7 +180,7 @@
       </div>
 
       <div class="guide-block">
-        <h3>Two rules apply everywhere in Hawai&#699;i</h3>
+        <h3>Two rules apply everywhere in Hawaiʻi</h3>
         <ul class="guide-list">
           <li><strong>State-park beaches are closed to dogs</strong> — leashed or not, on every
             island. Service animals excepted. This quietly rules out many of the best-known
@@ -193,17 +199,17 @@
             </thead>
             <tbody>
               <tr data-island="Oahu">
-                <th scope="row">O&#699;ahu</th><td>Designated parks only</td><td>Designated beaches only</td>
+                <th scope="row">Oʻahu</th><td>Designated parks only</td><td>Designated beaches only</td>
               </tr>
               <tr data-island="Maui">
-                <th scope="row">Maui &middot; Moloka&#699;i &middot; L&#257;na&#699;i</th>
+                <th scope="row">Maui &middot; Molokaʻi &middot; L&#257;naʻi</th>
                 <td>Leashed, 10 ft max</td><td>Leashed, 10 ft max</td>
               </tr>
               <tr data-island="Kauai">
-                <th scope="row">Kaua&#699;i</th><td>Permit only</td><td>Permit only</td>
+                <th scope="row">Kauaʻi</th><td>Permit only</td><td>Permit only</td>
               </tr>
               <tr data-island="Hawaii Island">
-                <th scope="row">Hawai&#699;i Island</th><td>Leashed, 6 ft max</td>
+                <th scope="row">Hawaiʻi Island</th><td>Leashed, 6 ft max</td>
                 <td><strong>Not permitted</strong></td>
               </tr>
             </tbody>
@@ -226,10 +232,10 @@
 
       <div class="guide-block">
         <h3>About this map</h3>
-        <p>Hawai&#699;i Dog Map is a hand-curated guide to every place across Hawai&#699;i where you can
+        <p>Hawaiʻi Dog Map is a hand-curated guide to every place across Hawaiʻi where you can
           actually bring your dog — off-leash dog parks, leash-friendly parks and beaches,
-          hiking trails, and dog-welcoming restaurant patios. It covers O&#699;ahu, Maui,
-          Kaua&#699;i, and Hawai&#699;i Island. Moloka&#699;i and L&#257;na&#699;i aren&rsquo;t included —
+          hiking trails, and dog-welcoming restaurant patios. It covers Oʻahu, Maui,
+          Kauaʻi, and Hawaiʻi Island. Molokaʻi and L&#257;naʻi aren&rsquo;t included —
           with no passenger ferry, there&rsquo;s no practical way to bring a dog to either.</p>
         <p>Every spot here comes from official designations and verified lists, not a scrape
           or a guess — sites with unclear or nuanced rules are flagged
@@ -239,15 +245,15 @@
         <div class="info-card">
           <h3>🗂️ Data &amp; map sources</h3>
           <ul class="about-sources">
-            <li><a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">City &amp; County of Honolulu, Dept. of Parks &amp; Recreation</a> — O&#699;ahu on-leash park designations &amp; GIS park data</li>
-            <li><a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a> — O&#699;ahu dog-friendly beach &amp; park lists</li>
+            <li><a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">City &amp; County of Honolulu, Dept. of Parks &amp; Recreation</a> — Oʻahu on-leash park designations &amp; GIS park data</li>
+            <li><a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a> — Oʻahu dog-friendly beach &amp; park lists</li>
             <li><a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a> — Maui's official off-leash dog parks</li>
             <li><a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a> — Maui dog-friendly beach, park &amp; patio recommendations</li>
-            <li><a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawai&#699;i Division of Forestry &amp; Wildlife (N&#257; Ala Hele)</a> &amp; <a href="https://dlnr.hawaii.gov/dsp/" target="_blank" rel="noopener">Division of State Parks</a> — trail &amp; state park dog policies</li>
-            <li><a href="https://www.hawaiicounty.gov/departments/parks-and-recreation" target="_blank" rel="noopener">Hawai&#699;i County Parks &amp; Recreation</a> &amp; <a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawai&#699;i Statewide GIS</a> — Hawai&#699;i Island park data &amp; the county leash ordinance</li>
-            <li><a href="https://hihs.org/" target="_blank" rel="noopener">Hawai&#699;i Island Humane Society</a> — the island's two public off-leash Bark Parks</li>
-            <li><a href="https://www.nps.gov/puhe/" target="_blank" rel="noopener">National Park Service</a> — Pu&#699;ukohol&#257; Heiau pet rules</li>
-            <li><a href="https://www.kauai.gov/Government/Departments-Agencies/Parks-Recreation" target="_blank" rel="noopener">Kaua&#699;i County</a> &amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua&#699;i Humane Society</a> — Kaua&#699;i park ordinances &amp; dog park info</li>
+            <li><a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawaiʻi Division of Forestry &amp; Wildlife (N&#257; Ala Hele)</a> &amp; <a href="https://dlnr.hawaii.gov/dsp/" target="_blank" rel="noopener">Division of State Parks</a> — trail &amp; state park dog policies</li>
+            <li><a href="https://www.hawaiicounty.gov/departments/parks-and-recreation" target="_blank" rel="noopener">Hawaiʻi County Parks &amp; Recreation</a> &amp; <a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawaiʻi Statewide GIS</a> — Hawaiʻi Island park data &amp; the county leash ordinance</li>
+            <li><a href="https://hihs.org/" target="_blank" rel="noopener">Hawaiʻi Island Humane Society</a> — the island's two public off-leash Bark Parks</li>
+            <li><a href="https://www.nps.gov/puhe/" target="_blank" rel="noopener">National Park Service</a> — Puʻukohol&#257; Heiau pet rules</li>
+            <li><a href="https://www.kauai.gov/Government/Departments-Agencies/Parks-Recreation" target="_blank" rel="noopener">Kauaʻi County</a> &amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kauaʻi Humane Society</a> — Kauaʻi park ordinances &amp; dog park info</li>
             <li><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> &amp; <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre GL JS</a> — map tiles &amp; rendering</li>
             <li><a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — satellite imagery &amp; hillshade</li>
             <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> — place photos (public domain &amp; Creative Commons licensed)</li>

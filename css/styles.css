@@ -13,9 +13,12 @@
   --glass-border: rgba(255, 255, 255, 0.55);
   --shadow-float: 0 10px 34px rgba(15, 23, 42, 0.18), 0 2px 8px rgba(15, 23, 42, 0.10);
   --shadow-panel: 0 20px 60px rgba(15, 23, 42, 0.32), 0 4px 16px rgba(15, 23, 42, 0.16);
-  /* Global brand typography — swap here to restyle the whole app + map labels. */
-  --font: 'Nunito', system-ui, -apple-system, sans-serif;
-  --font-map-label: 'Nunito', system-ui, sans-serif;
+  /* Global brand typography — swap here to restyle the whole app + map labels.
+     Any replacement MUST contain U+02BB (the ʻokina); most modern sans faces
+     don't, and fall back to a system glyph for it mid-wordmark. See the
+     typography note in CLAUDE.md before changing this. */
+  --font: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --font-map-label: 'Urbanist', system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }

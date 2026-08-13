@@ -46,7 +46,10 @@
   };
 
   // Font used for map-canvas labels (must exist in the glyph server).
-  // Swap here once Nunito glyph tiles are hosted; see --font-map-label in CSS.
+  // Swap here once Urbanist glyph tiles are hosted; see --font-map-label in CSS.
+  // Note this one is NOT ours to pick freely: it has to be a fontstack the tile
+  // server publishes, so the map's own place labels stay Noto Sans regardless of
+  // what the UI uses. Noto covers the ʻokina, so island names still render right.
   const MAP_LABEL_FONT = ["Noto Sans Regular"];
 
   /* Recolor an OpenMapTiles-schema style (OpenFreeMap) into the brand palette. */
@@ -219,10 +222,10 @@
         '<a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>, ' +
         '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a>, ' +
         '<a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>, ' +
-        '<a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawai’i DOFAW/Nā Ala Hele</a> ' +
-        '<a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kaua’i Humane Society</a>, ' +
-        '<a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawai’i Statewide GIS</a> ' +
-        '&amp; <a href="https://hihs.org/" target="_blank" rel="noopener">Hawai’i Island Humane Society</a>'
+        '<a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawaiʻi DOFAW/Nā Ala Hele</a> ' +
+        '<a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kauaʻi Humane Society</a>, ' +
+        '<a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawaiʻi Statewide GIS</a> ' +
+        '&amp; <a href="https://hihs.org/" target="_blank" rel="noopener">Hawaiʻi Island Humane Society</a>'
     }), "bottom-right");
     // Zoom + geolocate stack top-right so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
@@ -1057,11 +1060,11 @@
           "@type": "WebSite",
           "name": "Hawaii Dog Map",
           "url": "https://hawaiidogmap.com/",
-          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across O'ahu, Maui, Kaua'i, and Hawai'i Island."
+          "description": "Interactive map of dog-friendly parks, beaches, trails, and patios across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island."
         },
         {
           "@type": "ItemList",
-          "name": "Dog-friendly places on O'ahu, Maui, Kaua'i, and Hawai'i Island",
+          "name": "Dog-friendly places on Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island",
           "numberOfItems": items.length,
           "itemListElement": items
         }

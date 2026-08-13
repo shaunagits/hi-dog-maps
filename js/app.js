@@ -312,17 +312,30 @@
       attributionControl: false,
       dragRotate: true
     });
-    map.addControl(new maplibregl.AttributionControl({
+    // Attribution is deliberately SHORT. The nine data-source credits that used
+    // to live here now sit on /rules/#sources, in full and linked — a county
+    // parks list or a Humane Society beach guide is public-record data, not a
+    // licensed tile layer that has to be stamped on the map. The tile and
+    // imagery credits below still appear automatically: those come from each
+    // source's own `attribution` field and ARE a licence condition.
+    const attribCtrl = new maplibregl.AttributionControl({
       compact: true,
-      customAttribution: 'Park &amp; beach data: <a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">Honolulu DPR</a>, ' +
-        '<a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>, ' +
-        '<a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a>, ' +
-        '<a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>, ' +
-        '<a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawaiʻi DOFAW/Nā Ala Hele</a> ' +
-        '<a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kauaʻi Humane Society</a>, ' +
-        '<a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawaiʻi Statewide GIS</a> ' +
-        '&amp; <a href="https://hihs.org/" target="_blank" rel="noopener">Hawaiʻi Island Humane Society</a>'
-    }), "bottom-right");
+      customAttribution:
+        'Dog data: <a href="/rules/#sources">county parks, Humane Societies &amp; DLNR</a>'
+    });
+    map.addControl(attribCtrl, "bottom-right");
+    // MapLibre's compact attribution ships EXPANDED — it adds
+    // `maplibregl-compact-show` on init and only drops it on first map
+    // interaction. That was invisible while the three-row filter panel covered
+    // the bottom of the screen; with the collapsed bar it's 144px of text
+    // sitting over the map on load. Start it collapsed instead.
+    const collapseAttrib = function () {
+      const el = document.querySelector(".maplibregl-ctrl-attrib.maplibregl-compact");
+      if (el) el.classList.remove("maplibregl-compact-show");
+    };
+    collapseAttrib();
+    map.once("load", collapseAttrib);
+    map.once("idle", collapseAttrib);
     // Zoom + geolocate stack top-right so the bottom stays free for filters.
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     map.addControl(new maplibregl.GeolocateControl({
@@ -666,6 +679,7 @@
       map.getSource("points").setData(fc);
     }
     updateFilterCounts();
+    updateFilterSummary(fc.features.length);
     renderListView();
   }
 
@@ -857,6 +871,65 @@
     filterReset.hidden = !active;
     resetDivider.hidden = !active;
   }
+
+  /* ---------- Collapsed filter bar ---------- */
+  const filterPanel = document.getElementById("filter-panel");
+  const filterSheet = document.getElementById("filter-sheet");
+  const filtersToggle = document.getElementById("filters-toggle");
+  const filtersSummary = document.getElementById("filters-summary");
+  const filtersCount = document.getElementById("filters-count");
+
+  const TYPE_LABEL = { "off-leash": "Off-leash", leashed: "Leashed" };
+  const CAT_PLURAL = {
+    "dog-park": "Dog parks", park: "Parks", beach: "Beaches",
+    trail: "Trails", patio: "Patios"
+  };
+
+  /* The collapsed bar has to say what's filtered, or a map showing 23 of 289
+     pins looks broken rather than filtered. Reads out the active filters and
+     the live count; falls back to "All places" when nothing is applied. */
+  function updateFilterSummary(count) {
+    if (!filtersSummary) return;
+    const bits = [];
+    if (state.filterCat !== "all") bits.push(CAT_PLURAL[state.filterCat] || state.filterCat);
+    if (state.filterType !== "all") bits.push(TYPE_LABEL[state.filterType] || state.filterType);
+    const filtered = bits.length > 0;
+    filtersSummary.textContent = filtered ? bits.join(" · ") : "All places";
+    if (filtersCount) filtersCount.textContent = " (" + count + ")";
+    filtersToggle.classList.toggle("has-filters", filtered);
+    filtersToggle.setAttribute(
+      "aria-label",
+      (filtered ? "Filters: " + bits.join(", ") : "Filter places") + ", " + count + " shown"
+    );
+  }
+
+  function setSheetOpen(open) {
+    if (!filterSheet) return;
+    filterSheet.hidden = !open;
+    filterPanel.classList.toggle("sheet-open", open);
+    filtersToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  if (filtersToggle) {
+    filtersToggle.addEventListener("click", function () {
+      setSheetOpen(filterSheet.hidden);
+    });
+  }
+
+  /* ---------- Hide-all-chrome toggle ---------- */
+  const chromeHide = document.getElementById("chrome-hide");
+  const chromeRestore = document.getElementById("chrome-restore");
+
+  function setChromeHidden(hidden) {
+    document.body.classList.toggle("chrome-hidden", hidden);
+    if (chromeRestore) chromeRestore.hidden = !hidden;
+    // Collapse the sheet on the way out, so restoring never brings back a
+    // panel that's taller than the one the user hid.
+    if (hidden) setSheetOpen(false);
+  }
+
+  if (chromeHide) chromeHide.addEventListener("click", function () { setChromeHidden(true); });
+  if (chromeRestore) chromeRestore.addEventListener("click", function () { setChromeHidden(false); });
 
   document.querySelectorAll("[data-filter-type]").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -1245,9 +1318,12 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
+    // Innermost thing first, so Escape always undoes the most recent action.
     if (!backdrop.hidden) closeModal();
     else if (!guideEl.hidden) closeGuide();
     else if (viewMode === "list") showMapView();
+    else if (filterSheet && !filterSheet.hidden) setSheetOpen(false);
+    else if (document.body.classList.contains("chrome-hidden")) setChromeHidden(false);
   });
 
   /* ---------- Utils ---------- */

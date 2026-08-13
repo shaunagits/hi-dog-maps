@@ -115,8 +115,36 @@
     </div>
   </div>
 
-  <!-- Floating filter panel -->
-  <div class="filter-panel">
+  <!-- Floating filter panel.
+       Two tiers: an always-visible one-row bar, and a sheet of chips that
+       only opens on demand. The full chip set wrapped to three rows on a
+       phone and ate ~148px — 18% of the screen — of a UI whose whole job is
+       showing a map. The bar keeps the state visible (an active filter reads
+       out in #filters-summary, so a filtered map never looks like a broken
+       one) while giving that space back. -->
+  <div class="filter-panel" id="filter-panel">
+    <div class="filter-bar">
+      <button class="chip chip-filters" id="filters-toggle" type="button"
+              aria-expanded="false" aria-controls="filter-sheet">
+        <span class="filters-icon" aria-hidden="true">☰</span>
+        <span class="filters-summary" id="filters-summary">All places</span>
+        <span class="chip-count" id="filters-count"></span>
+        <span class="filters-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="filter-divider" aria-hidden="true"></div>
+      <div class="filter-group" role="group" aria-label="Map view, satellite, or list">
+        <button class="chip active" data-view="map"><span aria-hidden="true">🗺️</span><span class="view-label">Map</span></button>
+        <button class="chip" data-view="satellite"><span aria-hidden="true">🛰️</span><span class="view-label">Satellite</span></button>
+        <button class="chip" data-view="list"><span aria-hidden="true">☰</span><span class="view-label">List</span></button>
+      </div>
+      <div class="filter-divider" aria-hidden="true"></div>
+      <button class="chip chip-icon-only" id="chrome-hide" type="button"
+              aria-label="Hide controls for a full-screen map" title="Hide controls">
+        <span aria-hidden="true">⤡</span>
+      </button>
+    </div>
+
+    <div class="filter-sheet" id="filter-sheet" hidden>
     <div class="filter-group" role="group" aria-label="Leash rules filter">
       <button class="chip active" data-filter-type="all">All<span class="chip-count"></span></button>
       <button class="chip" data-filter-type="off-leash"><span class="dot dot-offleash"></span>Off-leash<span class="chip-count"></span></button>
@@ -133,13 +161,14 @@
     </div>
     <div class="filter-divider" id="reset-divider" aria-hidden="true" hidden></div>
     <button class="chip chip-reset" id="filter-reset" hidden>&times; Reset</button>
-    <div class="filter-divider" aria-hidden="true"></div>
-    <div class="filter-group" role="group" aria-label="Map view, satellite, or list">
-      <button class="chip active" data-view="map">🗺️ Map</button>
-      <button class="chip" data-view="satellite">🛰️ Satellite</button>
-      <button class="chip" data-view="list">☰ List</button>
-    </div>
+    </div><!-- /.filter-sheet -->
   </div>
+
+  <!-- Shown only while the chrome is hidden, so there's always one obvious way
+       back. A hide control with no visible way to undo it is a trap. -->
+  <button class="chrome-restore" id="chrome-restore" type="button" hidden>
+    <span aria-hidden="true">⤢</span> Show controls
+  </button>
 
   <!-- Park detail panel: slides in from the right on desktop, up from the
        bottom on narrow screens. Non-blocking — the map stays interactive
@@ -309,6 +338,6 @@
 
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="js/parks-data.js?v=11"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="js/app.js?v=17"></script>
 </body>
 </html>

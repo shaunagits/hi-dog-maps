@@ -160,6 +160,131 @@ html, body {
   justify-content: center;
 }
 
+/* ---------- Collapsed filter bar + expandable sheet ---------- */
+/* The panel is a column now: a one-row bar that's always up, and a sheet of
+   chips above it that only exists when opened. .filter-panel keeps its own
+   flex-wrap/gap for the sheet's benefit, so the two tiers are laid out here. */
+.filter-panel {
+  /* column-REVERSE: the bar comes first in the DOM (it owns the toggle button
+     and aria-controls, so it must precede the sheet for focus order), but the
+     sheet has to render ABOVE it. The panel is anchored to the bottom of the
+     viewport, so with a plain column the bar rode upward as the sheet opened —
+     the control you just tapped slid out from under your thumb. Reversed, the
+     bar stays put and the sheet grows up into the map. */
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: 0;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-wrap: nowrap;
+}
+/* The bar must stay ONE row at every width, and the pieces shrink unequally.
+   .filter-group inherits flex-wrap:wrap from the shared rule below; inside a
+   nowrap bar on a 375px phone it got squeezed narrower than its three chips
+   and wrapped them into a vertical stack, taking the stretch-aligned dividers
+   with it. So: the view group and the hide button never shrink, and the
+   summary chip — the only piece with elastic text — absorbs all of it. */
+.filter-bar .filter-group { flex-wrap: nowrap; flex-shrink: 0; }
+.filter-bar .chip-icon-only { flex-shrink: 0; }
+.filter-bar .chip-filters { flex-shrink: 1; min-width: 0; overflow: hidden; }
+.filter-bar .filters-summary { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* A stretch-aligned divider in a one-row bar just needs to match the chips.
+   width/flex-basis are restated deliberately: the ≤760px rule further down
+   turns dividers into full-width horizontal hairlines for the SHEET, where
+   groups stack — applied to this bar it made each 1px divider 231px wide and
+   crushed the summary chip to 19px. */
+.filter-bar .filter-divider {
+  align-self: center;
+  width: 1px;
+  flex-basis: auto;
+  height: 20px;
+  min-height: 0;
+  flex-shrink: 0;
+  margin: 0 1px;
+}
+/* The count is the whole point of the collapsed bar, so it survives the
+   ≤620px rule that hides per-chip counts inside the sheet. */
+.filter-bar .chip-filters .chip-count { display: inline; }
+/* Opens upward from the bar, so the bar itself never moves under the user's
+   thumb when the sheet expands. */
+.filter-sheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-bottom: 9px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--panel-border);
+  animation: sheet-open 0.18s ease-out;
+}
+.filter-sheet[hidden] { display: none; }
+@keyframes sheet-open {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* The summary chip. Carries the live result count and, once anything is
+   filtered, what's actually applied — a filtered map with no visible reason
+   reads as a broken map. */
+.chip-filters { font-weight: 800; }
+.chip-filters .filters-caret { font-size: 10px; opacity: 0.75; transition: transform 0.18s ease; }
+.filter-panel.sheet-open .chip-filters .filters-caret { transform: rotate(180deg); }
+.filter-panel.sheet-open .chip-filters {
+  background: linear-gradient(135deg, #0e7490, #0d9488);
+  color: #fff;
+}
+.filter-panel.sheet-open .chip-filters .chip-count { opacity: 0.85; }
+/* Signals "you have filters on" from the collapsed state, without needing the
+   sheet open to find out. */
+.chip-filters.has-filters {
+  background: rgba(14, 116, 144, 0.16);
+  border-color: rgba(14, 116, 144, 0.35);
+  color: var(--ocean-deep);
+}
+.chip-icon-only { padding: 6px 10px; }
+
+/* Restore pill — only rendered while the chrome is hidden. */
+.chrome-restore {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  box-shadow: var(--shadow-float);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  padding: 8px 15px;
+  cursor: pointer;
+}
+.chrome-restore[hidden] { display: none; }
+.chrome-restore:hover { color: var(--ocean-deep); background: #fff; }
+
+/* Full-bleed map: fade the chrome out rather than display:none, so it
+   animates, and kill pointer-events so the invisible panels can't still
+   swallow map drags. */
+body.chrome-hidden .top-left,
+body.chrome-hidden .filter-panel {
+  opacity: 0;
+  pointer-events: none;
+}
+body.chrome-hidden .top-left { transform: translateY(-14px); }
+body.chrome-hidden .filter-panel { transform: translateY(14px); }
+.top-left { transition: opacity 0.22s ease, transform 0.22s ease; }
+
 /* justify-content matters here, not just on .filter-panel: each group is a
    single flex item of the panel, so the panel only centres the groups as
    blocks. Once a group's own chips wrap — which the category group does first,
@@ -881,7 +1006,9 @@ body.basemap-satellite .island-label {
      hairlines instead of disappearing. */
   .filter-panel { column-gap: 5px; row-gap: 7px; padding: 7px 8px; }
   .filter-group { gap: 4px; }
-  .filter-divider {
+  /* Scoped to the sheet: this only makes sense where groups actually stack.
+     The collapsed bar is always one row and keeps vertical hairlines. */
+  .filter-sheet .filter-divider {
     width: 100%;
     flex-basis: 100%;
     min-height: 0;
@@ -923,16 +1050,27 @@ body.basemap-satellite .island-label {
   .top-left { top: 12px; left: 12px; right: auto; max-width: calc(100vw - 70px); }
   .header-bar { gap: 9px; padding: 7px 10px 7px 9px; }
   .brand-text h1 { font-size: 15px; }
-  .guide-trigger { font-size: 11px; padding: 5px 9px; }
   .guide-inner { padding: 56px 16px 80px; }
   .guide-inner h2 { font-size: 22px; }
-  .brand-sub { font-size: 10.5px; }
   .info-grid { grid-template-columns: 1fr; }
   .list-view-inner { padding-top: 88px; }
-}
-@media (max-width: 400px) {
+
+  /* Shrink the header to the mark, the name, and an icon. The "289 spots on
+     Oʻahu, Maui…" line is dropped here rather than squeezed: the same count
+     lives in the filter bar, where it's better placed anyway because it
+     responds to the filters. "Rules & safety" goes icon-only for the same
+     reason — the label costs more width than it earns on a phone. */
   .brand-sub { display: none; }
   .guide-trigger-label { display: none; }
-  .guide-trigger { padding: 6px 8px; }
+  .guide-trigger { padding: 6px 9px; font-size: 13px; }
   .brand-icon svg { width: 20px; height: 24px; }
+
+  /* Icons carry the view toggle on phones; the bar has to stay one row. */
+  .view-label { display: none; }
+  .filter-bar { gap: 5px; }
+  .filter-panel { padding: 6px 8px; }
+}
+@media (max-width: 400px) {
+  .brand-text h1 { font-size: 14px; }
+  .filters-summary { max-width: 92px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }

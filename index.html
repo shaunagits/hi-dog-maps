@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Hawaii Dog Map — Dog-Friendly Parks, Beaches &amp; Trails on Oʻahu, Maui, Kauaʻi &amp; Hawaiʻi Island</title>
-  <meta name="description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios. Interactive map with hours, rules, and amenities for every spot." />
+  <meta name="description" content="Find 289 verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios. Interactive map with hours, rules, and amenities for every spot." />
   <link rel="canonical" href="https://hawaiidogmap.com/" />
 
   <!-- Open Graph / social preview -->
@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://hawaiidogmap.com/" />
   <meta property="og:site_name" content="Hawaii Dog Map" />
   <meta property="og:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on Oʻahu, Maui, Kauaʻi & Hawaiʻi Island" />
-  <meta property="og:description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
+  <meta property="og:description" content="Find 289 verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta property="og:image" content="https://hawaiidogmap.com/icons/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -24,7 +24,7 @@
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hawaii Dog Map — Dog-Friendly Parks, Beaches & Trails on Oʻahu, Maui, Kauaʻi & Hawaiʻi Island" />
-  <meta name="twitter:description" content="Find 280+ verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
+  <meta name="twitter:description" content="Find 289 verified dog-friendly places across Oʻahu, Maui, Kauaʻi, and Hawaiʻi Island: off-leash dog parks, leash-allowed parks and beaches, hiking trails, and dog-welcoming restaurant patios." />
   <meta name="twitter:image" content="https://hawaiidogmap.com/icons/og-image.png" />
 
   <meta name="theme-color" content="#0e7490" />
@@ -286,6 +286,21 @@
             <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> — place photos (public domain &amp; Creative Commons licensed)</li>
           </ul>
         </div>
+
+        <!-- Crawl path into the generated static pages (tools/build-pages.mjs).
+             The map itself is one URL whose content is all written by JS, so
+             without real <a href>s here every one of the ~300 generated pages
+             would depend on the sitemap alone to be discovered. These are also
+             genuinely useful: a text index for anyone who'd rather read than pan. -->
+        <nav class="about-browse" aria-label="Browse all places">
+          <h3>🧭 Browse every place</h3>
+          <p class="about-browse-row"><strong>By island</strong>
+            <a href="/oahu/">Oʻahu</a><a href="/maui/">Maui</a><a href="/kauai/">Kauaʻi</a><a href="/hawaii-island/">Hawaiʻi Island</a></p>
+          <p class="about-browse-row"><strong>By type</strong>
+            <a href="/dog-parks/">Dog parks</a><a href="/parks/">Parks</a><a href="/beaches/">Beaches</a><a href="/trails/">Trails</a><a href="/patios/">Patios</a></p>
+          <p class="about-browse-row"><strong>Guides</strong>
+            <a href="/rules/">Dog rules by island</a><a href="/browse/">Full A–Z index</a></p>
+        </nav>
 
         <p class="about-credit"><a href="https://shauna.digital" target="_blank" rel="noopener">Built by</a></p>
       </div>

@@ -274,6 +274,37 @@ html, body {
 /* Off-document gradient definitions — never rendered, only referenced. */
 .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+/* ---------- Browse nav in the guide panel ---------- */
+/* Real links into the generated static pages — the crawl path out of a
+   single-URL app, and a text index for anyone who'd rather not pan a map. */
+.about-browse { margin-top: 22px; }
+.about-browse h3 { margin: 0 0 8px; font-size: 15px; font-weight: 900; }
+.about-browse-row {
+  margin: 0 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 8px;
+  font-size: 14px;
+}
+.about-browse-row strong {
+  min-width: 72px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.about-browse-row a {
+  background: rgba(14, 116, 144, 0.09);
+  border-radius: 999px;
+  padding: 3px 11px;
+  font-weight: 800;
+  color: var(--ocean-deep);
+  text-decoration: none;
+}
+.about-browse-row a:hover { background: rgba(14, 116, 144, 0.18); }
+
 /* ---------- Island name labels ---------- */
 /* Chart-style landmass names, in the UI's own Urbanist rather than the tile
    server's Noto Sans. Opacity is driven by zoom in updateIslandLabels(). */

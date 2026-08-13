@@ -1,0 +1,292 @@
+/* Styles for the generated static pages (place/, island + category hubs,
+   rules, browse).
+
+   Deliberately NOT css/styles.css. That file is built for the full-bleed map
+   app — it sets `html, body { height: 100%; overflow: hidden }` and positions
+   everything fixed, which makes a normal scrolling document impossible. These
+   pages are ordinary documents, so they get their own sheet.
+
+   The tokens below mirror the ones in styles.css; keep them in step by hand if
+   the brand palette changes. */
+:root {
+  --ocean: #0e7490;
+  --ocean-deep: #155e75;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --offleash: #16a34a;
+  --leashed: #0284c7;
+  --sunset: #b45309;
+  --paper: #fdfaf3;
+  --paper-deep: #f4ecdc;
+  --rule: rgba(14, 116, 144, 0.18);
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(78, 58, 32, 0.10), 0 1px 3px rgba(78, 58, 32, 0.08);
+  --font: 'Urbanist', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper-deep);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--ocean-deep); }
+
+/* ---------- Header ---------- */
+.site-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.site-nav a {
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.site-nav a:hover { background: rgba(14, 116, 144, 0.1); color: var(--ocean-deep); }
+.site-nav-cta {
+  background: linear-gradient(135deg, #0e7490, #0d9488);
+  color: #fff !important;
+}
+.site-nav-cta:hover { filter: brightness(1.08); }
+
+/* ---------- Breadcrumbs ---------- */
+.crumbs {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 14px 20px 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.crumb-sep { margin: 0 7px; opacity: 0.5; }
+
+/* ---------- Layout ---------- */
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px 20px 56px;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  margin: 10px 0 12px;
+}
+h2 {
+  font-size: clamp(20px, 3vw, 25px);
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  margin: 38px 0 12px;
+}
+.lede { font-size: 19px; color: var(--ink-soft); font-weight: 600; margin: 0 0 18px; }
+.addr { color: var(--ink-soft); font-weight: 700; margin: 0 0 18px; }
+.note, .group-note { color: var(--ink-soft); font-size: 15px; }
+
+/* ---------- Tags ---------- */
+.tags, .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  background: rgba(15, 23, 42, 0.07);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.tag-off { background: rgba(22, 163, 74, 0.14); color: #15803d; }
+.tag-on { background: rgba(2, 132, 199, 0.14); color: #0369a1; }
+.tag-warn { background: rgba(180, 83, 9, 0.14); color: var(--sunset); }
+
+/* ---------- Panels ---------- */
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+}
+.panel h2 { margin: 0 0 8px; font-size: 17px; }
+.panel p:last-child { margin-bottom: 0; }
+.panel-dogs { background: #f0f9f4; border-color: rgba(22, 163, 74, 0.22); }
+.panel-warn { background: #fdf6e8; border-color: rgba(180, 83, 9, 0.25); }
+
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.two-up .panel { margin: 18px 0 0; }
+@media (max-width: 620px) { .two-up { grid-template-columns: 1fr; } }
+
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; }
+.chips li {
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 999px;
+  padding: 3px 11px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* ---------- Hero photo ---------- */
+.hero { margin: 0 0 20px; }
+.hero img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
+  box-shadow: var(--shadow);
+}
+/* Credit is required CC attribution, not decoration — do not remove. */
+.hero figcaption { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; }
+
+/* ---------- Actions ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+.btn {
+  display: inline-block;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--ink);
+}
+.btn:hover { background: rgba(14, 116, 144, 0.13); }
+.btn-primary { background: linear-gradient(135deg, #0e7490, #0d9488); color: #fff; }
+.btn-primary:hover { filter: brightness(1.08); }
+
+/* ---------- Cards ---------- */
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 12px;
+}
+.card a {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 100%;
+  padding: 14px 15px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.card strong { font-size: 16.5px; font-weight: 800; line-height: 1.25; }
+.card-meta { font-size: 13px; font-weight: 700; color: var(--ocean-deep); }
+.card-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
+
+.hub-group { margin-top: 40px; }
+.hub-group h2 { display: flex; align-items: center; gap: 10px; }
+.count {
+  font-size: 13px;
+  font-weight: 800;
+  background: rgba(14, 116, 144, 0.12);
+  color: var(--ocean-deep);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  columns: 2;
+  column-gap: 28px;
+  font-size: 15px;
+}
+.link-list li { break-inside: avoid; margin-bottom: 5px; }
+.link-list .dim { color: var(--ink-soft); font-size: 13px; }
+@media (max-width: 620px) { .link-list { columns: 1; } }
+
+/* ---------- Prose ---------- */
+.prose-list { padding-left: 20px; }
+.prose-list li { margin-bottom: 9px; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15.5px; background: var(--paper); }
+th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--rule); }
+thead th { font-weight: 900; background: rgba(14, 116, 144, 0.07); }
+tbody th { font-weight: 800; }
+
+/* ---------- FAQ ---------- */
+.faq { margin-top: 40px; }
+.faq details {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+}
+.faq summary { font-weight: 800; cursor: pointer; }
+.faq details p { margin: 9px 0 0; color: var(--ink-soft); }
+
+.rules-note {
+  margin-top: 40px;
+  padding: 16px 18px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.rules-note h2 { margin-top: 0; font-size: 18px; }
+
+/* ---------- Footer ---------- */
+.site-foot {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 28px 20px 40px;
+  font-size: 15px;
+}
+.site-foot nav {
+  max-width: 860px;
+  margin: 0 auto 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.site-foot nav strong { min-width: 84px; font-weight: 900; }
+.site-foot nav a { font-weight: 700; text-decoration: none; }
+.site-foot nav a:hover { text-decoration: underline; }
+.foot-note, .foot-credit {
+  max-width: 860px;
+  margin: 16px auto 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+}

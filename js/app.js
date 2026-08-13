@@ -447,15 +447,35 @@
     // sides on small screens; that lifts the tightest fit to ~6.33 and keeps
     // "zoom out to see all four islands" working on the smallest phone.
     const side = window.innerWidth <= 560 ? 24 : 90;
-    // Bottom carries 30px more than it used to, and only that: at these zooms
-    // the southernmost marker is a cluster bubble, and bubbles are
-    // centre-anchored, so half of a 60px one hangs BELOW its coordinate where a
-    // pin sits entirely above its own. Deliberately NOT scaled to the filter
-    // panel's real height (~185px when it wraps to three rows on a phone) —
-    // that much vertical padding risks pushing the fit-everything zoom into the
-    // minZoom floor on small screens, which is the same trap the side padding
-    // above had to be narrowed to escape.
-    const cam = map.cameraForBounds(b, { padding: { top: 130, bottom: 120, left: side, right: side }, maxZoom: 12.5 });
+    // Bottom clears the filter panel, whose height is MEASURED, not assumed: it
+    // wraps to three rows on a phone (~152px) and sits on one row on a desktop
+    // (~70px). CLUSTER_OVERHANG is added on top because the southernmost marker
+    // at these zooms is a cluster bubble, and bubbles are centre-anchored — half
+    // of a 60px one hangs BELOW its coordinate, where a pin sits entirely above
+    // its own.
+    const panel = document.querySelector(".filter-panel");
+    const panelH = panel ? Math.ceil(panel.getBoundingClientRect().height) : 90;
+    const CLUSTER_OVERHANG = 34;
+    // Roomiest first, then progressively less. Which padding is affordable
+    // depends entirely on viewport SHAPE, so it can't be a constant:
+    //   - Portrait phone (320x568): the island chain spans 4.75° of longitude
+    //     against 3.26° of (Mercator) latitude, so WIDTH is what limits the fit.
+    //     Vertical padding is therefore free — the full 186 leaves the zoom at
+    //     ~6.33, exactly where 90 left it.
+    //   - Landscape phone (812x375): almost no height to begin with, and the
+    //     roomy option demands ~5.16 — below minZoom. cameraForBounds returns
+    //     that happily and the map then clamps it, silently cropping islands out
+    //     of a view whose whole job is showing all of them.
+    // So: take the roomiest padding whose camera the map can actually adopt.
+    let cam = null, tightest = null;
+    const pads = [panelH + CLUSTER_OVERHANG, 120, 90, 40];
+    for (let i = 0; i < pads.length; i++) {
+      const c = map.cameraForBounds(b, { padding: { top: 130, bottom: pads[i], left: side, right: side }, maxZoom: 12.5 });
+      if (!c) continue;
+      tightest = c;
+      if (c.zoom >= map.getMinZoom()) { cam = c; break; }
+    }
+    cam = cam || tightest;
     if (!cam) return;
     const target = { center: cam.center, zoom: cam.zoom, pitch: 20, bearing: 0 };
     if (animate) map.easeTo(Object.assign({ duration: 800 }, target));

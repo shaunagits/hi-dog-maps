@@ -435,7 +435,7 @@
     map.on("idle", syncMarkers);
     map.on("moveend", syncMarkers);
     refresh();
-    fitAll(false);
+    fitInitial();
     syncMarkers();
     // After fitAll, so the deep link's flyTo isn't immediately overwritten by
     // the all-islands jump.
@@ -646,6 +646,90 @@
     if (!map || !fc.features.length) return;
     const b = new maplibregl.LngLatBounds();
     fc.features.forEach(function (f) { b.extend(f.geometry.coordinates); });
+    applyCamera(cameraForPadded(b), animate);
+  }
+
+  /* Mercator y of a latitude, in degrees — the projected span is what a fit is
+     actually limited by, not the raw latitude span. */
+  function mercY(lat) {
+    return (180 / Math.PI) * Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI / 180) / 2));
+  }
+
+  /* How many zoom levels of VERTICAL slack fitting `b` would leave — i.e. how
+     much taller the frame is than the bounds need. Positive means width binds
+     and the leftover height shows as empty ocean above and below.
+     Measured: 375x812 portrait leaves 1.42; 1280x800 desktop leaves -0.38
+     (height binds, no slack at all). */
+  function verticalSlack(b) {
+    const pad = padding();
+    const availW = Math.max(1, window.innerWidth - pad.left - pad.right);
+    const availH = Math.max(1, window.innerHeight - pad.top - pad.bottom);
+    const lngSpan = Math.max(1e-6, b.getEast() - b.getWest());
+    const mercSpan = Math.max(1e-6, mercY(b.getNorth()) - mercY(b.getSouth()));
+    return Math.log2((availH / mercSpan) / (availW / lngSpan));
+  }
+
+  /* The view the map opens on.
+     A portrait phone cannot show all four islands AND fill the frame — the
+     chain is 1.44:1 (wide and shallow) against a 0.46:1 viewport, so width
+     binds at z5.60 while the height would allow z7.02. That 1.4-level gap is
+     dead ocean, and no amount of padding recovers it (zeroing the side padding
+     buys 0.2).
+     So on shapes where the gap is large, open on Oʻahu instead: it holds 152 of
+     the 289 places, sits mid-chain so zooming out reveals its neighbours in
+     both directions, and fills the frame. Anywhere with the aspect ratio to
+     show all four — desktop, landscape, tablets — still does.
+     This is a default view, NOT the island picker CLAUDE.md rejects: there's no
+     switcher UI, and one pinch out still returns the whole continuous map. */
+  /* Chosen against measured shapes, not guessed — it's a slack threshold rather
+     than a width breakpoint so it tracks the actual emptiness, and a short phone
+     (where the frame isn't very empty) correctly keeps all four:
+       iPhone 14 portrait  390x844   slack 1.43  ->  Oʻahu
+       iPhone SE portrait  375x812   slack 1.42  ->  Oʻahu
+       small Android       360x640   slack 1.01  ->  all four
+       iPad portrait       768x1024  slack 0.99  ->  all four
+       iPhone landscape    812x375   slack -1.43 ->  all four
+       desktop            1280x800   slack -0.37 ->  all four
+     0.9 was the first instinct and would have caught the portrait iPad, which
+     has ample room to show the whole chain at z6.44. */
+  const SLACK_LIMIT = 1.2; // ≈ frame 2.3x taller than the chain needs
+
+  function fitInitial() {
+    const fc = currentFeatures();
+    if (!map || !fc.features.length) return;
+    const all = new maplibregl.LngLatBounds();
+    fc.features.forEach(function (f) { all.extend(f.geometry.coordinates); });
+
+    if (verticalSlack(all) > SLACK_LIMIT) {
+      const oahu = PARKS.filter(function (p) { return p.island === "Oahu"; });
+      if (oahu.length) {
+        const b = new maplibregl.LngLatBounds();
+        oahu.forEach(function (p) { b.extend([p.lng, p.lat]); });
+        const cam = cameraForPadded(b);
+        if (cam) { applyCamera(cam, false); return; }
+      }
+    }
+    applyCamera(cameraForPadded(all), false);
+  }
+
+  function applyCamera(cam, animate) {
+    if (!cam) return;
+    const target = { center: cam.center, zoom: cam.zoom, pitch: 20, bearing: 0 };
+    if (animate) map.easeTo(Object.assign({ duration: 800 }, target));
+    else map.jumpTo(target);
+  }
+
+  /* The padding every fit uses, measured from the actual chrome. Split out so
+     verticalSlack() reasons about the same numbers cameraForPadded() applies. */
+  function padding() {
+    const panel = document.querySelector(".filter-panel");
+    const panelH = panel ? Math.ceil(panel.getBoundingClientRect().height) : 90;
+    const side = window.innerWidth <= 700 ? 24 : 90;
+    return { top: 130, bottom: panelH + 34, left: side, right: side };
+  }
+
+  function cameraForPadded(b) {
+    if (!map) return null;
     // The floating panels sit top and bottom, so wide SIDE padding buys nothing
     // — and on a 320px phone 90px each side ate 56% of the viewport, pushing the
     // fit-everything zoom down to 4.37 and well under minZoom. Narrow the sides
@@ -705,11 +789,7 @@
       tightest = c;
       if (c.zoom >= map.getMinZoom()) { cam = c; break; }
     }
-    cam = cam || tightest;
-    if (!cam) return;
-    const target = { center: cam.center, zoom: cam.zoom, pitch: 20, bearing: 0 };
-    if (animate) map.easeTo(Object.assign({ duration: 800 }, target));
-    else map.jumpTo(target);
+    return cam || tightest;
   }
 
   function refresh() {

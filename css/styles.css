@@ -814,7 +814,26 @@ body.basemap-satellite .island-label {
    the text's optical centre; the SVG scales with font-size, which a text glyph
    or emoji would not do consistently across platforms. */
 .thread-credit { display: inline-flex; align-items: center; gap: 5px; }
-.thread-credit__heart { width: 0.9em; height: 0.9em; flex-shrink: 0; fill: #e05a6b; }
+.thread-credit__heart {
+  width: 0.9em; height: 0.9em; flex-shrink: 0; fill: #e05a6b;
+  transform-origin: center;
+  /* A double-thump, not a pulse — the second, smaller beat is what reads as a
+     heartbeat rather than a throb. Same timing in every project carrying the
+     credit; keep them identical. */
+  animation: thread-heartbeat 1.4s ease infinite;
+}
+@keyframes thread-heartbeat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.25); }
+  28%  { transform: scale(1); }
+  42%  { transform: scale(1.15); }
+  56%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+/* An element that never stops moving is exactly what this query is for. */
+@media (prefers-reduced-motion: reduce) {
+  .thread-credit__heart { animation: none; }
+}
 
 /* ---------- List view ---------- */
 /* An alternative to the map for browsing every place; sits between the map

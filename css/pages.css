@@ -290,3 +290,10 @@ tbody th { font-weight: 800; }
   color: var(--ink-soft);
   font-size: 14px;
 }
+
+/* Attribution block — the standard "Built with <heart> by Thread" credit, also
+   in css/styles.css for the map page. Inline-flex so the heart sits on the
+   text's optical centre; the SVG scales with font-size, which a text glyph or
+   emoji would not do consistently across platforms. */
+.thread-credit { display: inline-flex; align-items: center; gap: 5px; }
+.thread-credit__heart { width: 0.9em; height: 0.9em; flex-shrink: 0; fill: #e05a6b; }

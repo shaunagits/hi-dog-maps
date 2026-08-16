@@ -809,6 +809,13 @@ body.basemap-satellite .island-label {
 .about-credit { text-align: center; margin: 22px 0 0; font-size: 13px; }
 .about-credit a { color: var(--ocean-deep); font-weight: 800; text-decoration: underline; }
 
+/* Attribution block — the standard "Built with <heart> by Thread" credit, also
+   in css/pages.css for the generated pages. Inline-flex so the heart sits on
+   the text's optical centre; the SVG scales with font-size, which a text glyph
+   or emoji would not do consistently across platforms. */
+.thread-credit { display: inline-flex; align-items: center; gap: 5px; }
+.thread-credit__heart { width: 0.9em; height: 0.9em; flex-shrink: 0; fill: #e05a6b; }
+
 /* ---------- List view ---------- */
 /* An alternative to the map for browsing every place; sits between the map
    (z-index 1) and the always-on-top floating controls (z-index 1000) so

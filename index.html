@@ -42,14 +42,17 @@
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2" />
 
+  <!-- Origins in the critical path. maplibre-gl ships both a render-blocking
+       stylesheet and the largest script on the page from unpkg, and the map cannot
+       paint until openfreemap returns its style JSON, so both are worth a warm
+       connection. upload.wikimedia.org serves the hero photo in the place modal.
+       upload.wikimedia.org serves the hero photo in the place modal. -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
+  <link rel="preconnect" href="https://upload.wikimedia.org" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Urbanist, as ONE variable file per subset rather than five static weights.
-       Chosen over the obvious alternatives because it actually contains U+02BB, the
-       ʻokina — Poppins, DM Sans, Rubik, Figtree, Outfit, Manrope and Plus Jakarta
-       Sans all lack it and silently substitute a system glyph, in a wordmark that
-       reads "Hawaiʻi Dog Map". Verify any future swap against that before anything
-       else; see the typography note in CLAUDE.md. -->
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="css/styles.css?v=18" />
@@ -128,7 +131,7 @@
               aria-expanded="false" aria-controls="filter-sheet">
         <span class="filters-icon" aria-hidden="true">☰</span>
         <span class="filters-summary" id="filters-summary">All places</span>
-        <span class="chip-count" id="filters-count"></span>
+        <span class="chip-count" id="filters-count"> (289)</span>
         <span class="filters-caret" aria-hidden="true">▾</span>
       </button>
       <div class="filter-divider" aria-hidden="true"></div>

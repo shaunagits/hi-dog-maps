@@ -20,6 +20,9 @@
 <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg?v=2" />
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
+<!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
+     pages that have one, so the connection is worth opening early. -->
+<link rel="preconnect" href="https://upload.wikimedia.org" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
@@ -63,7 +66,7 @@
   <p class="addr">📍 Trailhead at end of Kalaʻau Pl, Honolulu, HI 96821 (street parking in residential neighborhood)</p>
 
   <figure class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kuliouou_Ridge_Trail_View.jpg/960px-Kuliouou_Ridge_Trail_View.jpg" alt="Kuliʻouʻou Ridge Trail" loading="lazy" width="800" height="450" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kuliouou_Ridge_Trail_View.jpg/960px-Kuliouou_Ridge_Trail_View.jpg" alt="Kuliʻouʻou Ridge Trail" fetchpriority="high" decoding="async" width="800" height="450" />
     <figcaption>Julianibarra · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Kuliouou_Ridge_Trail_View.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
   </figure>
 

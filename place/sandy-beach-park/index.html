@@ -20,6 +20,9 @@
 <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg?v=2" />
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
+<!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
+     pages that have one, so the connection is worth opening early. -->
+<link rel="preconnect" href="https://upload.wikimedia.org" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
@@ -63,7 +66,7 @@
   <p class="addr">📍 8801 Kalanianaʻole Hwy, Honolulu, HI 96825</p>
 
   <figure class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg/960px-Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg" alt="Sandy Beach Park" loading="lazy" width="800" height="450" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg/960px-Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg" alt="Sandy Beach Park" fetchpriority="high" decoding="async" width="800" height="450" />
     <figcaption>Robert Linsdell from St. Andrews, Canada · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Sandy_Beach_Park,_Kalanianaole_Hwy,_Honolulu_(503339)_(17994299526).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
   </figure>
 

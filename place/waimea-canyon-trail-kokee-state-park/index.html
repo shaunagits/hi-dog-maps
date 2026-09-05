@@ -20,6 +20,9 @@
 <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg?v=2" />
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
+<!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
+     pages that have one, so the connection is worth opening early. -->
+<link rel="preconnect" href="https://upload.wikimedia.org" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
@@ -63,7 +66,7 @@
   <p class="addr">📍 Kokeʻe Rd, Waimea, HI 96796</p>
 
   <figure class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg/960px-Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg" alt="Waimea Canyon Trail (Kokeʻe State Park)" loading="lazy" width="800" height="450" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg/960px-Waimea_Canyon%2C_Waimea_%28502959%29_%2816953446122%29.jpg" alt="Waimea Canyon Trail (Kokeʻe State Park)" fetchpriority="high" decoding="async" width="800" height="450" />
     <figcaption>Robert Linsdell from St. Andrews, Canada · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Waimea_Canyon,_Waimea_(502959)_(16953446122).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
   </figure>
 

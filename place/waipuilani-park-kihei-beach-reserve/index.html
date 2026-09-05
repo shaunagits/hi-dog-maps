@@ -20,6 +20,9 @@
 <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg?v=2" />
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
+<!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
+     pages that have one, so the connection is worth opening early. -->
+<link rel="preconnect" href="https://upload.wikimedia.org" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
@@ -63,7 +66,7 @@
   <p class="addr">📍 South Kihei Rd, Kihei, HI 96753</p>
 
   <figure class="hero">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Kihei_Maui%2C_Hawaii_-_panoramio_%281%29.jpg" alt="Waipuilani Park / Kihei Beach Reserve" loading="lazy" width="800" height="450" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Kihei_Maui%2C_Hawaii_-_panoramio_%281%29.jpg" alt="Waipuilani Park / Kihei Beach Reserve" fetchpriority="high" decoding="async" width="800" height="450" />
     <figcaption>Michelle Maria · CC BY 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Kihei_Maui,_Hawaii_-_panoramio_(1).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
   </figure>
 

@@ -213,9 +213,9 @@ function page({ title, description, canonical, body, jsonld = [], breadcrumb }) 
      self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
      the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/css/pages.css?v=2" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2?v=1" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2?v=1" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=3" />
 ${ld}
 </head>
 <body>

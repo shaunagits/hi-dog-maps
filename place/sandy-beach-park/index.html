@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Beach","name":"Sandy Beach Park","description":"A famous bodysurfing beach on the wild Ka Iwi coast with big lawns, dunes, and dramatic shoreline; on the city's official on-leash dog park list.","url":"https://hawaiidogmap.com/place/sandy-beach-park/","geo":{"@type":"GeoCoordinates","latitude":21.2857,"longitude":-157.6725},"address":{"@type":"PostalAddress","streetAddress":"8801 Kalanianaʻole Hwy, Honolulu, HI 96825","addressLocality":"East Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily 5:00 AM - 10:00 PM (typical county beach park hours)","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Beach access","value":true},{"@type":"LocationFeatureSpecification","name":"Large lawns","value":true},{"@type":"LocationFeatureSpecification","name":"Parking","value":true},{"@type":"LocationFeatureSpecification","name":"Restrooms","value":true},{"@type":"LocationFeatureSpecification","name":"Showers","value":true}],"image":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg/960px-Sandy_Beach_Park%2C_Kalanianaole_Hwy%2C_Honolulu_%28503339%29_%2817994299526%29.jpg"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Sandy Beach Park","item":"https://hawaiidogmap.com/place/sandy-beach-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Sandy Beach Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Sandy Beach Park is open to leashed dogs. Leashed dogs allowed in the park; the shorebreak is powerful and dangerous, so keep dogs away from the water's edge."}},{"@type":"Question","name":"What are the hours at Sandy Beach Park?","acceptedAnswer":{"@type":"Answer","text":"Daily 5:00 AM - 10:00 PM (typical county beach park hours)"}},{"@type":"Question","name":"Where is Sandy Beach Park?","acceptedAnswer":{"@type":"Answer","text":"8801 Kalanianaʻole Hwy, Honolulu, HI 96825 — East Honolulu, Oʻahu. Coordinates 21.2857, -157.6725."}}]}</script>

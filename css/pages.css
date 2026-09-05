@@ -1,3 +1,46 @@
+/* ---------- Urbanist, self-hosted ----------
+   Was https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap.
+   Self-hosted for two reasons: it removes fonts.googleapis.com AND fonts.gstatic.com
+   from the critical path (two origins, each a DNS + TLS handshake before any text can
+   paint), and it lets font-display be set to `optional`.
+
+   Both files are Google's own variable-weight subsets, byte-identical to what the CDN
+   was serving, kept as two files with their original unicode-ranges so coverage does
+   not change. latin-ext is not optional here: it carries the kahakō (Ā ā Ē ē Ī ī Ō ō
+   Ū ū) that Hawaiian place names need. The ʻokina (U+02BB) lives in the latin file.
+   See the typography note in CLAUDE.md before swapping either.
+
+   font-display is `optional`, not `swap`. Measured on a place page: when Urbanist
+   arrives after first paint, 31 of 32 text blocks move and the worst moves 56px,
+   because the two typefaces wrap text differently. That cannot be fixed with
+   size-adjust: sweeping it from 96% to 112% against a metric-matched Arial fallback
+   bottoms out at 20.3px residual and never approaches zero, since line wrapping is
+   quantised to whole lines. ascent-override/descent-override do nothing at all here,
+   because every line-height in this stylesheet is unitless, so block height is
+   font-size x ratio regardless of the font's own vertical metrics.
+   `optional` removes the shift by construction: the browser uses the font only if it
+   is ready in time, and never swaps it in afterwards. Both files are preloaded from
+   the same origin, so in practice it is ready. On the rare pageview where it is not,
+   the fallback renders and the font is cached for the next one. Arial and Helvetica
+   both contain U+02BB and the macrons, so a fallback render still spells the names
+   correctly. */
+@font-face {
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: optional;
+  src: url(/fonts/urbanist-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: optional;
+  src: url(/fonts/urbanist-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Styles for the generated static pages (place/, island + category hubs,
    rules, browse).
 

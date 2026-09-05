@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Kauaʻi","item":"https://hawaiidogmap.com/kauai/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed on Kauaʻi beaches?","acceptedAnswer":{"@type":"Answer","text":"The opposite of Maui: Kauaʻi County parks and beaches prohibit dogs entirely except by permit. The places that work are narrow, specific carve-outs."}},{"@type":"Question","name":"How many dog-friendly places are there on Kauaʻi?","acceptedAnswer":{"@type":"Answer","text":"This map lists 9 on Kauaʻi: 1 dog parks, 2 beaches, 6 trails."}},{"@type":"Question","name":"Are Hawaiʻi state park beaches open to dogs?","acceptedAnswer":{"@type":"Answer","text":"No. State-park beaches are closed to dogs on every island, leashed or not, with service animals excepted. That applies regardless of what the county rule says."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Dog-friendly places on Kauaʻi","numberOfItems":9,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://hawaiidogmap.com/place/kauai-humane-society-dog-park/","name":"Kauai Humane Society Dog Park"},{"@type":"ListItem","position":2,"url":"https://hawaiidogmap.com/place/sleeping-giant-nounou-trail/","name":"Sleeping Giant (Nounou) Trail"},{"@type":"ListItem","position":3,"url":"https://hawaiidogmap.com/place/moalepe-trail/","name":"Moalepe Trail"},{"@type":"ListItem","position":4,"url":"https://hawaiidogmap.com/place/kuilau-ridge-trail/","name":"Kuilau Ridge Trail"},{"@type":"ListItem","position":5,"url":"https://hawaiidogmap.com/place/waimea-canyon-trail-kokee-state-park/","name":"Waimea Canyon Trail (Kokeʻe State Park)"},{"@type":"ListItem","position":6,"url":"https://hawaiidogmap.com/place/powerline-trail/","name":"Powerline Trail"},{"@type":"ListItem","position":7,"url":"https://hawaiidogmap.com/place/ke-ala-hele-makalae-kapaa-bike-path/","name":"Ke Ala Hele Makalae (Kapaʻa Bike Path)"},{"@type":"ListItem","position":8,"url":"https://hawaiidogmap.com/place/mahaulepu-beach/","name":"Mahaulepu Beach"},{"@type":"ListItem","position":9,"url":"https://hawaiidogmap.com/place/kalapaki-beach/","name":"Kalapaki Beach"}]}</script>

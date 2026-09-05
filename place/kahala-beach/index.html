@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Beach","name":"Kahala Beach","description":"A quiet, uncrowded upscale beach stretching along Kahala Avenue, reached through public shoreline access paths between homes. Shallow and calm, good for wading.","url":"https://hawaiidogmap.com/place/kahala-beach/","geo":{"@type":"GeoCoordinates","latitude":21.2683,"longitude":-157.7802},"address":{"@type":"PostalAddress","streetAddress":"Kahala Avenue (public access paths), Honolulu, HI 96816","addressLocality":"East Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Open daily, dawn to dusk (public shoreline access)","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Street parking","value":true},{"@type":"LocationFeatureSpecification","name":"Public beach access paths","value":true},{"@type":"LocationFeatureSpecification","name":"Calm swimming","value":true}],"image":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Walk_by_the_beach_%284807552983%29.jpg/960px-Walk_by_the_beach_%284807552983%29.jpg"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Kahala Beach","item":"https://hawaiidogmap.com/place/kahala-beach/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Kahala Beach?","acceptedAnswer":{"@type":"Answer","text":"Yes — Kahala Beach is open to leashed dogs. Leashed dogs are allowed on this state-jurisdiction residential shoreline, which is not a City beach park and carries no sanctuary designation."}},{"@type":"Question","name":"What are the hours at Kahala Beach?","acceptedAnswer":{"@type":"Answer","text":"Open daily, dawn to dusk (public shoreline access)"}},{"@type":"Question","name":"Where is Kahala Beach?","acceptedAnswer":{"@type":"Answer","text":"Kahala Avenue (public access paths), Honolulu, HI 96816 — East Honolulu, Oʻahu. Coordinates 21.2683, -157.7802."}}]}</script>

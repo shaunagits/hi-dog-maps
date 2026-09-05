@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Place","name":"Judd Trail (Judd Memorial Loop)","description":"A shady 1.2-mile loop through Nuuanu Valley's bamboo and eucalyptus groves, passing the Jackass Ginger swimming hole. An easy, family-friendly forest walk close to town.","url":"https://hawaiidogmap.com/place/judd-trail-judd-memorial-loop/","geo":{"@type":"GeoCoordinates","latitude":21.3535,"longitude":-157.8116},"address":{"@type":"PostalAddress","streetAddress":"Judd Trailhead, 4022 Nuuanu Pali Drive, Honolulu, HI 96817","addressLocality":"Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Sunrise to sunset (daily)","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Roadside parking","value":true},{"@type":"LocationFeatureSpecification","name":"Stream","value":true},{"@type":"LocationFeatureSpecification","name":"Shade","value":true},{"@type":"LocationFeatureSpecification","name":"Swimming hole","value":true},{"@type":"LocationFeatureSpecification","name":"No restrooms","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Judd Trail (Judd Memorial Loop)","item":"https://hawaiidogmap.com/place/judd-trail-judd-memorial-loop/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Judd Trail (Judd Memorial Loop)?","acceptedAnswer":{"@type":"Answer","text":"Yes — Judd Trail (Judd Memorial Loop) is open to leashed dogs. Dogs are allowed but must remain on a leash; the connecting Nuʻuanu Trail does NOT allow dogs, so stay on the Judd loop."}},{"@type":"Question","name":"What are the hours at Judd Trail (Judd Memorial Loop)?","acceptedAnswer":{"@type":"Answer","text":"Sunrise to sunset (daily)"}},{"@type":"Question","name":"Where is Judd Trail (Judd Memorial Loop)?","acceptedAnswer":{"@type":"Answer","text":"Judd Trailhead, 4022 Nuuanu Pali Drive, Honolulu, HI 96817 — Honolulu, Oʻahu. Coordinates 21.3535, -157.8116."}}]}</script>

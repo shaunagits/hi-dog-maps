@@ -46,16 +46,17 @@
        stylesheet and the largest script on the page from unpkg, and the map cannot
        paint until openfreemap returns its style JSON, so both are worth a warm
        connection. upload.wikimedia.org serves the hero photo in the place modal.
-       upload.wikimedia.org serves the hero photo in the place modal. -->
+       fonts.googleapis.com and fonts.gstatic.com are deliberately gone: Urbanist is
+       self-hosted now, see the @font-face block in css/styles.css. -->
   <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
   <link rel="preconnect" href="https://upload.wikimedia.org" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
+  <!-- Same-origin and preloaded so font-display:optional almost always wins the race. -->
+  <link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="css/styles.css?v=18" />
+  <link rel="stylesheet" href="css/styles.css?v=19" />
 </head>
 <body>
   <!-- Gradient defs for the paw-print markers, defined once and referenced by

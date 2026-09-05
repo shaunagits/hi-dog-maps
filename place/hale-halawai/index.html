@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Hale Hālāwai","description":"An oceanfront park on Aliʻi Drive in downtown Kailua-Kona with a large open-air pavilion used for community events, festivals, and cultural gatherings, plus a rocky shoreline overlooking Kailua Bay.","url":"https://hawaiidogmap.com/place/hale-halawai/","geo":{"@type":"GeoCoordinates","latitude":19.63659,"longitude":-155.9929},"address":{"@type":"PostalAddress","streetAddress":"75-5670 Aliʻi Drive, Kailua-Kona, HI 96740","addressLocality":"Kona","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Open daily, dawn to dusk (county park)","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Pavilion","value":true},{"@type":"LocationFeatureSpecification","name":"Restrooms","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Hawaiʻi Island","item":"https://hawaiidogmap.com/hawaii-island/"},{"@type":"ListItem","position":3,"name":"Hale Hālāwai","item":"https://hawaiidogmap.com/place/hale-halawai/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Hale Hālāwai?","acceptedAnswer":{"@type":"Answer","text":"Yes — Hale Hālāwai is open to leashed dogs. Leashed dogs are allowed. Hawaiʻi County Code § 4-4-29 permits dogs in County parks when kept on a leash no longer than six feet. Note that dogs are barred from County beach parks on this island entirely, even leashed — this is a regular county park, not a beach park."}},{"@type":"Question","name":"What are the hours at Hale Hālāwai?","acceptedAnswer":{"@type":"Answer","text":"Open daily, dawn to dusk (county park)"}},{"@type":"Question","name":"Where is Hale Hālāwai?","acceptedAnswer":{"@type":"Answer","text":"75-5670 Aliʻi Drive, Kailua-Kona, HI 96740 — Kona, Hawaiʻi Island. Coordinates 19.63659, -155.9929."}}]}</script>

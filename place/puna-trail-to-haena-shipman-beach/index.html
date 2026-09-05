@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Place","name":"Puna Trail (to Hāʻena / Shipman Beach)","description":"An easy 2.9-mile coastal trail on the old government road out to Hāʻena (Shipman) Beach. Bikes, horses and hunting are prohibited. Frequently very muddy. High surf and dangerous shorebreak at the beach; car break-ins reported at the trailhead.","url":"https://hawaiidogmap.com/place/puna-trail-to-haena-shipman-beach/","geo":{"@type":"GeoCoordinates","latitude":19.618294,"longitude":-154.959626},"address":{"@type":"PostalAddress","streetAddress":"Nā Ala Hele trailhead, Puna, Hawaiʻi Island","addressLocality":"Puna","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Open daily, dawn to dusk","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Coastal trail","value":true},{"@type":"LocationFeatureSpecification","name":"Beach access","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Hawaiʻi Island","item":"https://hawaiidogmap.com/hawaii-island/"},{"@type":"ListItem","position":3,"name":"Puna Trail (to Hāʻena / Shipman Beach)","item":"https://hawaiidogmap.com/place/puna-trail-to-haena-shipman-beach/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Puna Trail (to Hāʻena / Shipman Beach)?","acceptedAnswer":{"@type":"Answer","text":"Yes — Puna Trail (to Hāʻena / Shipman Beach) is open to leashed dogs. Leashed dogs are permitted — this trail carries the Nā Ala Hele “Dog on leash” designation from the state Division of Forestry & Wildlife. Dog policy on this system is per-trail, not per-reserve: neighbouring trails in the same forest reserve can differ, so don't assume it carries over."}},{"@type":"Question","name":"What are the hours at Puna Trail (to Hāʻena / Shipman Beach)?","acceptedAnswer":{"@type":"Answer","text":"Open daily, dawn to dusk"}},{"@type":"Question","name":"Where is Puna Trail (to Hāʻena / Shipman Beach)?","acceptedAnswer":{"@type":"Answer","text":"Nā Ala Hele trailhead, Puna, Hawaiʻi Island — Puna, Hawaiʻi Island. Coordinates 19.618294, -154.959626."}}]}</script>

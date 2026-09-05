@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Pawaʻa In-Ha Park","description":"A small urban park between Young and King Streets in the Pawaʻa area of central Honolulu, with lawn, benches and a play area. Recently designated on-leash for dogs.","url":"https://hawaiidogmap.com/place/pawaa-in-ha-park/","geo":{"@type":"GeoCoordinates","latitude":21.2982615,"longitude":-157.8382835},"address":{"@type":"PostalAddress","streetAddress":"1461 Young St, Honolulu, HI 96814","addressLocality":"Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily, sunrise to sunset","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Open lawn","value":true},{"@type":"LocationFeatureSpecification","name":"Benches","value":true},{"@type":"LocationFeatureSpecification","name":"Playground","value":true},{"@type":"LocationFeatureSpecification","name":"Street parking","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Pawaʻa In-Ha Park","item":"https://hawaiidogmap.com/place/pawaa-in-ha-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Pawaʻa In-Ha Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Pawaʻa In-Ha Park is open to leashed dogs. Keep dogs on a leash no longer than six feet and clean up all waste."}},{"@type":"Question","name":"What are the hours at Pawaʻa In-Ha Park?","acceptedAnswer":{"@type":"Answer","text":"Daily, sunrise to sunset"}},{"@type":"Question","name":"Where is Pawaʻa In-Ha Park?","acceptedAnswer":{"@type":"Answer","text":"1461 Young St, Honolulu, HI 96814 — Honolulu, Oʻahu. Coordinates 21.2982615, -157.8382835."}}]}</script>

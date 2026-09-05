@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"ʻAʻala Dog Park","description":"An urban fenced dog park at the edge of ʻAʻala Park near Chinatown and downtown Honolulu.","url":"https://hawaiidogmap.com/place/aala-dog-park/","geo":{"@type":"GeoCoordinates","latitude":21.3155,"longitude":-157.8638},"address":{"@type":"PostalAddress","streetAddress":"280 N King St, Honolulu, HI 96817 (ʻAʻala Park, Chinatown)","addressLocality":"Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily 6:00 AM - 9:00 PM","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Fenced","value":true},{"@type":"LocationFeatureSpecification","name":"Small & large dog areas","value":true},{"@type":"LocationFeatureSpecification","name":"Benches","value":true},{"@type":"LocationFeatureSpecification","name":"Street parking","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"ʻAʻala Dog Park","item":"https://hawaiidogmap.com/place/aala-dog-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at ʻAʻala Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — ʻAʻala Dog Park is an off-leash area. Off-leash inside the fenced enclosure with separate small and large dog areas; leash required elsewhere in ʻAʻala Park."}},{"@type":"Question","name":"What are the hours at ʻAʻala Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Daily 6:00 AM - 9:00 PM"}},{"@type":"Question","name":"Where is ʻAʻala Dog Park?","acceptedAnswer":{"@type":"Answer","text":"280 N King St, Honolulu, HI 96817 (ʻAʻala Park, Chinatown) — Honolulu, Oʻahu. Coordinates 21.3155, -157.8638."}}]}</script>

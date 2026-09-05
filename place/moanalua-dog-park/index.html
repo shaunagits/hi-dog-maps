@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Moanalua Dog Park","description":"A 1.3-acre fully fenced off-leash park inside Moanalua Community Park, one of the city's original and most popular dog parks.","url":"https://hawaiidogmap.com/place/moanalua-dog-park/","geo":{"@type":"GeoCoordinates","latitude":21.3494,"longitude":-157.8943},"address":{"@type":"PostalAddress","streetAddress":"2900 Moanalua Rd, Honolulu, HI 96819 (Moanalua Community Park)","addressLocality":"Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily during daylight hours; closed Tuesday mornings for maintenance","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Fenced","value":true},{"@type":"LocationFeatureSpecification","name":"Water stations","value":true},{"@type":"LocationFeatureSpecification","name":"Waste bags","value":true},{"@type":"LocationFeatureSpecification","name":"Shade","value":true},{"@type":"LocationFeatureSpecification","name":"Benches","value":true},{"@type":"LocationFeatureSpecification","name":"Picnic tables","value":true},{"@type":"LocationFeatureSpecification","name":"Parking","value":true},{"@type":"LocationFeatureSpecification","name":"Restrooms nearby","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Moanalua Dog Park","item":"https://hawaiidogmap.com/place/moanalua-dog-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Moanalua Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Moanalua Dog Park is an off-leash area. Off-leash allowed inside the fenced enclosure; dogs must be leashed to and from the gate. Water stations and waste bag dispensers provided."}},{"@type":"Question","name":"What are the hours at Moanalua Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Daily during daylight hours; closed Tuesday mornings for maintenance"}},{"@type":"Question","name":"Where is Moanalua Dog Park?","acceptedAnswer":{"@type":"Answer","text":"2900 Moanalua Rd, Honolulu, HI 96819 (Moanalua Community Park) — Honolulu, Oʻahu. Coordinates 21.3494, -157.8943."}}]}</script>

@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Puka's Bar at Kahala Whole Foods","description":"An outdoor bar attached to the Whole Foods Market at Kahala Mall in East Honolulu, serving local beer, wine and bar bites on a shaded patio.","url":"https://hawaiidogmap.com/place/pukas-bar-at-kahala-whole-foods/","geo":{"@type":"GeoCoordinates","latitude":21.276,"longitude":-157.7887},"address":{"@type":"PostalAddress","streetAddress":"4211 Waialae Ave, Honolulu, HI 96816","addressLocality":"East Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily 11am-8pm","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Outdoor patio","value":true},{"@type":"LocationFeatureSpecification","name":"Dog menu","value":true},{"@type":"LocationFeatureSpecification","name":"Shade","value":true},{"@type":"LocationFeatureSpecification","name":"Water bowls","value":true},{"@type":"LocationFeatureSpecification","name":"Parking","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Puka's Bar at Kahala Whole Foods","item":"https://hawaiidogmap.com/place/pukas-bar-at-kahala-whole-foods/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Puka's Bar at Kahala Whole Foods?","acceptedAnswer":{"@type":"Answer","text":"Yes — Puka's Bar at Kahala Whole Foods is open to leashed dogs. Leashed dogs welcome on the outdoor patio only. Offers a dog menu with hot dogs, mini burgers and bacon."}},{"@type":"Question","name":"What are the hours at Puka's Bar at Kahala Whole Foods?","acceptedAnswer":{"@type":"Answer","text":"Daily 11am-8pm"}},{"@type":"Question","name":"Where is Puka's Bar at Kahala Whole Foods?","acceptedAnswer":{"@type":"Answer","text":"4211 Waialae Ave, Honolulu, HI 96816 — East Honolulu, Oʻahu. Coordinates 21.276, -157.7887."}}]}</script>

@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Beach","name":"Kawailoa Beach Park","description":"A wide, uncrowded North Shore sand beach along Kamehameha Highway next to the Chun's Reef surf spot, between Haleiwa and Waimea Bay. Newly opened to leashed dogs in 2026.","url":"https://hawaiidogmap.com/place/kawailoa-beach-park/","geo":{"@type":"GeoCoordinates","latitude":21.6280556,"longitude":-158.08},"address":{"@type":"PostalAddress","streetAddress":"Kamehameha Hwy, Haleiwa, HI 96712","addressLocality":"North Shore","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily, sunrise to sunset","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Long sandy beach","value":true},{"@type":"LocationFeatureSpecification","name":"Surf spot","value":true},{"@type":"LocationFeatureSpecification","name":"Roadside parking only","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Kawailoa Beach Park","item":"https://hawaiidogmap.com/place/kawailoa-beach-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Kawailoa Beach Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Kawailoa Beach Park is open to leashed dogs. Leashed dogs only (six-foot maximum leash); owners must pack out all waste. No lifeguard - mind strong winter surf."}},{"@type":"Question","name":"What are the hours at Kawailoa Beach Park?","acceptedAnswer":{"@type":"Answer","text":"Daily, sunrise to sunset"}},{"@type":"Question","name":"Where is Kawailoa Beach Park?","acceptedAnswer":{"@type":"Answer","text":"Kamehameha Hwy, Haleiwa, HI 96712 — North Shore, Oʻahu. Coordinates 21.6280556, -158.08."}},{"@type":"Question","name":"Is the dog policy at Kawailoa Beach Park confirmed?","acceptedAnswer":{"@type":"Answer","text":"Not fully. This entry is flagged for verification — the rule is either narrow (for example dogs permitted only below the high-tide line) or the location was placed by geocoder rather than an official GIS layer. Check posted signs when you arrive."}}]}</script>

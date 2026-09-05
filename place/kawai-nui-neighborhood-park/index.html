@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Kawai Nui Neighborhood Park","description":"A 4.8-acre neighborhood park in Kailua (Kawai Nui), designated for on-leash dogs under the City & County of Honolulu's February 2026 expansion that doubled Oʻahu's on-leash parks to 72.","url":"https://hawaiidogmap.com/place/kawai-nui-neighborhood-park/","geo":{"@type":"GeoCoordinates","latitude":21.40474,"longitude":-157.75535},"address":{"@type":"PostalAddress","streetAddress":"Kailua (Kawai Nui), Oʻahu, HI","addressLocality":"Windward","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily; hours posted on site"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Kawai Nui Neighborhood Park","item":"https://hawaiidogmap.com/place/kawai-nui-neighborhood-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Kawai Nui Neighborhood Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Kawai Nui Neighborhood Park is open to leashed dogs. Dogs are welcome on-leash under the City & County of Honolulu designation (effective February 2026). Keep your dog leashed at all times, pick up after it, and follow posted signs."}},{"@type":"Question","name":"What are the hours at Kawai Nui Neighborhood Park?","acceptedAnswer":{"@type":"Answer","text":"Daily; hours posted on site"}},{"@type":"Question","name":"Where is Kawai Nui Neighborhood Park?","acceptedAnswer":{"@type":"Answer","text":"Kailua (Kawai Nui), Oʻahu, HI — Windward, Oʻahu. Coordinates 21.40474, -157.75535."}}]}</script>

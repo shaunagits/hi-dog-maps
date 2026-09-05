@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Mililani Dog Park","description":"Central Oʻahu's flagship fenced dog park at Mililani Mauka District Park, with grassy runs and mature shade trees.","url":"https://hawaiidogmap.com/place/mililani-dog-park/","geo":{"@type":"GeoCoordinates","latitude":21.4692,"longitude":-158.0051},"address":{"@type":"PostalAddress","streetAddress":"95-1069 Ukuwai St, Mililani, HI 96789 (Mililani Mauka District Park)","addressLocality":"Central Oahu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Daily during daylight hours; closed Wednesday mornings for maintenance","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Fenced","value":true},{"@type":"LocationFeatureSpecification","name":"Small & large dog areas","value":true},{"@type":"LocationFeatureSpecification","name":"Water stations","value":true},{"@type":"LocationFeatureSpecification","name":"Shade","value":true},{"@type":"LocationFeatureSpecification","name":"Benches","value":true},{"@type":"LocationFeatureSpecification","name":"Picnic tables","value":true},{"@type":"LocationFeatureSpecification","name":"Parking","value":true},{"@type":"LocationFeatureSpecification","name":"Restrooms nearby","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Mililani Dog Park","item":"https://hawaiidogmap.com/place/mililani-dog-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Mililani Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Mililani Dog Park is an off-leash area. Off-leash within the fenced park; separate maintenance closures posted on site. Water stations and cleanup bags available."}},{"@type":"Question","name":"What are the hours at Mililani Dog Park?","acceptedAnswer":{"@type":"Answer","text":"Daily during daylight hours; closed Wednesday mornings for maintenance"}},{"@type":"Question","name":"Where is Mililani Dog Park?","acceptedAnswer":{"@type":"Answer","text":"95-1069 Ukuwai St, Mililani, HI 96789 (Mililani Mauka District Park) — Central Oahu, Oʻahu. Coordinates 21.4692, -158.0051."}}]}</script>

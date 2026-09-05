@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Park","name":"Gilbert Carvalho Park","description":"A county park on Waiānuenue Avenue in Hilo, originally developed as Piʻihonua Park under a 1934 Civil Works Administration project and renamed for Gilbert Carvalho in 1955; the park includes a stream and a Portuguese bread oven.","url":"https://hawaiidogmap.com/place/gilbert-carvalho-park/","geo":{"@type":"GeoCoordinates","latitude":19.71747,"longitude":-155.10418},"address":{"@type":"PostalAddress","streetAddress":"850 Waianuenue Ave, Hilo, HI 96720","addressLocality":"Hilo","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Open daily, dawn to dusk (county park)","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Playground","value":true},{"@type":"LocationFeatureSpecification","name":"Baseball diamond","value":true},{"@type":"LocationFeatureSpecification","name":"Picnic areas","value":true},{"@type":"LocationFeatureSpecification","name":"Wading pool","value":true},{"@type":"LocationFeatureSpecification","name":"Walking path","value":true},{"@type":"LocationFeatureSpecification","name":"Restrooms","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Hawaiʻi Island","item":"https://hawaiidogmap.com/hawaii-island/"},{"@type":"ListItem","position":3,"name":"Gilbert Carvalho Park","item":"https://hawaiidogmap.com/place/gilbert-carvalho-park/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Gilbert Carvalho Park?","acceptedAnswer":{"@type":"Answer","text":"Yes — Gilbert Carvalho Park is open to leashed dogs. Leashed dogs are allowed. Hawaiʻi County Code § 4-4-29 permits dogs in County parks when kept on a leash no longer than six feet. Note that dogs are barred from County beach parks on this island entirely, even leashed — this is a regular county park, not a beach park."}},{"@type":"Question","name":"What are the hours at Gilbert Carvalho Park?","acceptedAnswer":{"@type":"Answer","text":"Open daily, dawn to dusk (county park)"}},{"@type":"Question","name":"Where is Gilbert Carvalho Park?","acceptedAnswer":{"@type":"Answer","text":"850 Waianuenue Ave, Hilo, HI 96720 — Hilo, Hawaiʻi Island. Coordinates 19.71747, -155.10418."}}]}</script>

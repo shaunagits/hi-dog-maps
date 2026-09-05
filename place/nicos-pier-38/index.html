@@ -21,12 +21,13 @@
 <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=2" />
 <!-- The hero photo is cross-origin to Wikimedia and is the LCP element on the
-     pages that have one, so the connection is worth opening early. -->
+     pages that have one, so the connection is worth opening early. Urbanist is
+     self-hosted now, so fonts.googleapis.com and fonts.gstatic.com are gone from
+     the critical path entirely; see the @font-face block in css/pages.css. -->
 <link rel="preconnect" href="https://upload.wikimedia.org" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/pages.css?v=1" />
+<link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/urbanist-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/css/pages.css?v=2" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Nico's Pier 38","description":"An award-winning seafood restaurant beside the Honolulu fish auction with a sun-soaked covered terrace overlooking the harbor. Live music plays through the day.","url":"https://hawaiidogmap.com/place/nicos-pier-38/","geo":{"@type":"GeoCoordinates","latitude":21.3095,"longitude":-157.8747},"address":{"@type":"PostalAddress","streetAddress":"1129 N Nimitz Hwy, Honolulu, HI 96817","addressLocality":"Honolulu","addressRegion":"HI","addressCountry":"US"},"isAccessibleForFree":true,"openingHours":"Mon-Sat 6:30am-9pm, Sun 10am-9pm","amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Outdoor patio","value":true},{"@type":"LocationFeatureSpecification","name":"Covered seating","value":true},{"@type":"LocationFeatureSpecification","name":"Harbor views","value":true},{"@type":"LocationFeatureSpecification","name":"Parking","value":true},{"@type":"LocationFeatureSpecification","name":"Live music","value":true}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hawaiidogmap.com/"},{"@type":"ListItem","position":2,"name":"Oʻahu","item":"https://hawaiidogmap.com/oahu/"},{"@type":"ListItem","position":3,"name":"Nico's Pier 38","item":"https://hawaiidogmap.com/place/nicos-pier-38/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are dogs allowed at Nico's Pier 38?","acceptedAnswer":{"@type":"Answer","text":"Yes — Nico's Pier 38 is open to leashed dogs. Leashed dogs welcome on the outdoor terrace/patio only, not inside the dining room."}},{"@type":"Question","name":"What are the hours at Nico's Pier 38?","acceptedAnswer":{"@type":"Answer","text":"Mon-Sat 6:30am-9pm, Sun 10am-9pm"}},{"@type":"Question","name":"Where is Nico's Pier 38?","acceptedAnswer":{"@type":"Answer","text":"1129 N Nimitz Hwy, Honolulu, HI 96817 — Honolulu, Oʻahu. Coordinates 21.3095, -157.8747."}}]}</script>

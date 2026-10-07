@@ -334,7 +334,7 @@ tbody th { font-weight: 800; }
   font-size: 14px;
 }
 
-/* Attribution block — the standard "Built with <heart> by Thread" credit, also
+/* Attribution block — the standard "Built with <heart> by shauna.digital" credit, also
    in css/styles.css for the map page. Inline-flex so the heart sits on the
    text's optical centre; the SVG scales with font-size, which a text glyph or
    emoji would not do consistently across platforms. */

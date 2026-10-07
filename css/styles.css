@@ -852,7 +852,7 @@ body.basemap-satellite .island-label {
 .about-credit { text-align: center; margin: 22px 0 0; font-size: 13px; }
 .about-credit a { color: var(--ocean-deep); font-weight: 800; text-decoration: underline; }
 
-/* Attribution block — the standard "Built with <heart> by Thread" credit, also
+/* Attribution block — the standard "Built with <heart> by shauna.digital" credit, also
    in css/pages.css for the generated pages. Inline-flex so the heart sits on
    the text's optical centre; the SVG scales with font-size, which a text glyph
    or emoji would not do consistently across platforms. */

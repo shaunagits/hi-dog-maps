@@ -74,10 +74,10 @@ const catBy = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]));
    generic "check local rules" paragraph. */
 const ISLAND_RULES = {
   Oahu: {
-    summary: "Leashed dogs are allowed only at parks and beaches the City &amp; County of Honolulu has specifically designated — there is no blanket permission.",
+    summary: "Leashed dogs are allowed only at parks and beaches the City &amp; County of Honolulu has specifically designated; there is no blanket permission.",
     detail: [
       "Honolulu runs a designation list rather than a default rule: a park or beach allows dogs only if it appears on the City &amp; County's list, which expanded to 72 parks in February 2026. Anywhere not on it, dogs are prohibited even on a leash.",
-      "Several Oʻahu beaches allow dogs only <strong>below the high-tide line</strong> — makai of the debris line, not on the dry upland sand. Those are flagged on this site rather than presented as straightforwardly open.",
+      "Several Oʻahu beaches allow dogs only <strong>below the high-tide line</strong>, makai of the debris line, not on the dry upland sand. Those are flagged on this site rather than presented as straightforwardly open.",
       "Oʻahu also has the state's largest set of fenced off-leash dog parks, which are free and city-run."
     ]
   },
@@ -86,23 +86,23 @@ const ISLAND_RULES = {
     detail: [
       "Maui County does not maintain a designation list. Leashed dogs are allowed in county parks and on county beaches generally, with a maximum lead of 10 feet.",
       "Maui also has the state's most developed dog-friendly restaurant-patio scene, and a handful of free county-run off-leash dog parks.",
-      "The statewide state-park beach ban still applies here — county beaches are open, state-park beaches are not."
+      "The statewide state-park beach ban still applies here: county beaches are open, state-park beaches are not."
     ]
   },
   Kauai: {
     summary: "The opposite of Maui: Kauaʻi County parks and beaches prohibit dogs entirely except by permit. The places that work are narrow, specific carve-outs.",
     detail: [
       "Because county land is closed to dogs by default, almost everything on this island comes from somewhere else: the Ke Ala Hele Makalae shared-use path is explicitly permitted by county code, and state Forest Reserve and Nā Ala Hele trails run their own policies.",
-      "Dog policy on Kauaʻi is <strong>per-trail, not per-landowner</strong>. Two trails in the same Forest Reserve can have opposite rules — Kuilau Ridge allows dogs while Keahua Arboretum a mile away does not, and Waimea Canyon Trail allows them while Awaʻawapuhi Trail in the same state park does not.",
-      "Kauaʻi's dog parks sit on Humane Society property and require a day pass or annual-donation membership — they are not free public facilities like Oʻahu's and Maui's."
+      "Dog policy on Kauaʻi is <strong>per-trail, not per-landowner</strong>. Two trails in the same Forest Reserve can have opposite rules: Kuilau Ridge allows dogs while Keahua Arboretum a mile away does not, and Waimea Canyon Trail allows them while Awaʻawapuhi Trail in the same state park does not.",
+      "Kauaʻi's dog parks sit on Humane Society property and require a day pass or annual-donation membership; they are not free public facilities like Oʻahu's and Maui's."
     ]
   },
   "Hawaii Island": {
     summary: "A hybrid, and the reason you can't generalise from another island: leashed dogs are fine in county parks on a 6-foot lead, but are banned outright from every county <em>beach</em> park, even leashed.",
     detail: [
-      "Hawaiʻi County Code <strong>§ 4-4-29</strong> permits leashed dogs in county parks on a maximum 6-foot lead — note that's shorter than Maui's 10 feet. The same code bans dogs from county beach parks entirely, which the County reconfirmed in 2016 regarding Reed's Bay.",
+      "Hawaiʻi County Code <strong>§ 4-4-29</strong> permits leashed dogs in county parks on a maximum 6-foot lead, which is shorter than Maui's 10 feet. The same code bans dogs from county beach parks entirely, which the County reconfirmed in 2016 regarding Reed's Bay.",
       "Hawaiʻi State Parks separately prohibit pets on beaches, which rules out Hāpuna, Kekaha Kai, MacKenzie and Old Kona Airport. Every beach on this island therefore comes from non-county, non-state-park land.",
-      "National Park Service units are the exception and the richest source here — they generally permit leashed dogs on a 6-foot lead on trails and beaches. Puʻukoholā Heiau sits directly beside the excluded Spencer Beach Park, making it the legal alternative next door. (Hawaiʻi Volcanoes NP is the exception to the exception: pets are barred from all trails.)",
+      "National Park Service units are the exception and the richest source here: they generally permit leashed dogs on a 6-foot lead on trails and beaches. Puʻukoholā Heiau sits directly beside the excluded Spencer Beach Park, making it the legal alternative next door. (Hawaiʻi Volcanoes NP is the exception to the exception: pets are barred from all trails.)",
       "<strong>There are deliberately no restaurant patios listed on Hawaiʻi Island.</strong> HCC <strong>§ 4-3-5</strong> makes it unlawful to bring a dog to any establishment where food is sold or displayed, restaurants included. The state Department of Health food-code change of 24 August 2025 that legalised dogs in outdoor dining areas is a food-safety rule and does not repeal a county animal-control ordinance. Plenty of businesses do welcome dogs; the county code still says otherwise."
     ]
   }
@@ -302,7 +302,7 @@ ${body}
     ${CATEGORIES.map((c) => `<a href="/${c.slug}/">${c.many}</a>`).join("")}
   </nav>
   <p class="foot-note">
-    Rules, hours and access change without notice — posted signs on site always win over
+    Rules, hours and access change without notice. Posted signs on site always win over
     anything on this map. <a href="/rules/">Read the rules &amp; safety guide</a>.
   </p>
   <p class="foot-credit"><a class="thread-credit" href="https://shauna.digital" target="_blank" rel="noopener" aria-label="Built with love by shauna.digital">Built with <svg class="thread-credit__heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> by shauna.digital</a></p>
@@ -541,7 +541,7 @@ function islandPage(isle) {
 
   const body = `
 <h1>Dog-Friendly Places on ${esc(isle.name)}</h1>
-<p class="lede">${list.length} verified spots — ${byCat.map((g) => `${g.items.length} ${g.c.many.toLowerCase()}`).join(", ")}${offleash ? `, of which ${offleash} allow off-leash` : ""}.</p>
+<p class="lede">${list.length} verified spots: ${byCat.map((g) => `${g.items.length} ${g.c.many.toLowerCase()}`).join(", ")}${offleash ? `, of which ${offleash} allow off-leash` : ""}.</p>
 
 <section class="panel panel-dogs">
   <h2>The rule on ${esc(isle.name)}</h2>
@@ -628,7 +628,7 @@ function categoryPage(cat) {
     cat.key === "beach"
       ? {
           q: "Can dogs go on Hawaiʻi state park beaches?",
-          a: "No. State-park beaches are closed to dogs on every island, leashed or not, service animals excepted. County beach rules vary enormously — Maui allows leashed dogs, Hawaiʻi Island bans them from county beach parks outright, Kauaʻi requires a permit, and Oʻahu allows them only at designated beaches."
+          a: "No. State-park beaches are closed to dogs on every island, leashed or not, service animals excepted. County beach rules vary enormously: Maui allows leashed dogs, Hawaiʻi Island bans them from county beach parks outright, Kauaʻi requires a permit, and Oʻahu allows them only at designated beaches."
         }
       : null
   ].filter(Boolean);
@@ -638,7 +638,7 @@ function categoryPage(cat) {
 <p class="lede">${list.length} verified ${cat.many.toLowerCase()} across ${byIsle.map((g) => g.i.name).join(", ")}.</p>
 ${missing.length
       ? `<p class="note">Not currently listed on ${missing.map((m) => m.name).join(" or ")}${
-          cat.key === "patio" ? " — see the question below for why." : "."
+          cat.key === "patio" ? "; see the question below for why." : "."
         }</p>`
       : ""}
 
@@ -698,15 +698,15 @@ function rulesPage() {
     },
     {
       q: "What is the leash law in Hawaiʻi?",
-      a: "There is no single statewide leash length — each county sets its own. Maui County's maximum is 10 feet; Hawaiʻi County Code § 4-4-29 sets 6 feet; National Park Service land also uses 6 feet. Where dogs are permitted at all, they must be leashed unless you are inside a fenced off-leash dog park."
+      a: "There is no single statewide leash length; each county sets its own. Maui County's maximum is 10 feet; Hawaiʻi County Code § 4-4-29 sets 6 feet; National Park Service land also uses 6 feet. Where dogs are permitted at all, they must be leashed unless you are inside a fenced off-leash dog park."
     },
     {
       q: "Are dogs allowed at Hawaiʻi restaurants?",
-      a: "On outdoor patios, often yes — the state Department of Health changed the food code on 24 August 2025 to allow dogs in outdoor dining areas. But that is a food-safety rule and does not override county animal-control ordinances. Hawaiʻi County Code § 4-3-5 still makes it unlawful to bring a dog to any establishment where food is sold, which is why no Hawaiʻi Island patios are listed here."
+      a: "On outdoor patios, often yes. The state Department of Health changed the food code on 24 August 2025 to allow dogs in outdoor dining areas. But that is a food-safety rule and does not override county animal-control ordinances. Hawaiʻi County Code § 4-3-5 still makes it unlawful to bring a dog to any establishment where food is sold, which is why no Hawaiʻi Island patios are listed here."
     },
     {
       q: "Are there off-leash dog parks in Hawaiʻi?",
-      a: `Yes — ${PARKS.filter((p) => p.type === "off-leash").length} on this map. Oʻahu and Maui run free county dog parks; Kauaʻi's sit on Humane Society property and require a day pass or annual-donation membership.`
+      a: `Yes, ${PARKS.filter((p) => p.type === "off-leash").length} on this map. Oʻahu and Maui run free county dog parks; Kauaʻi's sit on Humane Society property and require a day pass or annual-donation membership.`
     },
     {
       q: "Do I need to worry about monk seals?",
@@ -716,7 +716,7 @@ function rulesPage() {
 
   const body = `
 <h1>Dogs in Hawaiʻi: Rules &amp; Safety</h1>
-<p class="lede">Every county sets its own rules, and they genuinely contradict each other — what's
+<p class="lede">Every county sets its own rules, and they genuinely contradict each other: what's
 fine on Maui can be an offence on Kauaʻi. Here's what carries across the whole state, and what
 changes island by island.</p>
 
@@ -729,11 +729,11 @@ changes island by island.</p>
 <section>
   <h2>Two rules apply everywhere in Hawaiʻi</h2>
   <ul class="prose-list">
-    <li><strong>State-park beaches are closed to dogs</strong> — leashed or not, on every island.
+    <li><strong>State-park beaches are closed to dogs</strong>, leashed or not, on every island.
       Service animals excepted. This quietly rules out many of the best-known beaches, whichever
       island you're on.</li>
     <li><strong>Give monk seals, honu and nēnē a wide berth.</strong> A dog can seriously injure a
-      seal pup — and a protective mother seal can badly injure your dog.</li>
+      seal pup, and a protective mother seal can badly injure your dog.</li>
   </ul>
 </section>
 
@@ -750,7 +750,7 @@ changes island by island.</p>
       </tbody>
     </table>
   </div>
-  <p class="note">State parks and National Park Service land run their own rules — state parks are
+  <p class="note">State parks and National Park Service land run their own rules: state parks are
   stricter (no dogs on beaches), NPS is often more permissive (leashed, six feet). Each entry says
   which applies.</p>
 </section>
@@ -767,20 +767,20 @@ ${ISLANDS.map(
 <section>
   <h2>Stay aware</h2>
   <ul class="prose-list">
-    <li>Sand, lava rock and pavement get hot enough to burn paws — test it with your hand first.</li>
+    <li>Sand, lava rock and pavement get hot enough to burn paws; test it with your hand first.</li>
     <li>Shorebreak and rip currents turn dangerous fast, even on calm-looking days.</li>
-    <li>Some trails cross active hunting areas — wear bright colours.</li>
+    <li>Some trails cross active hunting areas, so wear bright colours.</li>
     <li>Carry water for both of you. Shade is scarce, and so is cell signal.</li>
   </ul>
 </section>
 
 <section>
   <h2>Why Molokaʻi and Lānaʻi aren't listed</h2>
-  <p>Both are Maui County, so the leash rules are the same permissive ones that apply on Maui —
+  <p>Both are Maui County, so the leash rules are the same permissive ones that apply on Maui;
   dogs are not banned there. They're left off for a practical reason: the Molokaʻi passenger ferry
   stopped running in 2016, so the only route is a small aircraft with 48 hours' notice, a required
   kennel, a combined pet-and-owner weight limit, and one pet per flight. There is effectively no
-  way for a visitor to bring a dog. Lānaʻi separately has almost nothing to map — 98% of the island
+  way for a visitor to bring a dog. Lānaʻi separately has almost nothing to map: 98% of the island
   is privately owned, and its one beach park has been the subject of community efforts to reduce
   visitor numbers.</p>
 </section>
@@ -793,18 +793,18 @@ ${faqBlock(qas)}
   not a scrape or a guess. Entries with unclear or narrow rules are flagged
   <span class="tag tag-warn">Verify first</span> rather than presented as certain.</p>
   <ul class="prose-list">
-    <li><a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">City &amp; County of Honolulu, Dept. of Parks &amp; Recreation</a> — Oʻahu on-leash park designations &amp; GIS park data</li>
-    <li><a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a> — Oʻahu dog-friendly beach &amp; park lists</li>
-    <li><a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a> — Maui's official off-leash dog parks</li>
-    <li><a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a> — Maui dog-friendly beach, park &amp; patio recommendations</li>
-    <li><a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawaiʻi Division of Forestry &amp; Wildlife (Nā Ala Hele)</a> &amp; <a href="https://dlnr.hawaii.gov/dsp/" target="_blank" rel="noopener">Division of State Parks</a> — trail &amp; state park dog policies</li>
-    <li><a href="https://www.hawaiicounty.gov/departments/parks-and-recreation" target="_blank" rel="noopener">Hawaiʻi County Parks &amp; Recreation</a> &amp; <a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawaiʻi Statewide GIS</a> — Hawaiʻi Island park data &amp; the county leash ordinance</li>
-    <li><a href="https://hihs.org/" target="_blank" rel="noopener">Hawaiʻi Island Humane Society</a> — the island's two public off-leash Bark Parks</li>
-    <li><a href="https://www.nps.gov/puhe/" target="_blank" rel="noopener">National Park Service</a> — Puʻukoholā Heiau pet rules</li>
-    <li><a href="https://www.kauai.gov/Government/Departments-Agencies/Parks-Recreation" target="_blank" rel="noopener">Kauaʻi County</a> &amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kauaʻi Humane Society</a> — Kauaʻi park ordinances &amp; dog park info</li>
-    <li><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> &amp; <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre GL JS</a> — map tiles &amp; rendering</li>
-    <li><a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a> — satellite imagery, hillshade &amp; bathymetry</li>
-    <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> — place photos (public domain &amp; Creative Commons licensed)</li>
+    <li><a href="https://www.honolulu.gov/dpr/dog-parks/" target="_blank" rel="noopener">City &amp; County of Honolulu, Dept. of Parks &amp; Recreation</a>: Oʻahu on-leash park designations &amp; GIS park data</li>
+    <li><a href="https://www.hawaiianhumane.org/dog-friendly-parks/" target="_blank" rel="noopener">Hawaiian Humane Society</a>: Oʻahu dog-friendly beach &amp; park lists</li>
+    <li><a href="https://www.mauicounty.gov/119/Parks-Recreation" target="_blank" rel="noopener">Maui County Parks &amp; Recreation</a>: Maui's official off-leash dog parks</li>
+    <li><a href="https://www.mauihumanesociety.org/beach-buddies-resource-page/" target="_blank" rel="noopener">Maui Humane Society</a>: Maui dog-friendly beach, park &amp; patio recommendations</li>
+    <li><a href="https://dlnr.hawaii.gov/recreation/nah/" target="_blank" rel="noopener">Hawaiʻi Division of Forestry &amp; Wildlife (Nā Ala Hele)</a> &amp; <a href="https://dlnr.hawaii.gov/dsp/" target="_blank" rel="noopener">Division of State Parks</a>: trail &amp; state park dog policies</li>
+    <li><a href="https://www.hawaiicounty.gov/departments/parks-and-recreation" target="_blank" rel="noopener">Hawaiʻi County Parks &amp; Recreation</a> &amp; <a href="https://geoportal.hawaii.gov/" target="_blank" rel="noopener">Hawaiʻi Statewide GIS</a>: Hawaiʻi Island park data &amp; the county leash ordinance</li>
+    <li><a href="https://hihs.org/" target="_blank" rel="noopener">Hawaiʻi Island Humane Society</a>: the island's two public off-leash Bark Parks</li>
+    <li><a href="https://www.nps.gov/puhe/" target="_blank" rel="noopener">National Park Service</a>: Puʻukoholā Heiau pet rules</li>
+    <li><a href="https://www.kauai.gov/Government/Departments-Agencies/Parks-Recreation" target="_blank" rel="noopener">Kauaʻi County</a> &amp; <a href="https://kauaihumane.org/" target="_blank" rel="noopener">Kauaʻi Humane Society</a>: Kauaʻi park ordinances &amp; dog park info</li>
+    <li><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> &amp; <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre GL JS</a>: map tiles &amp; rendering</li>
+    <li><a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a>: satellite imagery, hillshade &amp; bathymetry</li>
+    <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>: place photos (public domain &amp; Creative Commons licensed)</li>
   </ul>
 </section>`;
 
@@ -863,7 +863,7 @@ ${ISLANDS.map((i) => {
 
   return page({
     title: `Browse All ${PARKS.length} Dog-Friendly Places in Hawaiʻi`,
-    description: `Every dog-friendly park, beach, trail and restaurant patio on the Hawaiʻi Dog Map — ${PARKS.length} verified places across Oʻahu, Maui, Kauaʻi and Hawaiʻi Island.`.replace(" — ", ": "),
+    description: `Every dog-friendly park, beach, trail and restaurant patio on the Hawaiʻi Dog Map: ${PARKS.length} verified places across Oʻahu, Maui, Kauaʻi and Hawaiʻi Island.`,
     canonical: "/browse/",
     breadcrumb: crumbs(trail),
     jsonld: [breadcrumbLd(trail)],

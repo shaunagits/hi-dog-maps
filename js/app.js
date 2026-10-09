@@ -1114,7 +1114,7 @@
     listViewCount.textContent = parks.length + (parks.length === 1 ? " place" : " places") +
       " matching your filters";
     if (parks.length === 0) {
-      listGrid.innerHTML = '<li class="list-empty">No matches — try different filters or a different search.</li>';
+      listGrid.innerHTML = '<li class="list-empty">No matches. Try different filters or a different search.</li>';
       return;
     }
     listGrid.innerHTML = parks.map(function (park) {

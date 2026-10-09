@@ -20,13 +20,19 @@ An interactive map of 289 dog-friendly places across Hawaiʻi: dog parks, leash-
 
 ## Run it
 
-Any static file server works, no build step needed:
+Any static file server works:
 
 ```bash
 python3 -m http.server 4174
 ```
 
 Then open http://localhost:4174
+
+After changing `js/parks-data.js`, regenerate the static place pages, hub pages and `sitemap.xml` (plain Node, no dependencies):
+
+```bash
+node tools/build-pages.mjs
+```
 
 ## Project structure
 
@@ -62,7 +68,7 @@ Rules change. Always check posted signs, and pick up after your pup. 🦴
 
 ## Tech
 
-Plain HTML/CSS/JS, no build step. [MapLibre GL JS](https://maplibre.org), OpenFreeMap vector tiles, and Esri raster hillshade/imagery, all free, no API key.
+Plain HTML/CSS/JS, no framework or bundler; one Node script generates the static pages. [MapLibre GL JS](https://maplibre.org), OpenFreeMap vector tiles, and Esri raster hillshade/imagery, all free, no API key.
 
 ---
 

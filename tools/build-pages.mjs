@@ -154,6 +154,57 @@ function clamp(s, n = 155) {
   return t.slice(0, t.lastIndexOf(" ", n - 1)).replace(/[,;:.]$/, "") + "…";
 }
 
+/* Search-result copy (titles + meta descriptions).
+   Titles lead with the place name, because that is what people type
+   ("moanalua dog park", "ewa beach community park"), then answer the question
+   behind the search: can I bring my dog, and what are the rules. The island is
+   included only when it still fits in the ~60 characters Google shows.
+   No em dashes anywhere in this copy: colons and commas only. */
+const TITLE_MAX = 62;
+function fitTitle(...candidates) {
+  for (const t of candidates) if (t && t.length <= TITLE_MAX) return t;
+  return candidates[candidates.length - 1];
+}
+function placeTitle(p, isle) {
+  const n = p.name;
+  const suffix =
+    p.type === "off-leash" ? "Off-Leash Hours, Rules & Map"
+    : p.category === "beach" ? "Dog-Friendly Beach Rules & Map"
+    : p.category === "trail" ? "Hiking with Dogs, Rules & Map"
+    : p.category === "patio" ? "Dog-Friendly Patio, Hours & Map"
+    : "Dogs Allowed? Leash Rules & Map";
+  const short =
+    p.type === "off-leash" ? "Off-Leash Hours & Rules"
+    : p.category === "patio" ? "Dog-Friendly Patio"
+    : p.category === "trail" ? "Hiking with Dogs"
+    : "Dog Rules & Map";
+  return fitTitle(
+    `${n}, ${isle.name}: ${suffix}`,
+    `${n}: ${suffix}`,
+    `${n}: ${short}`,
+    `${n}: Dog Rules`,
+    n
+  );
+}
+function placeDescription(p, isle) {
+  // "Central Oahu, Oʻahu" reads as a stutter: drop the island when the region already names it.
+  const fold = (x) => String(x).normalize("NFD").replace(/[\u0300-\u036f\u02BB'‘’]/g, "").toLowerCase();
+  const where = p.region && fold(p.region).includes(fold(isle.key))
+    ? p.region
+    : `${p.region ? p.region + ", " : ""}${isle.name}`;
+  const lead =
+    p.type === "off-leash" ? `${p.name} in ${where} is an off-leash dog park.`
+    : p.category === "patio" ? `${p.name} in ${where} welcomes dogs on its outdoor patio.`
+    : p.uncertain ? `Leashed dogs are allowed at ${p.name} in ${where}, with conditions.`
+    : `Yes, leashed dogs are allowed at ${p.name} in ${where}.`;
+  const hours = p.hours ? ` Hours: ${p.hours.replace(/\.$/, "")}.` : "";
+  return clamp(`${lead}${hours} Dog rules, amenities, directions and a map.`);
+}
+/* Belt and braces for any data text that reaches a meta tag. */
+function noDash(s) {
+  return String(s).replace(/\s*—\s*/g, ", ");
+}
+
 /* Great-circle distance in km, for the "nearby places" internal links. */
 function distanceKm(a, b) {
   const R = 6371;
@@ -346,19 +397,19 @@ function placePage(p) {
   const qas = [
     {
       q: `Are dogs allowed at ${p.name}?`,
-      a: `Yes — ${esc(p.name)} is ${offleash
+      a: `Yes. ${esc(p.name)} is ${offleash
         ? "an off-leash area"
         : "open to leashed dogs"}. ${esc(p.dogRules || "")}`
     },
     p.hours ? { q: `What are the hours at ${p.name}?`, a: esc(p.hours) } : null,
     {
       q: `Where is ${p.name}?`,
-      a: `${esc(p.address || p.region)} — ${esc(p.region ? p.region + ", " : "")}${esc(isle.name)}. Coordinates ${p.lat}, ${p.lng}.`
+      a: `${esc(p.address || p.region)}, ${esc(p.region ? p.region + ", " : "")}${esc(isle.name)}. Coordinates ${p.lat}, ${p.lng}.`
     },
     p.uncertain
       ? {
           q: `Is the dog policy at ${p.name} confirmed?`,
-          a: "Not fully. This entry is flagged for verification — the rule is either narrow (for example dogs permitted only below the high-tide line) or the location was placed by geocoder rather than an official GIS layer. Check posted signs when you arrive."
+          a: "Not fully. This entry is flagged for verification: the rule is either narrow (for example dogs permitted only below the high-tide line) or the location was placed by geocoder rather than an official GIS layer. Check posted signs when you arrive."
         }
       : null
   ].filter(Boolean);
@@ -449,10 +500,8 @@ function placePage(p) {
 </article>`;
 
   return page({
-    title: `${p.name} — ${cat.title} in ${p.region || isle.name}, Hawaiʻi`,
-    description: clamp(
-      `${p.name}: ${offleash ? "off-leash" : "leashed dogs allowed"}. ${p.description}`
-    ),
+    title: placeTitle(p, isle),
+    description: noDash(placeDescription(p, isle)),
     canonical: p._url,
     breadcrumb: crumbs(trail),
     jsonld: [placeLd, breadcrumbLd(trail), faqLd(qas)],
@@ -520,12 +569,15 @@ ${faqBlock(qas)}
 </section>`;
 
   return page({
-    title: `Dog-Friendly Parks, Beaches & Trails on ${isle.name} (${list.length} Verified)`,
-    description: clamp(
-      `${list.length} dog-friendly places on ${isle.name}: ${byCat
-        .map((g) => g.c.many.toLowerCase())
-        .join(", ")}. ${stripTags(rules.summary)}`
+    title: fitTitle(
+      `${isle.name} Dog Parks, Dog-Friendly Beaches & Trails (${list.length})`,
+      `${isle.name} Dog Parks, Beaches & Trails (${list.length} Spots)`
     ),
+    description: noDash(clamp(
+      `All ${list.length} places on ${isle.name} where you can bring your dog: ${byCat
+        .map((g) => `${g.items.length} ${g.c.key === "dog-park" ? "off-leash dog parks" : g.c.many.toLowerCase()}`)
+        .join(", ")}. Plus the ${isle.name} leash rules and a live map.`
+    )),
     canonical: `/${isle.slug}/`,
     breadcrumb: crumbs(trail),
     jsonld: [
@@ -603,12 +655,14 @@ ${byIsle
 ${faqBlock(qas)}`;
 
   return page({
-    title: `Dog-Friendly ${cat.many} in Hawaiʻi — ${list.length} Verified Spots & Map`,
-    description: clamp(
-      `${list.length} dog-friendly ${cat.many.toLowerCase()} across ${byIsle
-        .map((g) => g.i.name)
-        .join(", ")}, with the leash rule, hours and amenities for each.`
-    ),
+    title: cat.key === "dog-park"
+      ? `Off-Leash Dog Parks in Hawaiʻi: All ${list.length}, by Island`
+      : `Dog-Friendly ${cat.many} in Hawaiʻi: ${list.length} Spots by Island`,
+    description: noDash(clamp(
+      `${list.length} ${cat.key === "dog-park" ? "off-leash dog parks" : "dog-friendly " + cat.many.toLowerCase()} in Hawaiʻi: ${byIsle
+        .map((g) => `${g.i.name} (${g.items.length})`)
+        .join(", ")}. Leash rules, hours and amenities for each, plus a map.`
+    )),
     canonical: `/${cat.slug}/`,
     breadcrumb: crumbs(trail),
     jsonld: [
@@ -809,7 +863,7 @@ ${ISLANDS.map((i) => {
 
   return page({
     title: `Browse All ${PARKS.length} Dog-Friendly Places in Hawaiʻi`,
-    description: `Every dog-friendly park, beach, trail and restaurant patio on the Hawaiʻi Dog Map — ${PARKS.length} verified places across Oʻahu, Maui, Kauaʻi and Hawaiʻi Island.`,
+    description: `Every dog-friendly park, beach, trail and restaurant patio on the Hawaiʻi Dog Map — ${PARKS.length} verified places across Oʻahu, Maui, Kauaʻi and Hawaiʻi Island.`.replace(" — ", ": "),
     canonical: "/browse/",
     breadcrumb: crumbs(trail),
     jsonld: [breadcrumbLd(trail)],

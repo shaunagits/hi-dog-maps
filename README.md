@@ -1,13 +1,15 @@
-# HI Dog Maps 🐾
+# Hawaiʻi Dog Map 🐾
 
-An interactive map of dog-friendly places across Hawai‘i: dog parks, leash-allowed parks and beaches, trails, and dog-welcoming restaurant patios. Covers O‘ahu, Maui, Kaua‘i, and Hawai‘i Island.
+An interactive map of 289 dog-friendly places across Hawaiʻi: dog parks, leash-allowed parks and beaches, trails, and dog-welcoming restaurant patios on Oʻahu, Maui, Kauaʻi and Hawaiʻi Island. Every place carries its dog rules, and anything not officially confirmed is flagged.
 
-**🌺 Live site: https://hawaiidogmap.com** (also works: https://shaunagits.github.io/hi-dog-maps/)
+**🌺 Live: [hawaiidogmap.com](https://hawaiidogmap.com)**
+
+![Hawaiʻi Dog Map](.github/screenshot.jpg)
 
 ## Features
 
 - **Custom vector map** (MapLibre GL + [OpenFreeMap](https://openfreemap.org), recolored to a brand palette) with a gentle 3D tilt, sky, and Esri shaded relief and satellite imagery.
-- Every place gets its own marker, no clustering, plus category **line-icons** (paw / tree / waves / mountain / utensils) shared between pins, filters, and the list view.
+- **Clustered markers** that break apart as you zoom in, and category **line-icons** (paw / tree / waves / mountain / utensils) shared between pins, filters, and the list view.
 - **Search** (name / region / island / address), **filters** by leash rule and category with live result counts, and a one-click reset.
 - **List view**: browse every filtered place as a scrollable list instead of the map. Useful on its own, and doubles as real, indexable content for search engines.
 - **Detail panel** per place: description, dog rules, hours, amenities, and a **Get directions** link. Slides in from the side (a bottom sheet on mobile) without blocking the map, so you can keep browsing while it's open.
@@ -61,3 +63,7 @@ Rules change. Always check posted signs, and pick up after your pup. 🦴
 ## Tech
 
 Plain HTML/CSS/JS, no build step. [MapLibre GL JS](https://maplibre.org), OpenFreeMap vector tiles, and Esri raster hillshade/imagery, all free, no API key.
+
+---
+
+Built with ♥ by [shauna.digital](https://shauna.digital)
